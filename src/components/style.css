@@ -1,0 +1,9 @@
+@import '~antd/dist/antd.css';
+
+.container .title h2{
+    font-weight: bold;
+}
+
+.container .title{
+    margin-bottom: 50px;
+}
