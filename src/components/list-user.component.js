@@ -44,82 +44,48 @@ export default class ListUser extends Component {
 
     const columns = [
       {
-        title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
         render: (text, record) => {
-          return(
-          <Link to={`/products_details/${record.id}`} className="-text-link">
-            {text}
-          </Link>)
+          return (
+            <Link to={`/products_details/${record.id}`} className="-text-link">
+              {text}
+            </Link>
+          );
         },
       },
       {
-        title: 'User Role',
-        dataIndex: 'role',
-        key: 'role',
+        title: "User Role",
+        dataIndex: "role",
+        key: "role",
         render: (text) => <p>{text}</p>,
       },
       {
-        title: 'User Name',
-        dataIndex: 'fullName',
-        key: 'fullName',
+        title: "User Name",
+        dataIndex: "fullName",
+        key: "fullName",
         render: (text) => <p>{text}</p>,
       },
-      // {
-      //   title: 'Create At',
-      //   dataIndex: 'createdAt',
-      //   key: 'createdAt',
-      //   render: (text) => {
-      //     const value = getDateTime(
-      //       text,
-      //       'DD/MM/YYYY HH:mm:ss'
-      //     )
-      //     return <p>{value}</p>
-      //   }
-      // },
 
-      // {
-      //   title: 'Update At',
-      //   dataIndex: 'updatedAt',
-      //   key: 'updatedAt',
-      //   render: (text) => {
-      //     const value = getDateTime(
-      //       text,
-      //       'DD/MM/YYYY HH:mm:ss'
-      //     )
-      //     return <p>{value}</p>
-      //   }
-      // },
       {
-        title: 'Phone',
-        dataIndex: 'phoneNo',
-        key: 'phoneNo',
+        title: "Phone",
+        dataIndex: "phoneNo",
+        key: "phoneNo",
         render: (text) => <p>{text}</p>,
       },
       {
-        title: 'Email',
-        dataIndex: 'email',
-        key: 'email',
+        title: "Email",
+        dataIndex: "email",
+        key: "email",
         render: (text) => <p>{text}</p>,
       },
       {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
+        title: "Address",
+        dataIndex: "address",
+        key: "address",
         render: (text) => <p>{text}</p>,
       },
-      // {
-      //   title: 'Action',
-      //   key: 'action',
-      //   render: (text, record) => {
-      //     return (
-      //     <Space size="middle">
-      //       <Link to={`/edit_product/${record.id}`} className="-text-link">Edit</Link>
-      //       {/* <Link to='/#' onClick={() => removeProduct(record.id)}>Remove</Link> */}
-      //     </Space>
-      //   )},
-      // },
     ];
 
     return (
