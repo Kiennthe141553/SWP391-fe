@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { Space, Table } from "antd";
-import { Link } from "react-router-dom";
+import React, {Component} from "react";
+import {Space, Table} from "antd";
+import {Link} from "react-router-dom";
 import UserService from "../services/user.service";
 // import AuthService from "../services/auth.service";
 import EventBus from "../common/EventBus";
-import { Redirect } from "react-router-dom";
+import {Redirect} from "react-router-dom";
 // import { getDateTime } from "../helper/datetime";
 import "./style.css";
-import { Input } from "antd";
-const { Search } = Input;
+import {Input} from "antd";
+
+const {Search} = Input;
 
 export default class ListUserAdmin extends Component {
   constructor(props) {
@@ -29,19 +30,19 @@ export default class ListUserAdmin extends Component {
 
     // if (!currentUser) this.setState({ redirect: "/" });
     UserService.getListUser()
-      .then((response) => {
-        this.setState({
-          dataSource: response.data,
-          userReady: true,
-          list: response.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        // if (error.response && error.response.status === 401) {
-        //   EventBus.dispatch("logout");
-        // }
+    .then((response) => {
+      this.setState({
+        dataSource: response.data,
+        userReady: true,
+        list: response.data,
       });
+    })
+    .catch((error) => {
+      console.log(error);
+      // if (error.response && error.response.status === 401) {
+      //   EventBus.dispatch("logout");
+      // }
+    });
   }
 
   render() {
@@ -49,19 +50,19 @@ export default class ListUserAdmin extends Component {
     const removeUserAdmin = (id) => {
       console.log(id);
       UserService.deactiveUser(id)
-        .then((response) => {
-          this.props.history.push(`/list_user_admin`);
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-          if (error.response && error.response.status === 401) {
-            EventBus.dispatch("logout");
-          }
-        });
+      .then((response) => {
+        this.props.history.push(`/list_user_admin`);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      });
     };
     if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />;
+      return <Redirect to={this.state.redirect}/>;
     }
     const data = this.state.list;
     const columns = [
@@ -71,12 +72,12 @@ export default class ListUserAdmin extends Component {
         key: "username",
         render: (text, record) => {
           return (
-            <Link
-              to={`/user_admin_details/${record.id}`}
-              className="-text-link"
-            >
-              {text}
-            </Link>
+              <Link
+                  to={`/user_admin_details/${record.id}`}
+                  className="-text-link"
+              >
+                {text}
+              </Link>
           );
         },
       },
@@ -119,15 +120,24 @@ export default class ListUserAdmin extends Component {
         title: "Action",
         key: "action",
         render: (text, record) => {
+          console.log("record: " + record.active)
           return (
-            <Space size="middle">
-              <Link to={`/edit_user_admin/${record.id}`} className="-text-link">
-                Edit
-              </Link>
-              <Link to="/#" onClick={() => removeUserAdmin(record.id)}>
-                Remove
-              </Link>
-            </Space>
+              <Space size="middle">
+                <Link to={`/edit_user_admin/${record.id}`}
+                      className="-text-link">
+                  Edit
+                </Link>
+                {record.active === 1 ?
+                    <Link to="/#" onClick={() => removeUserAdmin(record.id)}>
+                      Disable Account
+                    </Link>
+                    :
+                    <Link to="/#" >
+                      Enable Account
+                    </Link>
+
+                }
+              </Space>
           );
         },
       },
@@ -136,33 +146,33 @@ export default class ListUserAdmin extends Component {
     const onSearch = (val) => {
       console.log(val);
       if (val === "") {
-        this.setState({ dataSource: data });
+        this.setState({dataSource: data});
       } else {
         const currValue = val;
-        this.setState({ value: currValue });
+        this.setState({value: currValue});
         const valueToLowCase = String(currValue).toLowerCase();
         const filteredData = this.state.dataSource.filter((entry) => {
           return String(entry.productName)
-            .toLowerCase()
-            .includes(valueToLowCase);
+          .toLowerCase()
+          .includes(valueToLowCase);
         });
-        this.setState({ dataSource: filteredData });
+        this.setState({dataSource: filteredData});
       }
     };
     return (
-      <div className="container">
-        <div className="title">
-          <h2>List Users</h2>
+        <div className="container">
+          <div className="title">
+            <h2>List Users</h2>
+          </div>
+          <Search
+              placeholder="Search name product"
+              onSearch={onSearch}
+              enterButton
+          />
+          {this.state.userReady ? (
+              <Table columns={columns} dataSource={this.state.dataSource}/>
+          ) : null}
         </div>
-        <Search
-          placeholder="Search name product"
-          onSearch={onSearch}
-          enterButton
-        />
-        {this.state.userReady ? (
-          <Table columns={columns} dataSource={this.state.dataSource} />
-        ) : null}
-      </div>
     );
   }
 }

@@ -1,12 +1,12 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import UserService from "../services/user.service";
 // import AuthService from "../services/auth.service";
 // import EventBus from "../common/EventBus";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import {withRouter} from "react-router-dom";
 // import { Redirect } from "react-router-dom";
 // import {  getDateTime } from '../helper/datetime'
-import { Form, Input, Button, Radio, DatePicker } from "antd";
+import {Form, Input, Button, Radio, DatePicker} from "antd";
 import "./style.css";
 
 class EditUserAdmin extends Component {
@@ -32,7 +32,7 @@ class EditUserAdmin extends Component {
     // const currentUser = AuthService.getCurrentUser();
 
     // if (!currentUser) this.setState({ redirect: "/" });
-    const { id } = this.props.match.params;
+    const {id} = this.props.match.params;
 
     // UserService.getListCategory()
     //   .then((response) => {
@@ -46,18 +46,18 @@ class EditUserAdmin extends Component {
     //   });
 
     UserService.getDetailUser(id)
-      .then((response) => {
-        this.setState({ dataDetail: response.data, userReady: true });
+    .then((response) => {
+      this.setState({dataDetail: response.data, userReady: true});
 
-        // this.setState({ objCate: objCate[0] })
-        // console.log(this.state.objCate);
-      })
-      .catch((error) => {
-        console.log(error);
-        // if (error.response && error.response.status === 401) {
-        //   EventBus.dispatch("logout");
-        // }
-      });
+      // this.setState({ objCate: objCate[0] })
+      // console.log(this.state.objCate);
+    })
+    .catch((error) => {
+      console.log(error);
+      // if (error.response && error.response.status === 401) {
+      //   EventBus.dispatch("logout");
+      // }
+    });
   }
 
   onReset = () => {
@@ -71,7 +71,7 @@ class EditUserAdmin extends Component {
     //   return item.categoryName === this.state.dataDetail?.categoryName;
     // });
     // console.log(objCate);
-    const { id } = this.props.match.params;
+    const {id} = this.props.match.params;
     const param = {
       // categoryId: values.categoryId || objCate[0]?.category_id,
       // productName: values.productName || this.state.dataDetail?.productName,
@@ -89,16 +89,16 @@ class EditUserAdmin extends Component {
     };
 
     UserService.editUser(id, param)
-      .then(() => {
-        this.props.history.push(`/list_user_admin`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then(() => {
+      this.props.history.push(`/list_user_admin`);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   };
 
   render() {
-    const { dataDetail } = this.state;
+    const {dataDetail} = this.state;
     // console.log(dataDetail)
     // const listCate = this.state.listCategory;
     const buttonItemLayout = {
@@ -124,22 +124,21 @@ class EditUserAdmin extends Component {
       active: dataDetail?.active,
     };
 
-    // console.log(initialValues)
     return (
-      <div className="container">
-        <div className="title">
-          <h2>Edit User</h2>
-        </div>
-        <Form
-          ref={this.formRef}
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 14 }}
-          layout="horizontal"
-          onFinish={this.onFinish}
-          initialValues={initialValues}
-          // onValuesChange={onFormLayoutChange}
-        >
-          {/* <Form.Item label="Category" name="categoryId">
+        <div className="container">
+          <div className="title">
+            <h2>Edit User</h2>
+          </div>
+          <Form
+              ref={this.formRef}
+              labelCol={{span: 4}}
+              wrapperCol={{span: 14}}
+              layout="horizontal"
+              onFinish={this.onFinish}
+              initialValues={initialValues}
+              // onValuesChange={onFormLayoutChange}
+          >
+            {/* <Form.Item label="Category" name="categoryId">
             <Select placeholder={dataDetail?.categoryName}>
               {listCate.map((item, index) => (
                 <Select.Option key={index} value={item.category_id}>
@@ -148,43 +147,43 @@ class EditUserAdmin extends Component {
               ))}
             </Select>
           </Form.Item> */}
-          <Form.Item label="Active" name="active">
-            <Radio.Group>
-              <Radio value={0}>Deactive</Radio>
-              <Radio value={1}>Active</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item label="Email" name="email">
-            <Input placeholder={dataDetail?.email} />
-          </Form.Item>
-          <Form.Item label="Address" name="address">
-            <Input placeholder={dataDetail?.address} />
-          </Form.Item>
-          <Form.Item label="Birthday" name="birthDate">
-            <DatePicker placeholder={dataDetail?.birthDate} picker="week" />
-          </Form.Item>
-          <Form.Item label="First Name" name="firstName">
-            <Input placeholder={dataDetail?.firstName} />
-          </Form.Item>
-          <Form.Item label="Last Name" name="lastName">
-            <Input placeholder={dataDetail?.lastName} />
-          </Form.Item>
-          <Form.Item label="Gender" name="gender">
-            <Radio.Group>
-              <Radio value={0}>Male</Radio>
-              <Radio value={1}>Female</Radio>
-            </Radio.Group>
-          </Form.Item>
-          <Form.Item {...buttonItemLayout}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-            <Button htmlType="button" onClick={this.onReset}>
-              Reset
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
+            <Form.Item label="Active" name="active">
+              <Radio.Group>
+                <Radio value={0}>Deactive</Radio>
+                <Radio value={1}>Active</Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item label="Email" name="email">
+              <Input placeholder={dataDetail?.email}/>
+            </Form.Item>
+            <Form.Item label="Address" name="address">
+              <Input placeholder={dataDetail?.address}/>
+            </Form.Item>
+            <Form.Item label="Birthday" name="birthDate">
+              <DatePicker placeholder={dataDetail?.birthDate} picker="week"/>
+            </Form.Item>
+            <Form.Item label="First Name" name="firstName">
+              <Input placeholder={dataDetail?.firstName}/>
+            </Form.Item>
+            <Form.Item label="Last Name" name="lastName">
+              <Input placeholder={dataDetail?.lastName}/>
+            </Form.Item>
+            <Form.Item label="Gender" name="gender">
+              <Radio.Group initialValues={dataDetail?.gender}>
+                <Radio value={0}>Male</Radio>
+                <Radio value={1}>Female</Radio>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item {...buttonItemLayout}>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+              <Button htmlType="button" onClick={this.onReset}>
+                Reset
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
     );
   }
 }
