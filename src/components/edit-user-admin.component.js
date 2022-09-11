@@ -83,7 +83,7 @@ class EditUserAdmin extends Component {
       birthDate: values.birthDate || this.state.dataDetail?.birthDate,
       email: values.email || this.state.dataDetail?.email,
       firstName: values.firstName || this.state.dataDetail?.firstName,
-      gender: values.gender || this.state.dataDetail?.gender,
+      gender: values.gender || this.state.dataDetail?.gender || 1,
       id: id,
       lastName: values.lastName || this.state.dataDetail?.lastName,
     };
