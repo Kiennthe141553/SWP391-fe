@@ -1,18 +1,21 @@
 import axios from "axios";
 
-const API_URL = "https://itp-be-deploy.herokuapp.com";
+const API_URL = "http://localhost:10004/quizPractice/";
 
 class AuthService {
   login(username, password) {
     return axios
-      .post(API_URL + "/api/login", {
+      .post(API_URL + "api/login", {
         username,
         password,
       })
       .then((response) => {
         if (response.data) {
           localStorage.setItem("user", JSON.stringify(response.data.token));
-          localStorage.setItem("firstLogin", JSON.stringify(response.data.firstLogin));
+          localStorage.setItem(
+            "firstLogin",
+            JSON.stringify(response.data.firstLogin)
+          );
         }
 
         return response.data;
@@ -23,11 +26,13 @@ class AuthService {
     localStorage.removeItem("user");
   }
 
-  register(username, email, password) {
-    return axios.post(API_URL + "signup", {
+  register(username, email, password, firstName, lastName) {
+    return axios.post(API_URL + "api/user/register", {
       username,
       email,
       password,
+      firstName,
+      lastName,
     });
   }
 

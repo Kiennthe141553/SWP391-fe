@@ -6,7 +6,7 @@ import "./App.css";
 import AuthService from "./services/auth.service";
 
 import Login from "./components/login.component";
-// import Register from "./components/register.component";
+import Register from "./components/register.component";
 import Home from "./components/home.component";
 import ListUser from "./components/list-user.component";
 // import BoardUser from "./components/board-user.component";
@@ -30,10 +30,10 @@ class App extends Component {
     this.logOut = this.logOut.bind(this);
 
     this.state = {
-      showModeratorBoard: false,
-      showAdminBoard: false,
+      // showModeratorBoard: false,
+      // showAdminBoard: false,
       currentUser: undefined,
-      firstLogin: true
+      firstLogin: true,
     };
   }
 
@@ -45,12 +45,12 @@ class App extends Component {
     if (user) {
       this.setState({
         currentUser: user,
-        firstLogin: firstLogin
+        firstLogin: firstLogin,
         // showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
         // showAdminBoard: user.roles.includes("ROLE_ADMIN"),
       });
     }
-    
+
     EventBus.on("logout", () => {
       this.logOut();
     });
@@ -70,7 +70,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser} = this.state;
+    const { currentUser } = this.state;
 
     return (
       <div>
@@ -160,6 +160,12 @@ class App extends Component {
                   Login
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link to={"/register"} className="nav-link">
+                  Register
+                </Link>
+              </li>
             </div>
           )}
         </nav>
@@ -168,6 +174,7 @@ class App extends Component {
           <Switch>
             <Route exact path={["/", "/home"]} component={Home} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
             <Route path="/user" component={ListUser} />
             <Route path="/add_product" component={AddProduct} />
             <Route path="/add_user" component={AddUser} />
@@ -184,7 +191,7 @@ class App extends Component {
           </Switch>
         </div>
 
-        { /*<AuthVerify logOut={this.logOut}/> */ }
+        {/*<AuthVerify logOut={this.logOut}/> */}
       </div>
     );
   }
