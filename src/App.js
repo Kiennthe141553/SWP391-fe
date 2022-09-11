@@ -12,11 +12,11 @@ import ListUser from "./components/list-user.component";
 // import BoardUser from "./components/board-user.component";
 // import BoardModerator from "./components/board-moderator.component";
 // import BoardAdmin from "./components/board-admin.component";
-import ListProduct from "./components/list-product.component";
+import ListUserAdmin from "./components/list-user-admin.component";
 import AddUser from "./components/add-user.component";
-import AddProduct from "./components/add-product.component";
-import Detail from "./components/detail-product.component";
-import EditPro from "./components/edit-product.component";
+import AddUserAdmin from "./components/add-user-admin.component";
+import Detail from "./components/detail-user-admin.component";
+import EditUser from "./components/edit-user-admin.component";
 import Chart from "./components/chart.component";
 import UploadFile from "./components/upload-file.component";
 import ChangePassword from "./components/change-password.component";
@@ -127,21 +127,21 @@ class App extends Component {
                   User
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to={"/list_products"} className="nav-link">
-                  List Product
+              {/* <li className="nav-item">
+                <Link to={"/list_user_admin"} className="nav-link">
+                  List User Admin
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to={"/list_category"} className="nav-link">
                   List Category
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <Link to={"/add_product"} className="nav-link">
                   Add Product
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to={"/add_user"} className="nav-link">
                   Add User
@@ -166,6 +166,18 @@ class App extends Component {
                   Register
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link to={"/list_user_admin"} className="nav-link">
+                  List User Admin
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/add_user_admin"} className="nav-link">
+                  Add User
+                </Link>
+              </li>
             </div>
           )}
         </nav>
@@ -176,11 +188,11 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <Route path="/user" component={ListUser} />
-            <Route path="/add_product" component={AddProduct} />
+            <Route path="/add_user_admin" component={AddUserAdmin} />
             <Route path="/add_user" component={AddUser} />
-            <Route path="/list_products" component={ListProduct} />
-            <Route path="/products_details/:id" component={Detail} />
-            <Route path="/edit_product/:id" component={EditPro} />
+            <Route path="/list_user_admin" component={ListUserAdmin} />
+            <Route path="/user_admin_details/:id" component={Detail} />
+            <Route path="/edit_user_admin/:id" component={EditUser} />
             <Route path="/change-password" component={ChangePassword} />
             <Route path="/chart" component={Chart} />
             <Route path="/upload-file" component={UploadFile} />
