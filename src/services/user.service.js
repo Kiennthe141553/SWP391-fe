@@ -25,7 +25,7 @@ class UserService {
   }
 
   editUser(id, payload) {
-    return axios.put(API_URL + `api/products/${id}`, payload);
+    return axios.put(API_URL + `api/user/${id}`, payload);
   }
   // createUser(payload) {
   //   return axios.post(API_URL + "/api/user", payload, {
