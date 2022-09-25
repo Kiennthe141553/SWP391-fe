@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
-import EventBus from "../common/EventBus";
+// import EventBus from "../common/EventBus";
 // import { Redirect } from "react-router-dom";
 // import {  getDateTime } from '../helper/datetime'
 import {
@@ -30,18 +30,18 @@ export default class AddUserAdmin extends Component {
 
     if (!currentUser) this.setState({ redirect: "/" });
 
-    UserService.getListCategory()
-      .then((response) => {
-        console.log(response);
-        this.setState({ listCategory: response.data });
-        console.log(this.state.listCategory);
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.response && error.response.status === 401) {
-          EventBus.dispatch("logout");
-        }
-      });
+    // UserService.getListCategory()
+    //   .then((response) => {
+    //     console.log(response);
+    //     this.setState({ listCategory: response.data });
+    //     console.log(this.state.listCategory);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     if (error.response && error.response.status === 401) {
+    //       EventBus.dispatch("logout");
+    //     }
+    //   });
   }
 
   onReset = () => {

@@ -11,11 +11,11 @@ class AuthService {
       })
       .then((response) => {
         if (response.data) {
-          localStorage.setItem("user", JSON.stringify(response.data.token));
           localStorage.setItem(
-            "firstLogin",
-            JSON.stringify(response.data.firstLogin)
+            "user",
+            JSON.stringify(response.data.accessToken)
           );
+          localStorage.setItem("role", JSON.stringify(response.data.role));
         }
 
         return response.data;
@@ -40,8 +40,8 @@ class AuthService {
     return JSON.parse(localStorage.getItem("user"));
   }
 
-  getFirstLogin() {
-    return JSON.parse(localStorage.getItem("firstLogin"));
+  getRole() {
+    return JSON.parse(localStorage.getItem("role"));
   }
 }
 

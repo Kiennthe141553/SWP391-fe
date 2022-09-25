@@ -3,15 +3,15 @@ import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
+import { Row, Col } from "antd";
+
 import AuthService from "./services/auth.service";
 
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
 import ListUser from "./components/list-user.component";
-// import BoardUser from "./components/board-user.component";
-// import BoardModerator from "./components/board-moderator.component";
-// import BoardAdmin from "./components/board-admin.component";
+
 import ListUserAdmin from "./components/list-user-admin.component";
 import AddUser from "./components/add-user.component";
 import AddUserAdmin from "./components/add-user-admin.component";
@@ -21,33 +21,29 @@ import Chart from "./components/chart.component";
 import UploadFile from "./components/upload-file.component";
 import ChangePassword from "./components/change-password.component";
 import ListCategory from "./components/list-category.component";
-// import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.logOut = this.logOut.bind(this);
+    this.selectLink = this.selectLink.bind(this);
 
     this.state = {
-      // showModeratorBoard: false,
-      // showAdminBoard: false,
       currentUser: undefined,
-      firstLogin: true,
+      role: undefined,
+      moduleSelected: "Chart",
     };
   }
 
   componentDidMount() {
     const user = AuthService.getCurrentUser();
-    const firstLogin = AuthService.getFirstLogin();
-    console.log(user);
+    const role = AuthService.getRole();
 
     if (user) {
       this.setState({
         currentUser: user,
-        firstLogin: firstLogin,
-        // showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        // showAdminBoard: user.roles.includes("ROLE_ADMIN"),
+        role: role,
       });
     }
 
@@ -63,94 +59,55 @@ class App extends Component {
   logOut() {
     AuthService.logout();
     this.setState({
-      // showModeratorBoard: false,
-      // showAdminBoard: false,
       currentUser: undefined,
+      role: undefined,
+    });
+  }
+
+  componentDidUpdate() {}
+
+  selectLink(e) {
+    console.log(e.target.id);
+    this.setState({
+      moduleSelected: e.target.id,
     });
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser, role, moduleSelected } = this.state;
+
+    const listSystemAdminMenu = [
+      {
+        link: "/chart",
+        name: "Chart",
+        isActive: moduleSelected === "Chart",
+      },
+
+      {
+        link: "/list_user_admin",
+        name: "List User Admin",
+        isActive: moduleSelected === "List User Admin",
+      },
+    ];
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark bg-dark header">
           <Link to={"/"} className="navbar-brand">
-            Product Management
+            English Practice Quizzz
           </Link>
-          <div className="navbar-nav mr-auto">
-            {/* <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
-              </Link>
-            </li> */}
-
-            {/* {showModeratorBoard && (
-              <li className="nav-item">
-                <Link to={"/mod"} className="nav-link">
-                  Moderator Board
-                </Link>
-              </li>
-            )}
-
-            {showAdminBoard && (
-              <li className="nav-item">
-                <Link to={"/admin"} className="nav-link">
-                  Admin Board
-                </Link>
-              </li>
-            )} */}
-
-            {/* {currentUser && (
-            )} */}
-          </div>
+          <div className="navbar-nav mr-auto"></div>
 
           {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
-                <Link to={"/chart"} className="nav-link">
-                  Chart
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/upload-file"} className="nav-link">
-                  Upload File
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/change-password"} className="nav-link">
-                  Change Password
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to={"/user"} className="nav-link">
-                  User
-                </Link>
-              </li>
-              {/* <li className="nav-item">
-                <Link to={"/list_user_admin"} className="nav-link">
-                  List User Admin
-                </Link>
-              </li> */}
-              <li className="nav-item">
-                <Link to={"/list_category"} className="nav-link">
-                  List Category
-                </Link>
-              </li>
-              {/* <li className="nav-item">
-                <Link to={"/add_product"} className="nav-link">
-                  Add Product
-                </Link>
-              </li> */}
-              <li className="nav-item">
-                <Link to={"/add_user"} className="nav-link">
-                  Add User
-                </Link>
-              </li>
-              <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
-                </a>
+                <div className="box-avatar">
+                  <img
+                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                    alt="profile-img"
+                    className="avatar"
+                  />
+                </div>
               </li>
             </div>
           ) : (
@@ -166,44 +123,80 @@ class App extends Component {
                   Register
                 </Link>
               </li>
-
-              <li className="nav-item">
-                <Link to={"/list_user_admin"} className="nav-link">
-                  List User Admin
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link to={"/add_user_admin"} className="nav-link">
-                  Add User
-                </Link>
-              </li>
             </div>
           )}
         </nav>
+        <div className="main-page">
+          <Row className="row-main-page" gutter={24}>
+            <Col className="col-menu" span={currentUser ? 6 : 0}>
+              <div className="menu">
+                {currentUser && (
+                  <div className="navbar-nav ml-auto contain-menu">
+                    <div className="menu-content">
+                      {role === "MARKETING"}
+                      {role === "ADMIN" && (
+                        <>
+                          {listSystemAdminMenu.map((item) => {
+                            return (
+                              <li
+                                className={
+                                  item.isActive ? "nav-item-active" : "nav-item"
+                                }
+                              >
+                                <Link
+                                  to={item.link}
+                                  className="nav-link"
+                                  onClick={this.selectLink}
+                                  id={item.name}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </>
+                      )}
+                      {role === "CUSTOMER" && (
+                        <li className="nav-item">
+                          <Link to={"/change-password"} className="nav-link">
+                            Change Password
+                          </Link>
+                        </li>
+                      )}
+                    </div>
 
-        <div className="container mt-3">
-          <Switch>
-            <Route exact path={["/", "/home"]} component={Home} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route path="/user" component={ListUser} />
-            <Route path="/add_user_admin" component={AddUserAdmin} />
-            <Route path="/add_user" component={AddUser} />
-            <Route path="/list_user_admin" component={ListUserAdmin} />
-            <Route path="/user_admin_details/:id" component={Detail} />
-            <Route path="/edit_user_admin/:id" component={EditUser} />
-            <Route path="/change-password" component={ChangePassword} />
-            <Route path="/chart" component={Chart} />
-            <Route path="/upload-file" component={UploadFile} />
-            <Route path="/list_category" component={ListCategory} />
-            {/* <Route path="/user" component={BoardUser} /> */}
-            {/* <Route path="/mod" component={BoardModerator} />
-            <Route path="/admin" component={BoardAdmin} /> */}
-          </Switch>
+                    <li className="nav-item">
+                      <a
+                        href="/login"
+                        className="nav-link"
+                        onClick={this.logOut}
+                      >
+                        LogOut
+                      </a>
+                    </li>
+                  </div>
+                )}
+              </div>
+            </Col>
+            <Col span={currentUser ? 18 : 24} className="content">
+              <Switch>
+                <Route exact path={["/", "/home"]} component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route path="/user" component={ListUser} />
+                <Route path="/add_user_admin" component={AddUserAdmin} />
+                <Route path="/add_user" component={AddUser} />
+                <Route path="/list_user_admin" component={ListUserAdmin} />
+                <Route path="/user_admin_details/:id" component={Detail} />
+                <Route path="/edit_user_admin/:id" component={EditUser} />
+                <Route path="/change-password" component={ChangePassword} />
+                <Route path="/chart" component={Chart} />
+                <Route path="/upload-file" component={UploadFile} />
+                <Route path="/list_category" component={ListCategory} />
+              </Switch>
+            </Col>
+          </Row>
         </div>
-
-        {/*<AuthVerify logOut={this.logOut}/> */}
       </div>
     );
   }
