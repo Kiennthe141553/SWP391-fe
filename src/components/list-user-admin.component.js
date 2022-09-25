@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Space, Table } from "antd";
 import { Link } from "react-router-dom";
 import UserService from "../services/user.service";
-// import AuthService from "../services/auth.service";
+import AuthService from "../services/auth.service";
 import EventBus from "../common/EventBus";
 import { Redirect } from "react-router-dom";
 // import { getDateTime } from "../helper/datetime";
@@ -25,11 +25,12 @@ export default class ListUserAdmin extends Component {
   }
 
   componentDidMount() {
-    // const currentUser = AuthService.getCurrentUser();
+    const currentUser = AuthService.getCurrentUser();
 
-    // if (!currentUser) this.setState({ redirect: "/" });
+    if (!currentUser) this.setState({ redirect: "/" });
     UserService.getListUser()
       .then((response) => {
+        console.log(response.data);
         this.setState({
           dataSource: response.data,
           userReady: true,
@@ -38,14 +39,13 @@ export default class ListUserAdmin extends Component {
       })
       .catch((error) => {
         console.log(error);
-        // if (error.response && error.response.status === 401) {
-        //   EventBus.dispatch("logout");
-        // }
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
       });
   }
 
   render() {
-    console.log(this.state.dataSource);
     const removeUserAdmin = (id) => {
       console.log(id);
       UserService.deactiveUser(id)
@@ -119,13 +119,14 @@ export default class ListUserAdmin extends Component {
         title: "Action",
         key: "action",
         render: (text, record) => {
+          console.log(record);
           return (
             <Space size="middle">
               <Link to={`/edit_user_admin/${record.id}`} className="-text-link">
                 Edit
               </Link>
               <Link to="/#" onClick={() => removeUserAdmin(record.id)}>
-                Remove
+                {Boolean(record.active) ? "Disable" : "Enable"}
               </Link>
             </Space>
           );
@@ -155,7 +156,7 @@ export default class ListUserAdmin extends Component {
           <h2>List Users</h2>
         </div>
         <Search
-          placeholder="Search name product"
+          placeholder="Search name user"
           onSearch={onSearch}
           enterButton
         />

@@ -3,6 +3,62 @@ label {
   margin-top: 10px;
 }
 
+.header {
+  height: 7vh;
+}
+
+.main-page {
+  min-height: 93vh;
+}
+
+.row-main-page {
+  min-height: 93vh;
+  margin: 0 !important;
+}
+
+.col-menu {
+  background-color: white;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.col-menu .menu .contain-menu .nav-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.col-menu .menu .contain-menu .nav-item-active {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+}
+
+.col-menu .menu .contain-menu .nav-item a {
+  color: #000;
+  font-size: 18px;
+  /* border: 1px solid black; */
+  border-radius: 20px;
+  padding-left: 20px;
+}
+
+.col-menu .menu .contain-menu .nav-item-active a {
+  color: white;
+  font-size: 18px;
+  background-color: #343a40;
+  border-radius: 20px;
+  padding-left: 20px;
+}
+
+.col-menu .menu {
+  padding: 20px 25px;
+  height: 93vh;
+}
+
+.col-menu .menu .contain-menu {
+  height: 85vh;
+  justify-content: space-between;
+}
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
@@ -25,6 +81,26 @@ label {
   width: 96px;
   height: 96px;
   margin: 0 auto 10px;
+  display: block;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.nav-item {
+  max-height: 57px;
+  padding-left: 15px;
+
+}
+
+.nav-item .box-avatar {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.nav-item .box-avatar .avatar {
+  width: 35px;
+  height: 35px;
+  margin: 0 auto 0;
   display: block;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;

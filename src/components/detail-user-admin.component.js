@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import UserService from "../services/user.service";
-// import EventBus from "../common/EventBus";
+import EventBus from "../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 // import { getDateTime } from "../helper/datetime";
@@ -30,9 +30,9 @@ class DetailUserAdmin extends Component {
       })
       .catch((error) => {
         console.log(error);
-        // if (error.response && error.response.status === 401) {
-        //   EventBus.dispatch("logout");
-        // }
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
       });
   }
 
@@ -49,10 +49,6 @@ class DetailUserAdmin extends Component {
             <p>
               <strong>User Name:</strong> {data?.username}
             </p>
-            {/* <p>
-              <strong>Create Date:</strong>{" "}
-              {getDateTime(data?.createdAt, "DD/MM/YYYY")}
-            </p> */}
             <p>
               <strong>Email:</strong> {data?.email}
             </p>
