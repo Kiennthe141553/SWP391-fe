@@ -10,6 +10,7 @@ import AuthService from "./services/auth.service";
 import Login from "./components/login.component";
 import Register from "./components/register.component";
 import Home from "./components/home.component";
+import HomeUser from "./components/home-user.component";
 import ListUser from "./components/list-user.component";
 
 import ListUserAdmin from "./components/list-user-admin.component";
@@ -90,6 +91,14 @@ class App extends Component {
       },
     ];
 
+    const listSystemCustomerMenu = [
+      {
+        link: "/change-password",
+        name: "Change Password",
+        isActive: moduleSelected === "Change Password",
+      },
+    ];
+
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark header">
@@ -157,11 +166,26 @@ class App extends Component {
                         </>
                       )}
                       {role === "CUSTOMER" && (
-                        <li className="nav-item">
-                          <Link to={"/change-password"} className="nav-link">
-                            Change Password
-                          </Link>
-                        </li>
+                        <>
+                          {listSystemCustomerMenu.map((item) => {
+                            return (
+                              <li
+                                className={
+                                  item.isActive ? "nav-item-active" : "nav-item"
+                                }
+                              >
+                                <Link
+                                  to={item.link}
+                                  className="nav-link"
+                                  onClick={this.selectLink}
+                                  id={item.name}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </>
                       )}
                     </div>
 
@@ -178,9 +202,15 @@ class App extends Component {
                 )}
               </div>
             </Col>
-            <Col span={currentUser ? 18 : 24} className="content">
+            <Col span={currentUser ? 18 : 24} className="col-content">
               <Switch>
-                <Route exact path={["/", "/home"]} component={Home} />
+                <Route
+                  exact
+                  path={["/", "/home"]}
+                  component={
+                    !currentUser ? Home : role === "CUSTOMER" ? HomeUser : Chart
+                  }
+                />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route path="/user" component={ListUser} />

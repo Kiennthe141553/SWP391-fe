@@ -40,29 +40,7 @@ class UserService {
       }
     );
   }
-  // createUser(payload) {
-  //   return axios.post(API_URL + "/api/user", payload, {
-  //     headers: authHeader(),
-  //   });
-  // }
-
-  // editUser(id, payload) {
-  //   return axios.put(API_URL + `api/products/${id}`, payload, {
-  //     headers: authHeader(),
-  //   });
-  // }
-
-  // deactiveUser(id) {
-  //   return axios.delete(API_URL + `api/user/${id}`, {
-  //     headers: authHeader(),
-  //   });
-  // }
-
-  // getDetailUser(id) {
-  // return axios.get(API_URL + `/api/products/${id}`, {
-  //   headers: authHeader(),
-  // });
-  // }
+  
 }
 
 export default new UserService();

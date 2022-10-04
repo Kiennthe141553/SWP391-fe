@@ -1,5 +1,6 @@
 @import '~antd/dist/antd.css';
 
+/* all */
 .container .title h2{
     font-weight: bold;
 }
@@ -7,4 +8,25 @@
 .container .title{
     margin-top: 20px;
     margin-bottom: 50px;
+}
+/* home */
+
+.home {
+    /* min-height: 30vh; */
+    margin-top: 50px;
+}
+
+.home .contain-slider {
+    display: flex;
+    justify-content: center;
+    /* min-height: 30vh; */
+}
+
+.home .contain-slider img {
+    margin: auto;
+    min-height: 40vh;
+}
+
+.change-password-card {
+    margin: 0 auto 25px;
 }
