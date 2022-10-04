@@ -76,11 +76,10 @@ export default class ChangePassword extends Component {
   render() {
     return (
       <div className="col-md-12">
-        <div className="card card-container">
-
+        <div className="change-password-card card-container">
           <Form
             onSubmit={this.handleLogin}
-            ref={c => {
+            ref={(c) => {
               this.form = c;
             }}
           >
@@ -127,7 +126,6 @@ export default class ChangePassword extends Component {
                 </div>
               </div>
             )}
-           
           </Form>
         </div>
       </div>

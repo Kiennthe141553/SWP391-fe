@@ -11,7 +11,7 @@ const contentStyle = {
   background: "#364d79",
 };
 
-export default class Home extends Component {
+export default class HomeUser extends Component {
   constructor(props) {
     super(props);
 
@@ -24,6 +24,7 @@ export default class Home extends Component {
     return (
       // <div className="container">
       <div className="home">
+        Home User
         <Carousel autoplay>
           <div className="contain-slider">
             <img className="img-banner" src={banner2} alt="banner2" />

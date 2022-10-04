@@ -59,9 +59,16 @@ label {
   height: 85vh;
   justify-content: space-between;
 }
-.card-container.card {
+.card-container {
   max-width: 350px !important;
   padding: 40px 40px;
+  margin-top: 150px;
+  }
+  
+  .card-container.change-password-card {
+    max-width: 500px !important;
+    padding: 40px 40px;
+    margin-top: 150px;
 }
 
 .card {
