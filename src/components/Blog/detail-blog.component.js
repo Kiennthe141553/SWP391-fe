@@ -5,8 +5,7 @@ import EventBus from "../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
-
-class DetailUserAdmin extends Component {
+class DetailBlog extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -68,6 +67,6 @@ class DetailUserAdmin extends Component {
   }
 }
 
-const Detail = withRouter(DetailUserAdmin);
+const DetailBog = withRouter(DetailBlog);
 
-export default Detail;
+export default DetailBog;

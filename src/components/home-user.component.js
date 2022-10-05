@@ -3,14 +3,6 @@ import { Carousel } from "antd";
 import banner1 from "../imgs/banner1.jpg";
 import banner2 from "../imgs/banner2.png";
 
-const contentStyle = {
-  height: "160px",
-  color: "#fff",
-  lineHeight: "160px",
-  textAlign: "center",
-  background: "#364d79",
-};
-
 export default class HomeUser extends Component {
   constructor(props) {
     super(props);

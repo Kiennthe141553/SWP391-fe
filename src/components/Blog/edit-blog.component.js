@@ -91,7 +91,6 @@ class EditUserAdmin extends Component {
       active: dataDetail?.active,
     };
 
-    // console.log(initialValues)
     return (
       <div className="container">
         <div className="title">

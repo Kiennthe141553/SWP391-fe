@@ -14,8 +14,8 @@ import HomeUser from "./components/home-user.component";
 import ListUser from "./components/list-user.component";
 
 import ListUserAdmin from "./components/list-user-admin.component";
-import AddUser from "./components/add-user.component";
-import AddUserAdmin from "./components/add-user-admin.component";
+// import AddUser from "./components/add-user.component";
+// import AddUserAdmin from "./components/add-user-admin.component";
 import Detail from "./components/detail-user-admin.component";
 import EditUser from "./components/edit-user-admin.component";
 import Chart from "./components/chart.component";
@@ -213,12 +213,19 @@ class App extends Component {
                 />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
+
                 <Route path="/user" component={ListUser} />
-                <Route path="/add_user_admin" component={AddUserAdmin} />
-                <Route path="/add_user" component={AddUser} />
+                {/* <Route path="/add_user_admin" component={AddUserAdmin} />
+                <Route path="/add_user" component={AddUser} /> */}
                 <Route path="/list_user_admin" component={ListUserAdmin} />
                 <Route path="/user_admin_details/:id" component={Detail} />
                 <Route path="/edit_user_admin/:id" component={EditUser} />
+
+                <Route path="/user" component={ListUser} />
+                <Route path="/list_user_admin" component={ListUserAdmin} />
+                <Route path="/user_admin_details/:id" component={Detail} />
+                <Route path="/edit_user_admin/:id" component={EditUser} />
+
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />
                 <Route path="/upload-file" component={UploadFile} />
