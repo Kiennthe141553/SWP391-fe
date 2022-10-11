@@ -66,9 +66,9 @@ export default class ListUserAdmin extends Component {
     const data = this.state.list;
     const columns = [
       {
-        title: "User Name",
-        dataIndex: "username",
-        key: "username",
+        title: "Email",
+        dataIndex: "email",
+        key: "email",
         render: (text, record) => {
           return (
             <Link
@@ -100,9 +100,9 @@ export default class ListUserAdmin extends Component {
       //   },
       // },
       {
-        title: "Email",
-        dataIndex: "email",
-        key: "email",
+        title: "Role",
+        dataIndex: "roles",
+        key: "roles",
         render: (text) => <p>{text}</p>,
       },
       {
