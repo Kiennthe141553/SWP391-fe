@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import UserService from "../services/user.service";
-import AuthService from "../services/auth.service";
-import EventBus from "../common/EventBus";
+import BlogService from "../../services/blog.service";
+import AuthService from "../../services/auth.service";
+import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
-import { Form, Input, Button, Radio, DatePicker } from "antd";
-import "./style.css";
+import { Form, Input, Button, InputNumber, DatePicker } from "antd";
+import ".././style.css";
 
-class EditUserAdmin extends Component {
+class EditBlogManager extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -33,7 +33,7 @@ class EditUserAdmin extends Component {
     if (!currentUser) this.setState({ redirect: "/" });
     const { id } = this.props.match.params;
 
-    UserService.getDetailUser(id)
+    BlogService.getDetailBlog(id)
       .then((response) => {
         this.setState({ dataDetail: response.data, userReady: true });
       })
@@ -52,19 +52,22 @@ class EditUserAdmin extends Component {
   onFinish = (values) => {
     const { id } = this.props.match.params;
     const param = {
-      active: values.active || this.state.dataDetail?.active,
-      address: values.address || this.state.dataDetail?.address,
-      birthDate: values.birthDate || this.state.dataDetail?.birthDate,
-      email: values.email || this.state.dataDetail?.email,
-      firstName: values.firstName || this.state.dataDetail?.firstName,
-      gender: values.gender || this.state.dataDetail?.gender || 1,
+      authorID: this.state.dataDetail?.authorID,
+      contentText: values.contentText || this.state.dataDetail?.contentText,
+      createdBy: values.createdBy || this.state.dataDetail?.createdBy,
+      createdDate: values.createdDate || this.state.dataDetail?.createdDate,
+      imageID: values.imageID || this.state.dataDetail?.imageID,
+      title: values.title || this.state.dataDetail?.title,
+      updatedBy: values.updatedBy || this.state.dataDetail?.updatedBy,
+      updatedDate: values.updatedDate || this.state.dataDetail?.updatedDate,
+      isDeleted: 0,
       id: id,
-      lastName: values.lastName || this.state.dataDetail?.lastName,
+      version: values.version || this.state.dataDetail?.version,
     };
 
-    UserService.editUser(id, param)
+    BlogService.editBlog(id, param)
       .then(() => {
-        this.props.history.push(`/list_user_admin`);
+        this.props.history.push(`/list_blog_management`);
       })
       .catch((error) => {
         console.log(error);
@@ -91,6 +94,8 @@ class EditUserAdmin extends Component {
       active: dataDetail?.active,
     };
 
+    const { TextArea } = Input;
+
     return (
       <div className="container">
         <div className="title">
@@ -103,35 +108,32 @@ class EditUserAdmin extends Component {
           layout="horizontal"
           onFinish={this.onFinish}
           initialValues={initialValues}
-          // onValuesChange={onFormLayoutChange}
         >
-          <Form.Item label="Active" name="active">
-            <Radio.Group>
-              <Radio value={0}>Deactive</Radio>
-              <Radio value={1}>Active</Radio>
-            </Radio.Group>
+          <Form.Item label="Title" name="title">
+            <Input placeholder={dataDetail?.title} />
           </Form.Item>
-          <Form.Item label="Email" name="email">
-            <Input placeholder={dataDetail?.email} />
+          <Form.Item label="Content" name="contentText">
+            <TextArea rows={4} />
           </Form.Item>
-          <Form.Item label="Address" name="address">
-            <Input placeholder={dataDetail?.address} />
+          <Form.Item label="Create By" name="createdBy">
+            <Input placeholder={dataDetail?.createdBy} />
           </Form.Item>
-          <Form.Item label="Birthday" name="birthDate">
-            <DatePicker placeholder={dataDetail?.birthDate} picker="week" />
+          <Form.Item label="Create Date" name="createdDate">
+            <DatePicker placeholder={dataDetail?.createdDate} picker="week" />
           </Form.Item>
-          <Form.Item label="First Name" name="firstName">
-            <Input placeholder={dataDetail?.firstName} />
+          <Form.Item label="Update By" name="updatedBy">
+            <Input placeholder={dataDetail?.updatedBy} />
           </Form.Item>
-          <Form.Item label="Last Name" name="lastName">
-            <Input placeholder={dataDetail?.lastName} />
+          <Form.Item label="Update Date" name="updatedDate">
+            <DatePicker placeholder={dataDetail?.updatedDate} picker="week" />
           </Form.Item>
-          <Form.Item label="Gender" name="gender">
-            <Radio.Group>
-              <Radio value={0}>Male</Radio>
-              <Radio value={1}>Female</Radio>
-            </Radio.Group>
+          <Form.Item label="Image Link" name="imageID">
+            <Input placeholder={dataDetail?.imageID} />
           </Form.Item>
+          <Form.Item label="Version" name="version">
+            <InputNumber placeholder={dataDetail?.version} />
+          </Form.Item>
+
           <Form.Item {...buttonItemLayout}>
             <Button type="primary" htmlType="submit">
               Submit
@@ -146,6 +148,6 @@ class EditUserAdmin extends Component {
   }
 }
 
-const EditUser = withRouter(EditUserAdmin);
+const EditBlog = withRouter(EditBlogManager);
 
-export default EditUser;
+export default EditBlog;

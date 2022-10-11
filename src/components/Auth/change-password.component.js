@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 
-import UserService from "../services/user.service";
+import UserService from "../../services/user.service";
 
-
-const required = value => {
+const required = (value) => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
@@ -23,22 +22,22 @@ export default class ChangePassword extends Component {
     this.onChangeNewPassword = this.onChangeNewPassword.bind(this);
 
     this.state = {
-        oldPass: "",
-        newPass: "",
+      oldPass: "",
+      newPass: "",
       loading: false,
-      message: ""
+      message: "",
     };
   }
 
   onChangeOldPassword(e) {
     this.setState({
-        oldPass: e.target.value
+      oldPass: e.target.value,
     });
   }
 
   onChangeNewPassword(e) {
     this.setState({
-        newPass: e.target.value
+      newPass: e.target.value,
     });
   }
 
@@ -47,30 +46,29 @@ export default class ChangePassword extends Component {
 
     this.setState({
       message: "",
-      loading: true
+      loading: true,
     });
 
     this.form.validateAll();
 
-
     UserService.changePass(this.state.newPass, this.state.oldPass).then(
-        () => {
-          this.props.history.push("/chart");
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+      () => {
+        this.props.history.push("/chart");
+      },
+      (error) => {
+        const resMessage =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
 
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
-        }
-      );
+        this.setState({
+          loading: false,
+          message: resMessage,
+        });
+      }
+    );
   }
 
   render() {

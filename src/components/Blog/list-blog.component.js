@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Space, Table } from "antd";
+import { Row, Col, Card } from "antd";
 import { Link } from "react-router-dom";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
@@ -9,7 +9,7 @@ import "./style.css";
 import { Input } from "antd";
 const { Search } = Input;
 
-export default class ListBlog extends Component {
+export default class ListBlogUser extends Component {
   constructor(props) {
     super(props);
 
@@ -45,74 +45,10 @@ export default class ListBlog extends Component {
   }
 
   render() {
-    const removeUserAdmin = (id) => {
-      console.log(id);
-      UserService.deactiveUser(id)
-        .then((response) => {
-          this.props.history.push(`/list_user_admin`);
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-          if (error.response && error.response.status === 401) {
-            EventBus.dispatch("logout");
-          }
-        });
-    };
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />;
     }
     const data = this.state.list;
-    const columns = [
-      {
-        title: "User Name",
-        dataIndex: "username",
-        key: "username",
-        render: (text, record) => {
-          return (
-            <Link
-              to={`/user_admin_details/${record.id}`}
-              className="-text-link"
-            >
-              {text}
-            </Link>
-          );
-        },
-      },
-      {
-        title: "Email",
-        dataIndex: "email",
-        key: "email",
-        render: (text) => <p>{text}</p>,
-      },
-      {
-        title: "First Name",
-        dataIndex: "firstName",
-        key: "firstName",
-      },
-      {
-        title: "Last Name",
-        dataIndex: "lastName",
-        key: "lastName",
-      },
-      {
-        title: "Action",
-        key: "action",
-        render: (text, record) => {
-          console.log(record);
-          return (
-            <Space size="middle">
-              <Link to={`/edit_user_admin/${record.id}`} className="-text-link">
-                Edit
-              </Link>
-              <Link to="/#" onClick={() => removeUserAdmin(record.id)}>
-                {Boolean(record.active) ? "Disable" : "Enable"}
-              </Link>
-            </Space>
-          );
-        },
-      },
-    ];
 
     const onSearch = (val) => {
       console.log(val);
@@ -123,9 +59,7 @@ export default class ListBlog extends Component {
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
         const filteredData = this.state.dataSource.filter((entry) => {
-          return String(entry.productName)
-            .toLowerCase()
-            .includes(valueToLowCase);
+          return String(entry.title).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });
       }
@@ -141,7 +75,17 @@ export default class ListBlog extends Component {
           enterButton
         />
         {this.state.userReady ? (
-          <Table columns={columns} dataSource={this.state.dataSource} />
+          <Row gutter={16}>
+            {this.state.dataSource.map((item) => {
+              return (
+                <Col span={8}>
+                  <Card title={item.title} bordered={false}>
+                    {item.content}
+                  </Card>
+                </Col>
+              );
+            })}
+          </Row>
         ) : null}
       </div>
     );

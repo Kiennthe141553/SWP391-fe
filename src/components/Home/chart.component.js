@@ -14,7 +14,7 @@ import {
 } from "chart.js";
 import { Bar, Pie, Line } from "react-chartjs-2";
 import faker from "faker";
-import "./style.css";
+import ".././style.css";
 
 ChartJS.register(
   CategoryScale,

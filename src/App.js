@@ -2,26 +2,25 @@ import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
 import { Row, Col } from "antd";
-
 import AuthService from "./services/auth.service";
 
-import Login from "./components/login.component";
-import Register from "./components/register.component";
-import Home from "./components/home.component";
-import HomeUser from "./components/home-user.component";
-import ListUser from "./components/list-user.component";
+import Chart from "./components/Home/chart.component";
+import ChangePassword from "./components/Auth/change-password.component";
+import Login from "./components/Auth/login.component";
+import Register from "./components/Auth/register.component";
+import Home from "./components/Home/home.component";
+import HomeUser from "./components/Home/home-user.component";
 
-import ListUserAdmin from "./components/list-user-admin.component";
-// import AddUser from "./components/add-user.component";
-// import AddUserAdmin from "./components/add-user-admin.component";
-import Detail from "./components/detail-user-admin.component";
-import EditUser from "./components/edit-user-admin.component";
-import Chart from "./components/chart.component";
-import UploadFile from "./components/upload-file.component";
-import ChangePassword from "./components/change-password.component";
-import ListCategory from "./components/list-category.component";
+import ListBlogManagement from "./components/Blog/list-blog-management.component";
+import AddBlog from "./components/Blog/create-blog.component";
+import EditBlog from "./components/Blog/edit-blog.component";
+import DetailManageBlog from "./components/Blog/detail-blog-management.component";
+
+import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
+import Detail from "./components/ManageUser/detail-user-admin.component";
+import EditUser from "./components/ManageUser/edit-user-admin.component";
+
 import EventBus from "./common/EventBus";
 
 class App extends Component {
@@ -29,6 +28,7 @@ class App extends Component {
     super(props);
     this.logOut = this.logOut.bind(this);
     this.selectLink = this.selectLink.bind(this);
+    this.resetModuleSelected = this.resetModuleSelected.bind(this);
 
     this.state = {
       currentUser: undefined,
@@ -62,15 +62,21 @@ class App extends Component {
     this.setState({
       currentUser: undefined,
       role: undefined,
+      moduleSelected: "",
     });
   }
 
   componentDidUpdate() {}
 
   selectLink(e) {
-    console.log(e.target.id);
     this.setState({
       moduleSelected: e.target.id,
+    });
+  }
+
+  resetModuleSelected(e) {
+    this.setState({
+      moduleSelected: "",
     });
   }
 
@@ -86,8 +92,16 @@ class App extends Component {
 
       {
         link: "/list_user_admin",
-        name: "List User Admin",
-        isActive: moduleSelected === "List User Admin",
+        name: "Manage User",
+        isActive: moduleSelected === "Manage User",
+      },
+    ];
+
+    const listSystemAdminContentMenu = [
+      {
+        link: "/list_blog_management",
+        name: "Manage Blog",
+        isActive: moduleSelected === "Manage Blog",
       },
     ];
 
@@ -102,7 +116,11 @@ class App extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark header">
-          <Link to={"/"} className="navbar-brand">
+          <Link
+            to={"/"}
+            className="navbar-brand"
+            onClick={this.resetModuleSelected}
+          >
             English Practice Quizzz
           </Link>
           <div className="navbar-nav mr-auto"></div>
@@ -142,7 +160,28 @@ class App extends Component {
                 {currentUser && (
                   <div className="navbar-nav ml-auto contain-menu">
                     <div className="menu-content">
-                      {role === "MARKETING"}
+                      {role === "MARKETING" && (
+                        <>
+                          {listSystemAdminContentMenu.map((item) => {
+                            return (
+                              <li
+                                className={
+                                  item.isActive ? "nav-item-active" : "nav-item"
+                                }
+                              >
+                                <Link
+                                  to={item.link}
+                                  className="nav-link"
+                                  onClick={this.selectLink}
+                                  id={item.name}
+                                >
+                                  {item.name}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </>
+                      )}
                       {role === "ADMIN" && (
                         <>
                           {listSystemAdminMenu.map((item) => {
@@ -214,22 +253,23 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
 
-                <Route path="/user" component={ListUser} />
-                {/* <Route path="/add_user_admin" component={AddUserAdmin} />
-                <Route path="/add_user" component={AddUser} /> */}
                 <Route path="/list_user_admin" component={ListUserAdmin} />
                 <Route path="/user_admin_details/:id" component={Detail} />
                 <Route path="/edit_user_admin/:id" component={EditUser} />
 
-                <Route path="/user" component={ListUser} />
-                <Route path="/list_user_admin" component={ListUserAdmin} />
-                <Route path="/user_admin_details/:id" component={Detail} />
-                <Route path="/edit_user_admin/:id" component={EditUser} />
+                <Route
+                  path="/list_blog_management"
+                  component={ListBlogManagement}
+                />
+                <Route path="/add_blog" component={AddBlog} />
+                <Route path="/edit_blog/:id" component={EditBlog} />
+                <Route
+                  path="/blog_management_details/:id"
+                  component={DetailManageBlog}
+                />
 
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />
-                <Route path="/upload-file" component={UploadFile} />
-                <Route path="/list_category" component={ListCategory} />
               </Switch>
             </Col>
           </Row>

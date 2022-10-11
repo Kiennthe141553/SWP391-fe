@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import UserService from "../services/user.service";
-import AuthService from "../services/auth.service";
-import EventBus from "../common/EventBus";
+import UserService from "../../services/user.service";
+import AuthService from "../../services/auth.service";
+import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
 import { Form, Input, Button, Radio, DatePicker } from "antd";
-import "./style.css";
+import ".././style.css";
 
 class EditUserAdmin extends Component {
   static propTypes = {
