@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
+import UserService from "../../services/user.service";
+import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-// import { getDateTime } from "../helper/datetime";
 
 class DetailUserAdmin extends Component {
   static propTypes = {

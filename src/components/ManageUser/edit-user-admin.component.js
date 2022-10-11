@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import UserService from "../services/user.service";
-// import AuthService from "../services/auth.service";
-// import EventBus from "../common/EventBus";
+import UserService from "../../services/user.service";
+import AuthService from "../../services/auth.service";
+import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-// import { Redirect } from "react-router-dom";
-// import {  getDateTime } from '../helper/datetime'
+
 import { Form, Input, Button, Radio, DatePicker } from "antd";
-import "./style.css";
+import ".././style.css";
 
 class EditUserAdmin extends Component {
   static propTypes = {
@@ -29,34 +28,20 @@ class EditUserAdmin extends Component {
   formRef = React.createRef();
 
   componentDidMount() {
-    // const currentUser = AuthService.getCurrentUser();
+    const currentUser = AuthService.getCurrentUser();
 
-    // if (!currentUser) this.setState({ redirect: "/" });
+    if (!currentUser) this.setState({ redirect: "/" });
     const { id } = this.props.match.params;
-
-    // UserService.getListCategory()
-    //   .then((response) => {
-    //     this.setState({ listCategory: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     if (error.response && error.response.status === 401) {
-    //       EventBus.dispatch("logout");
-    //     }
-    //   });
 
     UserService.getDetailUser(id)
       .then((response) => {
         this.setState({ dataDetail: response.data, userReady: true });
-
-        // this.setState({ objCate: objCate[0] })
-        // console.log(this.state.objCate);
       })
       .catch((error) => {
         console.log(error);
-        // if (error.response && error.response.status === 401) {
-        //   EventBus.dispatch("logout");
-        // }
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
       });
   }
 
@@ -65,19 +50,8 @@ class EditUserAdmin extends Component {
   };
 
   onFinish = (values) => {
-    // console.log(this.state.objCate)
-
-    // const objCate = this.state.listCategory.filter((item) => {
-    //   return item.categoryName === this.state.dataDetail?.categoryName;
-    // });
-    // console.log(objCate);
     const { id } = this.props.match.params;
     const param = {
-      // categoryId: values.categoryId || objCate[0]?.category_id,
-      // productName: values.productName || this.state.dataDetail?.productName,
-      // price: values.price || this.state.dataDetail?.price,
-      // quantity: values.quantity || this.state.dataDetail?.quantity,
-      // description: values.description || this.state.dataDetail?.description,
       active: values.active || this.state.dataDetail?.active,
       address: values.address || this.state.dataDetail?.address,
       birthDate: values.birthDate || this.state.dataDetail?.birthDate,
@@ -99,22 +73,15 @@ class EditUserAdmin extends Component {
 
   render() {
     const { dataDetail } = this.state;
-    // console.log(dataDetail)
-    // const listCate = this.state.listCategory;
+
     const buttonItemLayout = {
       wrapperCol: {
         span: 14,
         offset: 4,
       },
     };
-    // const { TextArea } = Input;
-    const initialValues = {
-      // categoryId: dataDetail?.categoryName,
-      // productName: dataDetail?.productName,
-      // price: dataDetail?.price,
-      // quantity: dataDetail?.quantity,
-      // description: dataDetail?.description,
 
+    const initialValues = {
       address: dataDetail?.address,
       birthDate: dataDetail?.birthDate,
       email: dataDetail?.email,
@@ -139,15 +106,6 @@ class EditUserAdmin extends Component {
           initialValues={initialValues}
           // onValuesChange={onFormLayoutChange}
         >
-          {/* <Form.Item label="Category" name="categoryId">
-            <Select placeholder={dataDetail?.categoryName}>
-              {listCate.map((item, index) => (
-                <Select.Option key={index} value={item.category_id}>
-                  {item.categoryName}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item> */}
           <Form.Item label="Active" name="active">
             <Radio.Group>
               <Radio value={0}>Deactive</Radio>
