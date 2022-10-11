@@ -1,0 +1,14 @@
+.home-container {
+  background-color: rgb(235, 239, 242);
+}
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+}
+.btn {
+  transition: transform 0.5s;
+}
+.btn:hover {
+  transform: translateY(-5px) !important;
+}
