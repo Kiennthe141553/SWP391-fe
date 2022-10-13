@@ -37,3 +37,14 @@
     gap: 20px;
     margin-bottom: 20px;
 }
+/* List Blog */
+
+.row-list-blog {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.row-list-blog .col-list-blog {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

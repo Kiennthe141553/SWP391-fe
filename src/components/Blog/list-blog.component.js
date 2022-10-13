@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { Row, Col, Card } from "antd";
-import { Link } from "react-router-dom";
-import UserService from "../services/user.service";
-import AuthService from "../services/auth.service";
-import EventBus from "../common/EventBus";
+import { Row, Col, Card, Pagination } from "antd";
+
+import BlogService from "../../services/blog.service";
+
+import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
-import "./style.css";
+import ".././style.css";
 import { Input } from "antd";
 const { Search } = Input;
+const { Meta } = Card;
 
 export default class ListBlogUser extends Component {
   constructor(props) {
@@ -24,10 +25,10 @@ export default class ListBlogUser extends Component {
   }
 
   componentDidMount() {
-    const currentUser = AuthService.getCurrentUser();
+    // const currentUser = AuthService.getCurrentUser();
 
-    if (!currentUser) this.setState({ redirect: "/" });
-    UserService.getListUser()
+    // if (!currentUser) this.setState({ redirect: "/" });
+    BlogService.getListBlog()
       .then((response) => {
         console.log(response.data);
         this.setState({
@@ -50,6 +51,9 @@ export default class ListBlogUser extends Component {
     }
     const data = this.state.list;
 
+    console.log(this.state.dataSource.length % 3);
+    const numberPage = this.state.dataSource.length / 3;
+
     const onSearch = (val) => {
       console.log(val);
       if (val === "") {
@@ -67,7 +71,7 @@ export default class ListBlogUser extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>List Users</h2>
+          <h2>List Blogs</h2>
         </div>
         <Search
           placeholder="Search name user"
@@ -75,17 +79,55 @@ export default class ListBlogUser extends Component {
           enterButton
         />
         {this.state.userReady ? (
-          <Row gutter={16}>
-            {this.state.dataSource.map((item) => {
-              return (
-                <Col span={8}>
-                  <Card title={item.title} bordered={false}>
-                    {item.content}
-                  </Card>
-                </Col>
-              );
-            })}
-          </Row>
+          <>
+            <Row gutter={16} className="row-list-blog">
+              {this.state.dataSource.map((item) => {
+                return (
+                  <Col span={8} className="col-list-blog">
+                    <Card
+                      hoverable
+                      style={{
+                        borderRadius: "10px",
+                        border: "1px solid black",
+                      }}
+                      cover={
+                        <img
+                          alt={item.title}
+                          style={{
+                            height: "10vh",
+                            objectFit: "cover",
+                            padding: "10px",
+                          }}
+                          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                        />
+                      }
+                      onClick={() => {
+                        this.props.history.push(
+                          `/blog_management_details/${item.id}`
+                        );
+                      }}
+                    >
+                      <Meta title={item.title} />
+                    </Card>
+                  </Col>
+                );
+              })}
+            </Row>
+            <Row className="row-paging">
+              <Pagination
+                defaultCurrent={1}
+                total={
+                  this.state.dataSource.length % 3 === 0
+                    ? numberPage
+                    : numberPage + 1
+                }
+                // current={currentPage}
+                pageSize={3}
+                showSizeChanger={false}
+                // onChange={handleOnChange}
+              />
+            </Row>
+          </>
         ) : null}
       </div>
     );
