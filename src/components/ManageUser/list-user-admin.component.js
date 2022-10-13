@@ -122,10 +122,21 @@ export default class ListUserAdmin extends Component {
           console.log(record);
           return (
             <Space size="middle">
-              <Link to={`/edit_user_admin/${record.id}`} className="-text-link">
+              <Link
+                to={`/edit_user_admin/${record.id}`}
+                className="p-2 border rounded-lg text-black"
+              >
                 Edit
               </Link>
-              <Link to="/#" onClick={() => removeUserAdmin(record.id)}>
+              <Link
+                to="/#"
+                onClick={() => removeUserAdmin(record.id)}
+                className={
+                  Boolean(record.active)
+                    ? "p-2 bg-red-400 rounded-lg text-white"
+                    : "p-2 bg-green-400 rounded-lg text-white"
+                }
+              >
                 {Boolean(record.active) ? "Disable" : "Enable"}
               </Link>
             </Space>

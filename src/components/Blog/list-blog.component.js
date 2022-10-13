@@ -4,6 +4,8 @@ import { Row, Col, Card, Pagination } from "antd";
 import BlogService from "../../services/blog.service";
 
 import EventBus from "../../common/EventBus";
+
+import "../../styles/tailwind.css";
 import { Redirect } from "react-router-dom";
 import ".././style.css";
 import { Input } from "antd";
@@ -83,7 +85,7 @@ export default class ListBlogUser extends Component {
             <Row gutter={16} className="row-list-blog">
               {this.state.dataSource.map((item) => {
                 return (
-                  <Col span={8} className="col-list-blog">
+                  <Col span={8} className="col-list-blog overflow-scroll">
                     <Card
                       hoverable
                       style={{

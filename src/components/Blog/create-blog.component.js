@@ -63,16 +63,24 @@ export default class AddBlog extends Component {
           layout="horizontal"
           onFinish={this.onFinish}
         >
-          <Form.Item label="Content" name="contentText">
+          <Form.Item
+            label="Content"
+            name="contentText"
+            className="flex items-center"
+          >
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item label="ID" name="id">
+          <Form.Item label="ID" name="id" className="flex items-center">
             <Input />
           </Form.Item>
-          <Form.Item label="Image" name="imageBase64">
+          <Form.Item
+            label="Image"
+            name="imageBase64"
+            className="flex items-center"
+          >
             <Input />
           </Form.Item>
-          <Form.Item label="Title" name="title">
+          <Form.Item label="Title" name="title" className="flex items-center">
             <Input />
           </Form.Item>
 
