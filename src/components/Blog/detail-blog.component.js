@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 
-import UserService from "../services/user.service";
-import EventBus from "../common/EventBus";
+import BlogService from "../../services/blog.service";
+import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import { getDateTime } from "../../helper/datetime";
 
 class DetailBlog extends Component {
   static propTypes = {
@@ -22,8 +23,9 @@ class DetailBlog extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    UserService.getDetailUser(id)
+    BlogService.getDetailBlog(id)
       .then((response) => {
+        console.log(response);
         this.setState({ data: response.data, userReady: true });
         console.log(this.state.data);
       })
@@ -37,28 +39,40 @@ class DetailBlog extends Component {
 
   render() {
     const { data, userReady } = this.state;
-
+    console.log(data);
     return (
       <div className="container">
         <div className="title">
-          <h2>Detail User {data?.id}</h2>
+          <h2>Detail Blog: {data?.title}</h2>
         </div>
         {userReady ? (
           <div>
             <p>
-              <strong>User Name:</strong> {data?.username}
+              <strong>Author ID:</strong> {data?.authorID}
             </p>
             <p>
-              <strong>Email:</strong> {data?.email}
+              <strong>Title:</strong> {data?.title}
             </p>
             <p>
-              <strong>DOB:</strong> {data?.birthDate} $
+              <strong>Content:</strong> {data?.contentText}
             </p>
             <p>
-              <strong>Gender:</strong> {data?.gender}
+              <strong>Image:</strong> <img src={data?.imageID} />
             </p>
             <p>
-              <strong>Address:</strong> {data?.address}
+              <strong>Create By:</strong> {data?.createdBy}
+            </p>
+            <p>
+              <strong>Create Date:</strong> {getDateTime(data?.createdDate)}
+            </p>
+            <p>
+              <strong>Update By:</strong> {data?.updatedBy}
+            </p>
+            <p>
+              <strong>Update Date:</strong> {getDateTime(data?.updatedDate)}
+            </p>
+            <p>
+              <strong>Version:</strong> {data?.version}
             </p>
           </div>
         ) : null}
@@ -67,6 +81,6 @@ class DetailBlog extends Component {
   }
 }
 
-const DetailBog = withRouter(DetailBlog);
+const DetailBlog = withRouter(DetailBlog);
 
-export default DetailBog;
+export default DetailBlog;

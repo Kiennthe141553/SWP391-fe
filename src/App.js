@@ -13,6 +13,7 @@ import Home from "./components/Home/home.component";
 import HomeUser from "./components/Home/home-user.component";
 
 import ListBlogManagement from "./components/Blog/list-blog-management.component";
+import ListBlogUser from "./components/Blog/list-blog.component";
 import AddBlog from "./components/Blog/create-blog.component";
 import EditBlog from "./components/Blog/edit-blog.component";
 import DetailManageBlog from "./components/Blog/detail-blog-management.component";
@@ -107,6 +108,11 @@ class App extends Component {
 
     const listSystemCustomerMenu = [
       {
+        link: "/list_blog",
+        name: "Blog",
+        isActive: moduleSelected === "Blog",
+      },
+      {
         link: "/change-password",
         name: "Change Password",
         isActive: moduleSelected === "Change Password",
@@ -139,6 +145,12 @@ class App extends Component {
             </div>
           ) : (
             <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/blog"} className="nav-link">
+                  Blog
+                </Link>
+              </li>
+
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
                   Login
@@ -260,6 +272,11 @@ class App extends Component {
                 <Route
                   path="/list_blog_management"
                   component={ListBlogManagement}
+                />
+                <Route
+                  exact
+                  path={["/blog", "/list_blog"]}
+                  component={ListBlogUser}
                 />
                 <Route path="/add_blog" component={AddBlog} />
                 <Route path="/edit_blog/:id" component={EditBlog} />
