@@ -7,6 +7,7 @@ import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
 // import { getDateTime } from "../../helper/datetime";
 import ".././style.css";
+import "../../styles/tailwind.css";
 import { Input } from "antd";
 const { Search } = Input;
 
@@ -113,10 +114,17 @@ export default class ListBlogManagement extends Component {
           console.log(record);
           return (
             <Space size="middle">
-              <Link to={`/edit_blog/${record.id}`} className="-text-link">
+              <Link
+                to={`/edit_blog/${record.id}`}
+                className="p-2 bg-green-400 rounded-lg text-white"
+              >
                 Edit
               </Link>
-              <Link to="/#" onClick={() => removeUserAdmin(record.id)}>
+              <Link
+                to="/#"
+                onClick={() => removeUserAdmin(record.id)}
+                className="p-2 bg-red-500 rounded-lg text-white"
+              >
                 Delete
               </Link>
             </Space>
@@ -155,7 +163,9 @@ export default class ListBlogManagement extends Component {
           </Button>
         </div>
         {this.state.userReady ? (
-          <Table columns={columns} dataSource={this.state.dataSource} />
+          <div className="list-user overflow-scroll ">
+            <Table columns={columns} dataSource={this.state.dataSource} />
+          </div>
         ) : null}
       </div>
     );

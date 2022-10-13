@@ -24,6 +24,8 @@ import EditUser from "./components/ManageUser/edit-user-admin.component";
 
 import EventBus from "./common/EventBus";
 
+import "./styles/tailwind.css";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -121,7 +123,7 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark header">
+        <nav className="navbar navbar-expand navbar-dark bg-black header shadow-sm">
           <Link
             to={"/"}
             className="navbar-brand"
@@ -144,21 +146,30 @@ class App extends Component {
               </li>
             </div>
           ) : (
-            <div className="navbar-nav ml-auto">
+            <div className="navbar-nav ml-auto flex items-center">
               <li className="nav-item">
-                <Link to={"/blog"} className="nav-link">
+                <Link
+                  to={"/blog"}
+                  className="p-2 text-gray-200 rounded-lg bg-blue-600 hover:text-gray-200 hover:bg-blue-800 "
+                >
                   Blog
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link to={"/login"} className="nav-link">
+                <Link
+                  to={"/login"}
+                  className="p-2 text-gray-200 rounded-lg bg-blue-600 hover:text-gray-200 hover:bg-blue-800 "
+                >
                   Login
                 </Link>
               </li>
 
               <li className="nav-item">
-                <Link to={"/register"} className="nav-link">
+                <Link
+                  to={"/register"}
+                  className="p-2 text-gray-200 border border-gray-800 rounded-lg hover:text-gray-400 "
+                >
                   Register
                 </Link>
               </li>
@@ -243,10 +254,10 @@ class App extends Component {
                     <li className="nav-item">
                       <a
                         href="/login"
-                        className="nav-link"
+                        className="p-3 text-white bg-red-500 w-full"
                         onClick={this.logOut}
                       >
-                        LogOut
+                        Logout
                       </a>
                     </li>
                   </div>

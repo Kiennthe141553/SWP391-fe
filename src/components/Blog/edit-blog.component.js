@@ -5,6 +5,8 @@ import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
+import "../../styles/tailwind.css";
+
 import { Form, Input, Button, InputNumber, DatePicker } from "antd";
 import ".././style.css";
 
@@ -96,6 +98,10 @@ class EditBlogManager extends Component {
 
     const { TextArea } = Input;
 
+    const styles = {
+      input_container: "flex items-center",
+    };
+
     return (
       <div className="container">
         <div className="title">
@@ -109,28 +115,60 @@ class EditBlogManager extends Component {
           onFinish={this.onFinish}
           initialValues={initialValues}
         >
-          <Form.Item label="Title" name="title">
-            <Input placeholder={dataDetail?.title} />
+          <Form.Item
+            label="Title"
+            name="title"
+            className={styles.input_container}
+          >
+            <Input placeholder={dataDetail?.title} clasName="rounded-xl" />
           </Form.Item>
-          <Form.Item label="Content" name="contentText">
+          <Form.Item
+            label="Content"
+            name="contentText"
+            className={styles.input_container}
+          >
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item label="Create By" name="createdBy">
+          <Form.Item
+            label="Create By"
+            name="createdBy"
+            className={styles.input_container}
+          >
             <Input placeholder={dataDetail?.createdBy} />
           </Form.Item>
-          <Form.Item label="Create Date" name="createdDate">
+          <Form.Item
+            label="Create Date"
+            name="createdDate"
+            className={styles.input_container}
+          >
             <DatePicker placeholder={dataDetail?.createdDate} picker="week" />
           </Form.Item>
-          <Form.Item label="Update By" name="updatedBy">
+          <Form.Item
+            label="Update By"
+            name="updatedBy"
+            className={styles.input_container}
+          >
             <Input placeholder={dataDetail?.updatedBy} />
           </Form.Item>
-          <Form.Item label="Update Date" name="updatedDate">
+          <Form.Item
+            label="Update Date"
+            name="updatedDate"
+            className={styles.input_container}
+          >
             <DatePicker placeholder={dataDetail?.updatedDate} picker="week" />
           </Form.Item>
-          <Form.Item label="Image Link" name="imageID">
+          <Form.Item
+            label="Image Link"
+            name="imageID"
+            className={styles.input_container}
+          >
             <Input placeholder={dataDetail?.imageID} />
           </Form.Item>
-          <Form.Item label="Version" name="version">
+          <Form.Item
+            label="Version"
+            name="version"
+            className={styles.input_container}
+          >
             <InputNumber placeholder={dataDetail?.version} />
           </Form.Item>
 
