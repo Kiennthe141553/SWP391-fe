@@ -4,6 +4,7 @@ import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
+import "../../styles/tailwind.css";
 
 import { Form, Input, Button, Radio, DatePicker } from "antd";
 import ".././style.css";
@@ -106,28 +107,44 @@ class EditUserAdmin extends Component {
           initialValues={initialValues}
           // onValuesChange={onFormLayoutChange}
         >
-          <Form.Item label="Active" name="active">
+          <Form.Item label="Active" name="active" className="flex items-center">
             <Radio.Group>
               <Radio value={0}>Deactive</Radio>
               <Radio value={1}>Active</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="Email" name="email">
+          <Form.Item label="Email" name="email" className="flex items-center">
             <Input placeholder={dataDetail?.email} />
           </Form.Item>
-          <Form.Item label="Address" name="address">
+          <Form.Item
+            label="Address"
+            name="address"
+            className="flex items-center"
+          >
             <Input placeholder={dataDetail?.address} />
           </Form.Item>
-          <Form.Item label="Birthday" name="birthDate">
+          <Form.Item
+            label="Birthday"
+            name="birthDate"
+            className="flex items-center"
+          >
             <DatePicker placeholder={dataDetail?.birthDate} picker="week" />
           </Form.Item>
-          <Form.Item label="First Name" name="firstName">
+          <Form.Item
+            label="First Name"
+            name="firstName"
+            className="flex items-center"
+          >
             <Input placeholder={dataDetail?.firstName} />
           </Form.Item>
-          <Form.Item label="Last Name" name="lastName">
+          <Form.Item
+            label="Last Name"
+            name="lastName"
+            className="flex items-center"
+          >
             <Input placeholder={dataDetail?.lastName} />
           </Form.Item>
-          <Form.Item label="Gender" name="gender">
+          <Form.Item label="Gender" name="gender" className="flex items-center">
             <Radio.Group>
               <Radio value={0}>Male</Radio>
               <Radio value={1}>Female</Radio>

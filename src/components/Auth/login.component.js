@@ -5,6 +5,8 @@ import CheckButton from "react-validation/build/button";
 
 import AuthService from "../../services/auth.service";
 
+import "../../styles/tailwind.css";
+
 const required = (value) => {
   if (!value) {
     return (

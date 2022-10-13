@@ -1,39 +1,64 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
 
 /* all */
-.container .title h2{
-    font-weight: bold;
+.container .title h2 {
+  font-weight: bold;
 }
 
-.container .title{
-    margin-top: 20px;
-    margin-bottom: 50px;
+.container .title {
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 /* home */
 
 .home {
-    /* min-height: 30vh; */
-    margin-top: 50px;
+  /* min-height: 30vh; */
+  margin-top: 50px;
 }
 
 .home .contain-slider {
-    display: flex;
-    justify-content: center;
-    /* min-height: 30vh; */
+  display: flex;
+  justify-content: center;
+  /* min-height: 30vh; */
 }
 
 .home .contain-slider img {
-    margin: auto;
-    min-height: 40vh;
+  margin: auto;
+  min-height: 40vh;
 }
 
 .change-password-card {
-    margin: 0 auto 25px;
+  margin: 0 auto 25px;
 }
 /* List Blog Management */
 
 .search_and_add_blog {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.list-user {
+  height: 700px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: lightgrey;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }

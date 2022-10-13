@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
 import EventBus from "../common/EventBus";
+import "../../styles/tailwind.css";
 import { Redirect } from "react-router-dom";
 import "./style.css";
 import { Input } from "antd";
@@ -78,7 +79,7 @@ export default class ListBlogUser extends Component {
           <Row gutter={16}>
             {this.state.dataSource.map((item) => {
               return (
-                <Col span={8}>
+                <Col span={8} className="overflow-scroll">
                   <Card title={item.title} bordered={false}>
                     {item.content}
                   </Card>
