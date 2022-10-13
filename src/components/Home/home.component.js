@@ -39,19 +39,16 @@ export default function Home() {
       </div>
       {/* bottom */}
       <div className="border-t-4 w-8/12 flex flex-col justify-center">
-        <p className="text-center font-extrabold text-4xl text-gray-600 pt-10">
+        <p className="text-center pb-2 font-extrabold text-4xl text-gray-600 pt-10">
           A little thing this app can help you
         </p>
         <div className="flex items-center justify-between p-10 border-t-4 border-gray-400">
           <div className="w-6/12">
             {/* text */}
             <div className="font-medium text-gray-600 text-2xl mb-8">
-              When used correctly, flash cards allow students to interact with
-              information in a way that makes it easier to retain. Flash cards
-              are strategically designed to enhance and encourage active recall.
-              The format, usually a question on one side of the card and the
-              answer on the other, requires learners to look at one side and
-              recall the information from the other side.
+              Flash cards allow students to interact with information in a way
+              that makes it easier to retain. Flash cards are strategically
+              designed to enhance and encourage active recall.
             </div>
             <Link to={"/register"} className="nav-link">
               <button className={styles.btn}>Get started</button>
@@ -75,7 +72,7 @@ export default function Home() {
           <div className="w-6/12">
             {/* text */}
             <div className="font-medium text-gray-600 text-2xl mb-8">
-              Practice help you prepare for exams and remember better
+              Quick practice help you prepare for exams and remember better
             </div>
             <Link to={"/register"} className="nav-link">
               <button className={styles.btn}>Get started</button>
