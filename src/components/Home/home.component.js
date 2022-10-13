@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/tailwind.css";
 import "../../styles/home.css";
 import { Footer } from "antd/lib/layout/layout";
-import { SubTitle } from "chart.js";
+
 import { Link } from "react-router-dom";
 
 export default function Home() {

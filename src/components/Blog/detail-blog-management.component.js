@@ -57,7 +57,8 @@ class DetailBlog extends Component {
               <strong>Content:</strong> {data?.contentText}
             </p>
             <p>
-              <strong>Image:</strong> <img src={data?.imageID} />
+              <strong>Image:</strong>{" "}
+              <img src={data?.imageID} alt={data?.imageID} />
             </p>
             <p>
               <strong>Create By:</strong> {data?.createdBy}
