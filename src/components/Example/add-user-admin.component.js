@@ -2,16 +2,8 @@ import React, { Component } from "react";
 import UserService from "../services/user.service";
 import AuthService from "../services/auth.service";
 // import EventBus from "../common/EventBus";
-// import { Redirect } from "react-router-dom";
-// import {  getDateTime } from '../helper/datetime'
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-  // DatePicker,
-  InputNumber,
-} from "antd";
+
+import { Form, Input, Button, Select, InputNumber } from "antd";
 import "./style.css";
 
 export default class AddUserAdmin extends Component {
@@ -29,19 +21,6 @@ export default class AddUserAdmin extends Component {
     const currentUser = AuthService.getCurrentUser();
 
     if (!currentUser) this.setState({ redirect: "/" });
-
-    // UserService.getListCategory()
-    //   .then((response) => {
-    //     console.log(response);
-    //     this.setState({ listCategory: response.data });
-    //     console.log(this.state.listCategory);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     if (error.response && error.response.status === 401) {
-    //       EventBus.dispatch("logout");
-    //     }
-    //   });
   }
 
   onReset = () => {
@@ -79,8 +58,6 @@ export default class AddUserAdmin extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
-          // initialValues={{ disabled: componentDisabled }}
-          // onValuesChange={onFormLayoutChange}
         >
           <Form.Item label="Category" name="categoryId">
             <Select>
@@ -97,9 +74,7 @@ export default class AddUserAdmin extends Component {
           <Form.Item label="Product Price" name="price">
             <Input />
           </Form.Item>
-          {/* <Form.Item label="Start Date" name='startDate'>
-          <DatePicker />
-        </Form.Item> */}
+
           <Form.Item label="Quantity" name="quantity">
             <InputNumber />
           </Form.Item>

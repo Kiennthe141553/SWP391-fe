@@ -104,15 +104,7 @@ export default class Chart extends Component {
       },
     };
 
-    // const labelsLine = [
-    //   "January",
-    //   "February",
-    //   "March",
-    //   "April",
-    //   "May",
-    //   "June",
-    //   "July",
-    // ];
+
 
     const dataLine = {
       labels,

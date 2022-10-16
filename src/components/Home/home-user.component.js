@@ -14,7 +14,6 @@ export default class HomeUser extends Component {
 
   render() {
     return (
-      // <div className="container">
       <div className="home">
         Home User
         <Carousel autoplay>
@@ -26,7 +25,6 @@ export default class HomeUser extends Component {
           </div>
         </Carousel>
       </div>
-      // </div>
     );
   }
 }

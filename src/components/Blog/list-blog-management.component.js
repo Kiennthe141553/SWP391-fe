@@ -5,7 +5,7 @@ import BlogService from "../../services/blog.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
-// import { getDateTime } from "../../helper/datetime";
+
 import ".././style.css";
 import "../../styles/tailwind.css";
 import { Input } from "antd";

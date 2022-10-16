@@ -5,7 +5,7 @@ import UserService from "../../services/user.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
-// import { getDateTime } from "../helper/datetime";
+
 import ".././style.css";
 import { Input } from "antd";
 const { Search } = Input;
@@ -80,25 +80,6 @@ export default class ListUserAdmin extends Component {
           );
         },
       },
-      // {
-      //   title: "Create At",
-      //   dataIndex: "createdAt",
-      //   key: "createdAt",
-      //   render: (text) => {
-      //     const value = getDateTime(text, "DD/MM/YYYY HH:mm:ss");
-      //     return <p>{value}</p>;
-      //   },
-      // },
-
-      // {
-      //   title: "Update At",
-      //   dataIndex: "updatedAt",
-      //   key: "updatedAt",
-      //   render: (text) => {
-      //     const value = getDateTime(text, "DD/MM/YYYY HH:mm:ss");
-      //     return <p>{value}</p>;
-      //   },
-      // },
       {
         title: "Role",
         dataIndex: "roles",
