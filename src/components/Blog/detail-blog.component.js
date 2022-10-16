@@ -42,38 +42,29 @@ class DetailBlogUser extends Component {
     console.log(data);
     return (
       <div className="container">
-        <div className="title">
-          <h2>Detail Blog: {data?.title}</h2>
-        </div>
+        <div className="title"></div>
         {userReady ? (
-          <div>
-            <p>
-              <strong>Author ID:</strong> {data?.authorID}
-            </p>
-            <p>
-              <strong>Title:</strong> {data?.title}
-            </p>
-            <p>
-              <strong>Content:</strong> {data?.contentText}
-            </p>
-            <p>
-              <strong>Image:</strong> <img src={data?.imageID} />
-            </p>
-            <p>
-              <strong>Create By:</strong> {data?.createdBy}
-            </p>
-            <p>
-              <strong>Create Date:</strong> {getDateTime(data?.createdDate)}
-            </p>
-            <p>
-              <strong>Update By:</strong> {data?.updatedBy}
-            </p>
-            <p>
-              <strong>Update Date:</strong> {getDateTime(data?.updatedDate)}
-            </p>
-            <p>
-              <strong>Version:</strong> {data?.version}
-            </p>
+          <div className="">
+            {/* title */}
+            <div className="text-center text-3xl font-semibold mb-10">
+              {data?.title}
+            </div>
+            {/* author */}
+            <div className="text-right text-gray-400 font-bold">
+              {data.authorID}
+            </div>
+            <hr className="border bg-gray-800 mb-5" />
+            {/* image */}
+            <div>
+              <img
+                className="lg:w-6/12 md:w-10/12 mb-5 cover rounded-lg mx-auto"
+                alt=""
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png"
+              />
+            </div>
+
+            {/* content */}
+            <div className="mb-10 text-xl">&emsp;{data.contentText}</div>
           </div>
         ) : null}
       </div>
