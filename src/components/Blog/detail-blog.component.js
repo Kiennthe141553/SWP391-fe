@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { getDateTime } from "../../helper/datetime";
 
-class DetailBlog extends Component {
+class DetailBlogUser extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -44,11 +44,27 @@ class DetailBlog extends Component {
       <div className="container">
         <div className="title"></div>
         {userReady ? (
-          <div>
+          <div className="">
             {/* title */}
-            <div>{data?.title}</div>
+            <div className="text-center text-3xl font-semibold mb-10">
+              {data?.title}
+            </div>
             {/* author */}
+            <div className="text-right text-gray-400 font-bold">
+              {data.authorID}
+            </div>
+            <hr className="border bg-gray-800 mb-5" />
+            {/* image */}
+            <div>
+              <img
+                className="lg:w-6/12 md:w-10/12 mb-5 cover rounded-lg mx-auto"
+                alt=""
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png"
+              />
+            </div>
+
             {/* content */}
+            <div className="mb-10 text-xl">&emsp;{data.contentText}</div>
           </div>
         ) : null}
       </div>
@@ -56,6 +72,6 @@ class DetailBlog extends Component {
   }
 }
 
-const DetailBlog = withRouter(DetailBlog);
+const DetailBlog = withRouter(DetailBlogUser);
 
 export default DetailBlog;

@@ -90,9 +90,7 @@ export default class ListBlogUser extends Component {
                   // card container
                   <div
                     onClick={() => {
-                      this.props.history.push(
-                        `/blog_management_details/${item.id}`
-                      );
+                      this.props.history.push(`/blog_details/${item.id}`);
                     }}
                     className="blog-card-container shadow-md hover:shadow-lg transition ease-in-out duration-300 cursor-pointer bg-gray-100 border border-gray-200 rounded-lg "
                   >
@@ -114,7 +112,7 @@ export default class ListBlogUser extends Component {
               })}
             </div>
             <div className="w-full flex justify-center my-10">
-              <Row className="row-paging ">
+              {/* <Row className="row-paging ">
                 <Pagination
                   defaultCurrent={1}
                   total={
@@ -127,7 +125,7 @@ export default class ListBlogUser extends Component {
                   showSizeChanger={false}
                   // onChange={handleOnChange}
                 />
-              </Row>
+              </Row> */}
             </div>
           </>
         ) : null}

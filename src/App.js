@@ -17,6 +17,7 @@ import ListBlogUser from "./components/Blog/list-blog.component";
 import AddBlog from "./components/Blog/create-blog.component";
 import EditBlog from "./components/Blog/edit-blog.component";
 import DetailManageBlog from "./components/Blog/detail-blog-management.component";
+import DetailBlog from "./components/Blog/detail-blog.component";
 
 import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
 import Detail from "./components/ManageUser/detail-user-admin.component";
@@ -291,6 +292,7 @@ class App extends Component {
                 />
                 <Route path="/add_blog" component={AddBlog} />
                 <Route path="/edit_blog/:id" component={EditBlog} />
+                <Route path="/blog_details/:id" component={DetailBlog} />
                 <Route
                   path="/blog_management_details/:id"
                   component={DetailManageBlog}
