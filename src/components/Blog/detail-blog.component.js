@@ -42,38 +42,13 @@ class DetailBlog extends Component {
     console.log(data);
     return (
       <div className="container">
-        <div className="title">
-          <h2>Detail Blog: {data?.title}</h2>
-        </div>
+        <div className="title"></div>
         {userReady ? (
           <div>
-            <p>
-              <strong>Author ID:</strong> {data?.authorID}
-            </p>
-            <p>
-              <strong>Title:</strong> {data?.title}
-            </p>
-            <p>
-              <strong>Content:</strong> {data?.contentText}
-            </p>
-            <p>
-              <strong>Image:</strong> <img src={data?.imageID} />
-            </p>
-            <p>
-              <strong>Create By:</strong> {data?.createdBy}
-            </p>
-            <p>
-              <strong>Create Date:</strong> {getDateTime(data?.createdDate)}
-            </p>
-            <p>
-              <strong>Update By:</strong> {data?.updatedBy}
-            </p>
-            <p>
-              <strong>Update Date:</strong> {getDateTime(data?.updatedDate)}
-            </p>
-            <p>
-              <strong>Version:</strong> {data?.version}
-            </p>
+            {/* title */}
+            <div>{data?.title}</div>
+            {/* author */}
+            {/* content */}
           </div>
         ) : null}
       </div>

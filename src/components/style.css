@@ -64,15 +64,19 @@
   background: #999;
 }
 
-
 /* List Blog */
 
 .row-list-blog {
-    margin-top: 30px;
-    margin-bottom: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .row-list-blog .col-list-blog {
-    margin-top: 20px;
-    margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* blog card container */
+.blog-card-container:hover {
+  transform: scale(1.1);
 }

@@ -82,53 +82,53 @@ export default class ListBlogUser extends Component {
         />
         {this.state.userReady ? (
           <>
-            <Row gutter={16} className="row-list-blog">
+            {/* all card container */}
+            <div className="w-full grid md:grid-cols-3 md:gap-6 lg:grid-cols-4 lg:gap-10 mt-10">
               {this.state.dataSource.map((item) => {
+                console.log(item);
                 return (
-                  <Col span={8} className="col-list-blog overflow-scroll">
-                    <Card
-                      hoverable
-                      style={{
-                        borderRadius: "10px",
-                        border: "1px solid black",
-                      }}
-                      cover={
-                        <img
-                          alt={item.title}
-                          style={{
-                            height: "10vh",
-                            objectFit: "cover",
-                            padding: "10px",
-                          }}
-                          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-                        />
-                      }
-                      onClick={() => {
-                        this.props.history.push(
-                          `/blog_management_details/${item.id}`
-                        );
-                      }}
-                    >
-                      <Meta title={item.title} />
-                    </Card>
-                  </Col>
+                  // card container
+                  <div
+                    onClick={() => {
+                      this.props.history.push(
+                        `/blog_management_details/${item.id}`
+                      );
+                    }}
+                    className="blog-card-container shadow-md hover:shadow-lg transition ease-in-out duration-300 cursor-pointer bg-gray-100 border border-gray-200 rounded-lg "
+                  >
+                    {/* title */}
+                    <div className="text-center text-xl text-gray-600 font-bold p-3 h-20 overflow-hidden">
+                      {item.title}
+                    </div>
+                    {/* image */}
+                    <div className="flex justify-center">
+                      <img
+                        className="rounded-lg w-11/12 mb-3"
+                        alt="blog"
+                        style={{ objectFit: "contain" }}
+                        src="https://img.freepik.com/premium-photo/astronaut-outer-open-space-planet-earth-stars-provide-background-erforming-space-planet-earth-sunrise-sunset-our-home-iss-elements-this-image-furnished-by-nasa_150455-16829.jpg?w=2000"
+                      />
+                    </div>
+                  </div>
                 );
               })}
-            </Row>
-            <Row className="row-paging">
-              <Pagination
-                defaultCurrent={1}
-                total={
-                  this.state.dataSource.length % 3 === 0
-                    ? numberPage
-                    : numberPage + 1
-                }
-                // current={currentPage}
-                pageSize={3}
-                showSizeChanger={false}
-                // onChange={handleOnChange}
-              />
-            </Row>
+            </div>
+            <div className="w-full flex justify-center my-10">
+              <Row className="row-paging ">
+                <Pagination
+                  defaultCurrent={1}
+                  total={
+                    this.state.dataSource.length % 3 === 0
+                      ? numberPage
+                      : numberPage + 1
+                  }
+                  // current={currentPage}
+                  pageSize={3}
+                  showSizeChanger={false}
+                  // onChange={handleOnChange}
+                />
+              </Row>
+            </div>
           </>
         ) : null}
       </div>
