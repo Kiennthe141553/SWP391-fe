@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { getDateTime } from "../../helper/datetime";
 
-class DetailBlog extends Component {
+class DetailBlogUser extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -81,6 +81,6 @@ class DetailBlog extends Component {
   }
 }
 
-const DetailBlog = withRouter(DetailBlog);
+const DetailBlog = withRouter(DetailBlogUser);
 
 export default DetailBlog;

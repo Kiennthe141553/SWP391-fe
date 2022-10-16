@@ -104,9 +104,7 @@ export default class ListBlogUser extends Component {
                         />
                       }
                       onClick={() => {
-                        this.props.history.push(
-                          `/blog_management_details/${item.id}`
-                        );
+                        this.props.history.push(`/blog_details/${item.id}`);
                       }}
                     >
                       <Meta title={item.title} />
@@ -115,7 +113,7 @@ export default class ListBlogUser extends Component {
                 );
               })}
             </Row>
-            <Row className="row-paging">
+            {/* <Row className="row-paging">
               <Pagination
                 defaultCurrent={1}
                 total={
@@ -128,7 +126,7 @@ export default class ListBlogUser extends Component {
                 showSizeChanger={false}
                 // onChange={handleOnChange}
               />
-            </Row>
+            </Row> */}
           </>
         ) : null}
       </div>
