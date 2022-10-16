@@ -5,7 +5,7 @@ import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { getDateTime } from "../../helper/datetime";
-
+import "../../styles/tailwind.css";
 class DetailBlog extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -43,7 +43,7 @@ class DetailBlog extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>Detail Blog: {data?.title}</h2>
+          <h2 className="text-2xl">Detail Blog: {data?.title}</h2>
         </div>
         {userReady ? (
           <div>

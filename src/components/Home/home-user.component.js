@@ -1,32 +1,51 @@
-import React, { Component } from "react";
-import { Carousel } from "antd";
-import banner1 from "../../imgs/banner1.jpg";
-import banner2 from "../../imgs/banner2.png";
+import Axios from "axios";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import QuizCard from "../Quiz/QuizCard";
+import QuizList from "../Quiz/QuizList";
+import "../../styles/tailwind.css";
 
-export default class HomeUser extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: "",
+const HomeUser = () => {
+  const [recentQuiz, setrecentQuiz] = useState([]);
+  useEffect(() => {
+    const fetchRecentQuiz = async () => {
+      const response = await Axios.get("/data/recentQuizset.json");
+      if (response) {
+        setrecentQuiz((prev) => response.data);
+      }
     };
-  }
 
-  render() {
-    return (
-      // <div className="container">
-      <div className="home">
-        Home User
-        <Carousel autoplay>
-          <div className="contain-slider">
-            <img className="img-banner" src={banner2} alt="banner2" />
-          </div>
-          <div className="contain-slider">
-            <img className="img-banner" src={banner1} alt="banner1" />
-          </div>
-        </Carousel>
+    fetchRecentQuiz();
+  }, []);
+  return (
+    <div className="w-7/12 mt-2">
+      <div className="flex justify-between mt-4">
+        <p className="font-bold text-xl">Recent</p>
+        <a
+          href="#"
+          className="underline
+        text-blue-600"
+        >
+          show more
+        </a>
       </div>
-      // </div>
-    );
-  }
-}
+
+      {/* recent */}
+      <QuizList props={recentQuiz} />
+      {/* my quiz */}
+      <div className="flex justify-between">
+        <p className="font-bold text-xl">My Quiz</p>
+        <a
+          href="#"
+          className="underline
+        text-blue-600"
+        >
+          show more
+        </a>
+      </div>
+      <QuizList props={recentQuiz} />
+    </div>
+  );
+};
+
+export default HomeUser;
