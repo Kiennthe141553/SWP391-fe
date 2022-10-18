@@ -17,11 +17,9 @@ label {
 }
 
 .col-menu {
-  background-color: white;
+  background-color: rgb(222, 236, 254);
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
 }
-
-
 
 .col-menu .menu .contain-menu .nav-item {
   margin-top: 10px;
@@ -63,12 +61,12 @@ label {
   max-width: 350px !important;
   padding: 40px 40px;
   margin-top: 150px;
-  }
-  
-  .card-container.change-password-card {
-    max-width: 500px !important;
-    padding: 40px 40px;
-    margin-top: 150px;
+}
+
+.card-container.change-password-card {
+  max-width: 500px !important;
+  padding: 40px 40px;
+  margin-top: 150px;
 }
 
 .card {
@@ -96,7 +94,6 @@ label {
 .nav-item {
   max-height: 57px;
   padding-left: 15px;
-
 }
 
 .nav-item .box-avatar {

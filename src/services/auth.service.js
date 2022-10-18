@@ -43,6 +43,10 @@ class AuthService {
   getRole() {
     return JSON.parse(localStorage.getItem("role"));
   }
+
+  getCurrentUserId() {
+    return JSON.parse(localStorage.getItem("LOCAL_STORAGE_TAB_ID_LASTEST"));
+  }
 }
 
 export default new AuthService();
