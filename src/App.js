@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Link, useHistory } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Row, Col } from "antd";
@@ -36,7 +36,6 @@ class App extends Component {
     this.resetModuleSelected = this.resetModuleSelected.bind(this);
 
     this.state = {
-      userID: undefined,
       currentUser: undefined,
       role: undefined,
       moduleSelected: "Chart",
@@ -46,11 +45,9 @@ class App extends Component {
   componentDidMount() {
     const user = AuthService.getCurrentUser();
     const role = AuthService.getRole();
-    const userID = AuthService.getCurrentUserId();
 
     if (user) {
       this.setState({
-        userID: userID,
         currentUser: user,
         role: role,
       });
@@ -68,7 +65,6 @@ class App extends Component {
   logOut() {
     AuthService.logout();
     this.setState({
-      userID: undefined,
       currentUser: undefined,
       role: undefined,
       moduleSelected: "",

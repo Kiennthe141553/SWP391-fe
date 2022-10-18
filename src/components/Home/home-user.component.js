@@ -1,14 +1,14 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import QuizCard from "../Quiz/QuizCard";
+// import QuizCard from "../Quiz/QuizCard";
 import QuizList from "../Quiz/QuizList";
 import "../../styles/tailwind.css";
 import { Carousel } from "antd";
 
 const HomeUser = () => {
   const [recentQuiz, setrecentQuiz] = useState([]);
-  const [myQuiz, setMyQuiz] = useState([]);
+  // const [myQuiz, setMyQuiz] = useState([]);
 
   useEffect(() => {
     const fetchRecentQuiz = async () => {
@@ -47,7 +47,7 @@ const HomeUser = () => {
       <div className="flex justify-between mt-4">
         <p className="font-bold text-xl">Recent</p>
         <a
-          href="#"
+          href="/"
           className="underline
         text-blue-600"
         >
@@ -61,7 +61,7 @@ const HomeUser = () => {
       <div className="flex justify-between">
         <p className="font-bold text-xl">My Quiz</p>
         <a
-          href="#"
+          href="/"
           className="underline
         text-blue-600"
         >

@@ -24,11 +24,11 @@ const ProfileDetail = () => {
       setImage(URL.createObjectURL(event.target.files[0]));
     }
   };
-  const handleFileSelected = (e) => {
-    const files = Array.from(e.target.files);
-    user.avatar = e.target.result;
-    console.log("files:", e.target.files);
-  };
+  // const handleFileSelected = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   user.avatar = e.target.result;
+  //   console.log("files:", e.target.files);
+  // };
 
   return (
     <div>
