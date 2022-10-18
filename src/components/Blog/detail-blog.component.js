@@ -4,7 +4,7 @@ import BlogService from "../../services/blog.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+
 
 class DetailBlogUser extends Component {
   static propTypes = {

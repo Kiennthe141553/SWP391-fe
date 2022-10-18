@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Row, Col, Card, Pagination } from "antd";
 
+import AuthService from "../../services/auth.service";
 import BlogService from "../../services/blog.service";
 
 import EventBus from "../../common/EventBus";
@@ -10,7 +10,6 @@ import { Redirect } from "react-router-dom";
 import ".././style.css";
 import { Input } from "antd";
 const { Search } = Input;
-const { Meta } = Card;
 
 export default class ListBlogUser extends Component {
   constructor(props) {
@@ -27,9 +26,9 @@ export default class ListBlogUser extends Component {
   }
 
   componentDidMount() {
-    // const currentUser = AuthService.getCurrentUser();
+    const currentUser = AuthService.getCurrentUser();
 
-    // if (!currentUser) this.setState({ redirect: "/" });
+    if (!currentUser) this.setState({ redirect: "/login" });
     BlogService.getListBlog()
       .then((response) => {
         console.log(response.data);
@@ -54,7 +53,6 @@ export default class ListBlogUser extends Component {
     const data = this.state.list;
 
     console.log(this.state.dataSource.length % 3);
-    const numberPage = this.state.dataSource.length / 3;
 
     const onSearch = (val) => {
       console.log(val);
