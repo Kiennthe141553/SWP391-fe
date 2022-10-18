@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Row, Col } from "antd";
@@ -26,6 +26,7 @@ import EditUser from "./components/ManageUser/edit-user-admin.component";
 import EventBus from "./common/EventBus";
 
 import "./styles/tailwind.css";
+import ProfileDetail from "./components/Profile/ProfileDetail";
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +36,7 @@ class App extends Component {
     this.resetModuleSelected = this.resetModuleSelected.bind(this);
 
     this.state = {
+      userID: undefined,
       currentUser: undefined,
       role: undefined,
       moduleSelected: "Chart",
@@ -44,9 +46,11 @@ class App extends Component {
   componentDidMount() {
     const user = AuthService.getCurrentUser();
     const role = AuthService.getRole();
+    const userID = AuthService.getCurrentUserId();
 
     if (user) {
       this.setState({
+        userID: userID,
         currentUser: user,
         role: role,
       });
@@ -64,6 +68,7 @@ class App extends Component {
   logOut() {
     AuthService.logout();
     this.setState({
+      userID: undefined,
       currentUser: undefined,
       role: undefined,
       moduleSelected: "",
@@ -123,7 +128,7 @@ class App extends Component {
     ];
 
     return (
-      <div>
+      <div className="bg-blue-100">
         <nav className="navbar navbar-expand navbar-dark bg-black header shadow-sm">
           <Link
             to={"/"}
@@ -135,17 +140,24 @@ class App extends Component {
           <div className="navbar-nav mr-auto"></div>
 
           {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <div className="box-avatar">
-                  <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                    alt="profile-img"
-                    className="avatar"
-                  />
-                </div>
-              </li>
-            </div>
+            <Link to={"/user/profile"} onClick={this.resetModuleSelected}>
+              <div
+                className="navbar-nav ml-auto cursor-pointer"
+                onClick={() => {
+                  console.log(this.state);
+                }}
+              >
+                <li className="nav-item">
+                  <div className="box-avatar">
+                    <img
+                      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                      alt="profile-img"
+                      className="avatar"
+                    />
+                  </div>
+                </li>
+              </div>
+            </Link>
           ) : (
             <div className="navbar-nav ml-auto flex items-center">
               <li className="nav-item">
@@ -280,6 +292,7 @@ class App extends Component {
                 <Route path="/list_user_admin" component={ListUserAdmin} />
                 <Route path="/user_admin_details/:id" component={Detail} />
                 <Route path="/edit_user_admin/:id" component={EditUser} />
+                <Route path="/user/profile/:id" component={ProfileDetail} />
 
                 <Route
                   path="/list_blog_management"

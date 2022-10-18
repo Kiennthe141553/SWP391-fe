@@ -4,9 +4,12 @@ import { useEffect } from "react";
 import QuizCard from "../Quiz/QuizCard";
 import QuizList from "../Quiz/QuizList";
 import "../../styles/tailwind.css";
+import { Carousel } from "antd";
 
 const HomeUser = () => {
   const [recentQuiz, setrecentQuiz] = useState([]);
+  const [myQuiz, setMyQuiz] = useState([]);
+
   useEffect(() => {
     const fetchRecentQuiz = async () => {
       const response = await Axios.get("/data/recentQuizset.json");
@@ -17,8 +20,30 @@ const HomeUser = () => {
 
     fetchRecentQuiz();
   }, []);
+
+  const contentStyle = {
+    height: "160px",
+    color: "#fff",
+    lineHeight: "160px",
+    textAlign: "center",
+    background: "#364d79",
+  };
   return (
     <div className="w-7/12 mt-2">
+      <Carousel autoplay>
+        <div>
+          <h3 style={contentStyle}>1</h3>
+        </div>
+        <div>
+          <h3 style={contentStyle}>2</h3>
+        </div>
+        <div>
+          <h3 style={contentStyle}>3</h3>
+        </div>
+        <div>
+          <h3 style={contentStyle}>4</h3>
+        </div>
+      </Carousel>
       <div className="flex justify-between mt-4">
         <p className="font-bold text-xl">Recent</p>
         <a
