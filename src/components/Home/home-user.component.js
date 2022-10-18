@@ -15,24 +15,6 @@ const HomeUser = () => {
       }
     };
 
-<<<<<<< HEAD
-  render() {
-    return (
-      <div className="home">
-        Home User
-        <Carousel autoplay>
-          <div className="contain-slider">
-            <img className="img-banner" src={banner2} alt="banner2" />
-          </div>
-          <div className="contain-slider">
-            <img className="img-banner" src={banner1} alt="banner1" />
-          </div>
-        </Carousel>
-      </div>
-    );
-  }
-}
-=======
     fetchRecentQuiz();
   }, []);
   return (
@@ -67,4 +49,3 @@ const HomeUser = () => {
 };
 
 export default HomeUser;
->>>>>>> 23db7aaa49483b90f86095d1eb620bd7a4778d01
