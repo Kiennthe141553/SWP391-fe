@@ -128,7 +128,7 @@ class App extends Component {
     ];
 
     return (
-      <div className="bg-blue-100">
+      <div>
         <nav className="navbar navbar-expand navbar-dark bg-black header shadow-sm">
           <Link
             to={"/"}
@@ -142,10 +142,8 @@ class App extends Component {
           {currentUser ? (
             <Link to={"/user/profile"} onClick={this.resetModuleSelected}>
               <div
-                className="navbar-nav ml-auto cursor-pointer"
-                onClick={() => {
-                  console.log(this.state);
-                }}
+                className="navbar-nav ml-auto cursor-pointer "
+                onClick={() => {}}
               >
                 <li className="nav-item">
                   <div className="box-avatar">

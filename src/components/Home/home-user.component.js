@@ -1,8 +1,7 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
-import QuizCard from "../Quiz/QuizCard";
-import QuizList from "../Quiz/QuizList";
+import QuizList from "../Quiz/quiz-list.component";
 import "../../styles/tailwind.css";
 import { Carousel } from "antd";
 

@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import QuizCard from "./QuizCard";
 import "../../styles/tailwind.css";
+import authService from "../../services/auth.service";
+import QuizCard from "./quiz-card.component";
 
 const QuizList = (props) => {
   const [data, setData] = useState([]);
+  const userID = authService.getCurrentUserId();
+
   useEffect(() => {
+    console.log(userID);
     if (props) {
       setData(Object.values(props)[0]);
     }
