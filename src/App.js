@@ -19,6 +19,12 @@ import EditBlog from "./components/Blog/edit-blog.component";
 import DetailManageBlog from "./components/Blog/detail-blog-management.component";
 import DetailBlog from "./components/Blog/detail-blog.component";
 
+import ListSubjectManagement from "./components/Subject/list-subject-management.component";
+import DetailManageSubject from "./components/Subject/detail-subject-management.component";
+import AddSubjectManagement from "./components/Subject/create-subject-management.component";
+import EditSubject from "./components/Subject/edit-subject.component";
+import DetailUserSubject from "./components/Subject/detail-subject.component";
+
 import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
 import Detail from "./components/ManageUser/detail-user-admin.component";
 import EditUser from "./components/ManageUser/edit-user-admin.component";
@@ -107,6 +113,11 @@ class App extends Component {
         link: "/list_blog_management",
         name: "Manage Blog",
         isActive: moduleSelected === "Manage Blog",
+      },
+      {
+        link: "/list_subject_management",
+        name: "Manage Subject",
+        isActive: moduleSelected === "Manage Subject",
       },
     ];
 
@@ -306,6 +317,21 @@ class App extends Component {
                   path="/blog_management_details/:id"
                   component={DetailManageBlog}
                 />
+
+                <Route
+                  path="/list_subject_management"
+                  component={ListSubjectManagement}
+                />
+                <Route
+                  path="/subject_management_details/:id"
+                  component={DetailManageSubject}
+                />
+                <Route
+                  path="/detail_subject/:id"
+                  component={DetailUserSubject}
+                />
+                <Route path="/add_subject" component={AddSubjectManagement} />
+                <Route path="/edit_subject/:id" component={EditSubject} />
 
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Space, Table, Button } from "antd";
 import { Link } from "react-router-dom";
-import BlogService from "../../services/blog.service";
+import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
@@ -11,7 +11,7 @@ import "../../styles/tailwind.css";
 import { Input } from "antd";
 const { Search } = Input;
 
-export default class ListBlogManagement extends Component {
+export default class ListSubjectManagement extends Component {
   constructor(props) {
     super(props);
 
@@ -29,7 +29,7 @@ export default class ListBlogManagement extends Component {
     const currentUser = AuthService.getCurrentUser();
 
     if (!currentUser) this.setState({ redirect: "/" });
-    BlogService.getListBlog()
+    SubjectService.getListSubject()
       .then((response) => {
         this.setState({
           dataSource: response.data,
@@ -46,11 +46,11 @@ export default class ListBlogManagement extends Component {
   }
 
   render() {
-    const removeUserAdmin = (id) => {
+    const removeSubjectAdmin = (id) => {
       console.log(id);
-      BlogService.deleteBlog(id)
+      SubjectService.deleteSubject(id)
         .then((response) => {
-          this.props.history.push(`/list_blog_management`);
+          this.props.history.push(`/list_subject_management`);
         })
         .catch((error) => {
           console.log(error);
@@ -65,13 +65,13 @@ export default class ListBlogManagement extends Component {
     const data = this.state.list;
     const columns = [
       {
-        title: "Title",
-        dataIndex: "title",
-        key: "title",
+        title: "Code",
+        dataIndex: "code",
+        key: "code",
         render: (text, record) => {
           return (
             <Link
-              to={`/blog_management_details/${record.id}`}
+              to={`/subject_management_details/${record.id}`}
               className="-text-link"
             >
               {text}
@@ -80,28 +80,32 @@ export default class ListBlogManagement extends Component {
         },
       },
       {
-        title: "Author",
-        dataIndex: "authorID",
-        key: "authorID",
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
         render: (text) => <p>{text}</p>,
       },
       {
-        title: "Content",
-        dataIndex: "contentText",
-        key: "contentText",
+        title: "Version",
+        dataIndex: "version",
+        key: "version",
+        render: (text) => <p>{text}</p>,
+      },
+      {
+        title: "Description",
+        dataIndex: "description",
+        key: "description",
         render: (text) => <p>{text}</p>,
       },
       {
         title: "Create By",
         dataIndex: "createdBy",
         key: "createdBy",
-        render: (text) => <p>{text}</p>,
       },
       {
         title: "Update By",
         dataIndex: "updatedBy",
         key: "updatedBy",
-        render: (text) => <p>{text}</p>,
       },
       {
         title: "Create Date",
@@ -113,18 +117,17 @@ export default class ListBlogManagement extends Component {
         title: "Action",
         key: "action",
         render: (text, record) => {
-          console.log(record);
           return (
             <Space size="middle">
               <Link
-                to={`/edit_blog/${record.id}`}
+                to={`/edit_subject/${record.id}`}
                 className="p-2 bg-green-400 rounded-lg text-white"
               >
                 Edit
               </Link>
               <Link
                 to="/#"
-                onClick={() => removeUserAdmin(record.id)}
+                onClick={() => removeSubjectAdmin(record.id)}
                 className="p-2 bg-red-500 rounded-lg text-white"
               >
                 Delete
@@ -144,7 +147,7 @@ export default class ListBlogManagement extends Component {
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
         const filteredData = this.state.dataSource.filter((entry) => {
-          return String(entry.title).toLowerCase().includes(valueToLowCase);
+          return String(entry.code).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });
       }
@@ -152,16 +155,16 @@ export default class ListBlogManagement extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>List Blogs</h2>
+          <h2>List Subject</h2>
         </div>
         <div className="search_and_add_blog">
           <Search
-            placeholder="Search Title Blog"
+            placeholder="Search Title Subject"
             onSearch={onSearch}
             enterButton
           />
-          <Button type="primary" href="/add_blog">
-            Add Blog
+          <Button type="primary" href="/add_subject">
+            Add Subject
           </Button>
         </div>
         {this.state.userReady ? (
