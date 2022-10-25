@@ -4,10 +4,12 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import AuthService from "../../services/auth.service";
+import "../../styles/login.css";
+
 const required = (value) => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="text-red-400 ml-2" role="alert">
         This field is required!
       </div>
     );
@@ -16,7 +18,7 @@ const required = (value) => {
 const email = (value) => {
   if (!isEmail(value)) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="text-red-400 ml-2" role="alert">
         This is not a valid email.
       </div>
     );
@@ -122,24 +124,25 @@ export default class Register extends Component {
   }
   render() {
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
+      <div className="col-md-12 login-container ">
+        <div className="login-box md:w-6/12 w-5/12">
+          <img className="login_img" src="../../login.webp" alt="" />
+
           <Form
             onSubmit={this.handleRegister}
             ref={(c) => {
               this.form = c;
             }}
+            className="login-input-box shadow-md"
           >
             {!this.state.successful && (
-              <div>
-                <div className="form-group">
-                  <label htmlFor="firstname">First Name</label>
+              <div className=" register-input">
+                <div className="form-group ">
+                  <p className="font-bold text-gray-400 text-3xl mb-4 text-center">
+                    Register
+                  </p>
                   <Input
+                    placeholder="First Name"
                     type="text"
                     className="form-control"
                     name="firstname"
@@ -149,8 +152,8 @@ export default class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="lastname">Last Name</label>
                   <Input
+                    placeholder="Last Name"
                     type="text"
                     className="form-control"
                     name="lastname"
@@ -160,8 +163,8 @@ export default class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="username">Username</label>
                   <Input
+                    placeholder="Username"
                     type="text"
                     className="form-control"
                     name="username"
@@ -171,8 +174,8 @@ export default class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
                   <Input
+                    placeholder="Email"
                     type="text"
                     className="form-control"
                     name="email"
@@ -182,8 +185,8 @@ export default class Register extends Component {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
                   <Input
+                    placeholder="Password"
                     type="password"
                     className="form-control"
                     name="password"
