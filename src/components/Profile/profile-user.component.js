@@ -1,23 +1,39 @@
+import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import authService from "../../services/auth.service";
+import userService from "../../services/user.service";
 import "../../styles/tailwind.css";
 
 const ProfileDetail = () => {
-  const [curUser, setCurUser] = useState(null);
-  useEffect(() => {
-    setCurUser((prev) => authService.getCurrentUser());
-  }, []);
-  const user = {
-    userName: "trang",
-    email: "trang@example",
-    firstName: "trang",
-    lastName: "duong",
-    address: "some where",
-    DOB: "12/2/2022",
+  const [newUser, setNewUser] = useState({
+    username: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    datebirth: "",
+    gender: "",
     avatar: "../../../favicon.ico",
-  };
+  });
+  useEffect(() => {
+    const fetchCurrentUser = async () => {
+      // const url = process.env.API_URL + "/myProfile";
 
-  const [image, setImage] = useState(user.avatar);
+      const res = await userService.getProfile();
+      setNewUser({
+        id: res.data.id,
+        username: res.data.username,
+        email: res.data.email,
+        firstName: res.data.firstName,
+        lastName: res.data.lastName,
+        address: res.data.address,
+        datebirth: res.data.datebirth,
+        gender: res.data.gender,
+      });
+    };
+    fetchCurrentUser();
+  }, []);
+
+  const [image, setImage] = useState(newUser.avatar);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -30,13 +46,30 @@ const ProfileDetail = () => {
   //   console.log("files:", e.target.files);
   // };
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setNewUser({ ...newUser, [e.target.name]: value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      console.log(newUser);
+      const res = await userService.editUser(
+        "3464d541-0db9-4df0-ab13-42700250533c",
+        { address: "trang" }
+      );
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <div>
       <label
         for="website-admin"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
       >
-        Username
+        User Name
       </label>
       <div className="flex">
         <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
@@ -56,10 +89,12 @@ const ProfileDetail = () => {
           </svg>
         </span>
         <input
+          onChange={(e) => handleChange(e)}
+          name="username"
+          value={newUser.username}
           type="text"
           id="website-admin"
           className=" rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          value={user.userName}
         />
       </div>
 
@@ -87,13 +122,16 @@ const ProfileDetail = () => {
           </svg>
         </span>
         <input
+          onChange={(e) => handleChange(e)}
+          name="firstName"
+          value={newUser.firstName}
           type="text"
           id="website-admin"
           className=" rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          value={user.firstName}
         />
       </div>
 
+      {/* last name */}
       <label
         for="website-admin"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -118,13 +156,49 @@ const ProfileDetail = () => {
           </svg>
         </span>
         <input
+          onChange={(e) => handleChange(e)}
+          name="lastName"
+          value={newUser.lastName}
           type="text"
           id="website-admin"
           className=" rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          value={user.lastName}
         />
       </div>
 
+      {/* date of birth */}
+      <label
+        for="website-admin"
+        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+      >
+        Date Of Birth
+      </label>
+      <div className="flex">
+        <span className="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 rounded-l-md border border-r-0 border-gray-300 dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+            />
+          </svg>
+        </span>
+        <input
+          onChange={(e) => handleChange(e)}
+          name="birthDate"
+          value={newUser.birthDate}
+          type="date"
+          id="website-admin"
+          className=" rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        />
+      </div>
+      {/* address */}
       <label
         for="website-admin"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
@@ -154,10 +228,12 @@ const ProfileDetail = () => {
           </svg>
         </span>
         <input
+          onChange={(e) => handleChange(e)}
+          name="address"
+          value={newUser.address}
           type="text"
           id="website-admin"
           className=" rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          value={user.address}
         />
       </div>
       <label
@@ -180,12 +256,52 @@ const ProfileDetail = () => {
           </svg>
         </div>
         <input
+          onChange={(e) => handleChange(e)}
+          name="email"
+          value={newUser.email}
           type="text"
           id="input-group-1"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="name@gmail.com"
-          value={user.email}
         />
+      </div>
+
+      {/* gender  0 is male, 1 is female*/}
+      <div className="flex items-center">
+        <img
+          className="mr-4 object-contain "
+          src="https://img.icons8.com/plumpy/24/000000/gender.png"
+        />
+        <div class="flex items-center mr-4">
+          <input
+            onChange={(e) => handleChange(e)}
+            id="default-radio-1"
+            type="radio"
+            value="0"
+            name="gender"
+            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="default-radio-1"
+            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Male
+          </label>
+
+          <input
+            onChange={(e) => handleChange(e)}
+            id="default-radio-1"
+            type="radio"
+            value="1"
+            name="gender"
+            class="ml-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            for="default-radio-1"
+            class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Female
+          </label>
+        </div>
       </div>
 
       {/* avatar */}
@@ -235,7 +351,7 @@ const ProfileDetail = () => {
         </label>
       </div>
       <button
-        onClick={() => console.log(curUser)}
+        onClick={handleSubmit}
         className="p-2 rounded-lg bg-green-400 text-white hover:bg-green-500 shadow-md"
       >
         Save

@@ -32,7 +32,7 @@ import EditUser from "./components/ManageUser/edit-user-admin.component";
 import EventBus from "./common/EventBus";
 
 import "./styles/tailwind.css";
-import ProfileDetail from "./components/Profile/ProfileDetail";
+import ProfileDetail from "./components/Profile/profile-user.component";
 
 class App extends Component {
   constructor(props) {
@@ -135,7 +135,7 @@ class App extends Component {
     ];
 
     return (
-      <div className="bg-blue-100">
+      <div>
         <nav className="navbar navbar-expand navbar-dark bg-black header shadow-sm">
           <Link
             to={"/"}
@@ -149,10 +149,8 @@ class App extends Component {
           {currentUser ? (
             <Link to={"/user/profile"} onClick={this.resetModuleSelected}>
               <div
-                className="navbar-nav ml-auto cursor-pointer"
-                onClick={() => {
-                  console.log(this.state);
-                }}
+                className="navbar-nav ml-auto cursor-pointer "
+                onClick={() => {}}
               >
                 <li className="nav-item">
                   <div className="box-avatar">
@@ -299,7 +297,7 @@ class App extends Component {
                 <Route path="/list_user_admin" component={ListUserAdmin} />
                 <Route path="/user_admin_details/:id" component={Detail} />
                 <Route path="/edit_user_admin/:id" component={EditUser} />
-                <Route path="/user/profile/:id" component={ProfileDetail} />
+                <Route path="/user/profile" component={ProfileDetail} />
 
                 <Route
                   path="/list_blog_management"
