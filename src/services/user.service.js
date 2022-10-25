@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:10004/quizPractice/";
@@ -7,6 +7,18 @@ class UserService {
   // getListUser() {
   //   return axios.get(API_URL + "api/user", { headers: authHeader() });
   // }
+  getProfile() {
+    return axios.get(API_URL + `api/myProfile`, {
+      headers: authHeader(),
+    });
+  }
+
+  editProfile(payload) {
+    console.log(authHeader());
+    return axios.put(API_URL + `api/myProfile`, payload, {
+      headers: authHeader(),
+    });
+  }
 
   getListUser() {
     return axios.get(API_URL + "api/user", {
@@ -40,7 +52,6 @@ class UserService {
       }
     );
   }
-  
 }
 
 export default new UserService();
