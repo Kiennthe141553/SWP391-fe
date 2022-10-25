@@ -4,8 +4,6 @@ import authHeader from "./auth-header";
 const API_URL = "http://localhost:10004/quizPractice/";
 
 class UserService {
-<<<<<<< HEAD
-=======
   // getListUser() {
   //   return axios.get(API_URL + "api/user", { headers: authHeader() });
   // }
@@ -22,7 +20,6 @@ class UserService {
     });
   }
 
->>>>>>> 925cd0eaa6cdc5d2898098dbe289d9174a6153a9
   getListUser() {
     return axios.get(API_URL + "api/user", {
       headers: authHeader(),
