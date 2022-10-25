@@ -6,11 +6,12 @@ import CheckButton from "react-validation/build/button";
 import AuthService from "../../services/auth.service";
 
 import "../../styles/tailwind.css";
+import "../../styles/login.css";
 
 const required = (value) => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="text-red-400 ml-2" role="alert">
         This field is required!
       </div>
     );
@@ -96,24 +97,23 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
-          <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
-          />
+      <div className="col-md-12 login-container ">
+        <div className="login-box md:w-6/12 w-5/12">
+          <img className="login_img" src="../../login.webp" alt="" />
 
           <Form
+            className="w-4/12 login-input-box shadow-md"
             onSubmit={this.handleLogin}
             ref={(c) => {
               this.form = c;
             }}
           >
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
+            <p className="font-bold text-gray-400 text-3xl mb-4">Login</p>
+            <div className="form-group login-input">
+              {/* <label htmlFor="username">Username</label> */}
               <Input
                 type="text"
+                placeholder="Username"
                 className="form-control"
                 name="username"
                 value={this.state.username}
@@ -122,9 +122,10 @@ export default class Login extends Component {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
+            <div className="form-group login-input">
+              {/* <label htmlFor="password">Password</label> */}
               <Input
+                placeholder="Password"
                 type="password"
                 className="form-control"
                 name="password"
@@ -134,7 +135,7 @@ export default class Login extends Component {
               />
             </div>
 
-            <div className="form-group">
+            <div className="form-group login-input">
               <button
                 className="btn btn-primary btn-block"
                 disabled={this.state.loading}
@@ -147,8 +148,8 @@ export default class Login extends Component {
             </div>
 
             {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
+              <div className="form-group login-input">
+                <div className="text-red-400 ml-2" role="alert">
                   {this.state.message}
                 </div>
               </div>

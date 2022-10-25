@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import BlogService from "../../services/blog.service";
+import SubjectService from "../../services/subject.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { getDateTime } from "../../helper/datetime";
 import "../../styles/tailwind.css";
-class DetailBlog extends Component {
+class DetailSubjectUser extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -23,7 +23,7 @@ class DetailBlog extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    BlogService.getDetailBlog(id)
+    SubjectService.getDetailSubject(id)
       .then((response) => {
         console.log(response);
         this.setState({ data: response.data, userReady: true });
@@ -43,22 +43,18 @@ class DetailBlog extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2 className="text-2xl">Detail Blog: {data?.title}</h2>
+          <h2 className="text-2xl">Detail Subject: {data?.code}</h2>
         </div>
         {userReady ? (
           <div>
             <p>
-              <strong>Author ID:</strong> {data?.authorID}
+              <strong>Code:</strong> {data?.code}
             </p>
             <p>
-              <strong>Title:</strong> {data?.title}
+              <strong>Name:</strong> {data?.name}
             </p>
             <p>
-              <strong>Content:</strong> {data?.contentText}
-            </p>
-            <p>
-              <strong>Image:</strong>{" "}
-              <img src={data?.imageID} alt={data?.imageID} />
+              <strong>Description:</strong> {data?.description}
             </p>
             <p>
               <strong>Create By:</strong> {data?.createdBy}
@@ -82,6 +78,6 @@ class DetailBlog extends Component {
   }
 }
 
-const DetailManageBlog = withRouter(DetailBlog);
+const DetailUserSubject = withRouter(DetailSubjectUser);
 
-export default DetailManageBlog;
+export default DetailUserSubject;

@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { Space, Table } from "antd";
+import { Space, Table, Button } from "antd";
 import { Link } from "react-router-dom";
-import UserService from "../../services/user.service";
+import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
-
+import { getDateTime } from "../../helper/datetime";
 import ".././style.css";
+import "../../styles/tailwind.css";
 import { Input } from "antd";
 const { Search } = Input;
 
-export default class ListUserAdmin extends Component {
+export default class ListSubjectManagement extends Component {
   constructor(props) {
     super(props);
 
@@ -28,9 +29,8 @@ export default class ListUserAdmin extends Component {
     const currentUser = AuthService.getCurrentUser();
 
     if (!currentUser) this.setState({ redirect: "/" });
-    UserService.getListUser()
+    SubjectService.getListSubject()
       .then((response) => {
-        console.log(response.data);
         this.setState({
           dataSource: response.data,
           userReady: true,
@@ -46,12 +46,11 @@ export default class ListUserAdmin extends Component {
   }
 
   render() {
-    const removeUserAdmin = (id) => {
+    const removeSubjectAdmin = (id) => {
       console.log(id);
-      UserService.deactiveUser(id)
+      SubjectService.deleteSubject(id)
         .then((response) => {
-          this.props.history.push(`/list_user_admin`);
-          console.log(response);
+          this.props.history.push(`/list_subject_management`);
         })
         .catch((error) => {
           console.log(error);
@@ -66,13 +65,13 @@ export default class ListUserAdmin extends Component {
     const data = this.state.list;
     const columns = [
       {
-        title: "Email",
-        dataIndex: "email",
-        key: "email",
+        title: "Code",
+        dataIndex: "code",
+        key: "code",
         render: (text, record) => {
           return (
             <Link
-              to={`/user_admin_details/${record.id}`}
+              to={`/subject_management_details/${record.id}`}
               className="-text-link"
             >
               {text}
@@ -81,44 +80,57 @@ export default class ListUserAdmin extends Component {
         },
       },
       {
-        title: "Role",
-        dataIndex: "roles",
-        key: "roles",
+        title: "Name",
+        dataIndex: "name",
+        key: "name",
         render: (text) => <p>{text}</p>,
       },
       {
-        title: "First Name",
-        dataIndex: "firstName",
-        key: "firstName",
+        title: "Version",
+        dataIndex: "version",
+        key: "version",
+        render: (text) => <p>{text}</p>,
       },
       {
-        title: "Last Name",
-        dataIndex: "lastName",
-        key: "lastName",
+        title: "Description",
+        dataIndex: "description",
+        key: "description",
+        render: (text) => <p>{text}</p>,
+      },
+      {
+        title: "Create By",
+        dataIndex: "createdBy",
+        key: "createdBy",
+      },
+      {
+        title: "Update By",
+        dataIndex: "updatedBy",
+        key: "updatedBy",
+      },
+      {
+        title: "Create Date",
+        dataIndex: "createdDate",
+        key: "createdDate",
+        render: (text) => <p>{getDateTime(text)}</p>,
       },
       {
         title: "Action",
         key: "action",
         render: (text, record) => {
-          console.log(record);
           return (
             <Space size="middle">
               <Link
-                to={`/edit_user_admin/${record.id}`}
-                className="p-2 border rounded-lg text-black"
+                to={`/edit_subject/${record.id}`}
+                className="p-2 bg-green-400 rounded-lg text-white"
               >
                 Edit
               </Link>
               <Link
                 to="/#"
-                onClick={() => removeUserAdmin(record.id)}
-                className={
-                  Boolean(record.active)
-                    ? "p-2 bg-red-400 rounded-lg text-white"
-                    : "p-2 bg-green-400 rounded-lg text-white"
-                }
+                onClick={() => removeSubjectAdmin(record.id)}
+                className="p-2 bg-red-500 rounded-lg text-white"
               >
-                {Boolean(record.active) ? "Disable" : "Enable"}
+                Delete
               </Link>
             </Space>
           );
@@ -135,7 +147,7 @@ export default class ListUserAdmin extends Component {
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
         const filteredData = this.state.dataSource.filter((entry) => {
-          return String(entry.username).toLowerCase().includes(valueToLowCase);
+          return String(entry.code).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });
       }
@@ -143,15 +155,22 @@ export default class ListUserAdmin extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>List Users</h2>
+          <h2>List Subject</h2>
         </div>
-        <Search
-          placeholder="Search name user"
-          onSearch={onSearch}
-          enterButton
-        />
+        <div className="search_and_add_blog">
+          <Search
+            placeholder="Search Title Subject"
+            onSearch={onSearch}
+            enterButton
+          />
+          <Button type="primary" href="/add_subject">
+            Add Subject
+          </Button>
+        </div>
         {this.state.userReady ? (
-          <Table columns={columns} dataSource={this.state.dataSource} />
+          <div className="list-user overflow-scroll ">
+            <Table columns={columns} dataSource={this.state.dataSource} />
+          </div>
         ) : null}
       </div>
     );

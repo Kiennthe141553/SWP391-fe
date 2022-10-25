@@ -19,6 +19,12 @@ import EditBlog from "./components/Blog/edit-blog.component";
 import DetailManageBlog from "./components/Blog/detail-blog-management.component";
 import DetailBlog from "./components/Blog/detail-blog.component";
 
+import ListSubjectManagement from "./components/Subject/list-subject-management.component";
+import DetailManageSubject from "./components/Subject/detail-subject-management.component";
+import AddSubjectManagement from "./components/Subject/create-subject-management.component";
+import EditSubject from "./components/Subject/edit-subject.component";
+import DetailUserSubject from "./components/Subject/detail-subject.component";
+
 import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
 import Detail from "./components/ManageUser/detail-user-admin.component";
 import EditUser from "./components/ManageUser/edit-user-admin.component";
@@ -26,6 +32,7 @@ import EditUser from "./components/ManageUser/edit-user-admin.component";
 import EventBus from "./common/EventBus";
 
 import "./styles/tailwind.css";
+import ProfileDetail from "./components/Profile/ProfileDetail";
 
 class App extends Component {
   constructor(props) {
@@ -107,6 +114,11 @@ class App extends Component {
         name: "Manage Blog",
         isActive: moduleSelected === "Manage Blog",
       },
+      {
+        link: "/list_subject_management",
+        name: "Manage Subject",
+        isActive: moduleSelected === "Manage Subject",
+      },
     ];
 
     const listSystemCustomerMenu = [
@@ -123,7 +135,7 @@ class App extends Component {
     ];
 
     return (
-      <div>
+      <div className="bg-blue-100">
         <nav className="navbar navbar-expand navbar-dark bg-black header shadow-sm">
           <Link
             to={"/"}
@@ -135,17 +147,24 @@ class App extends Component {
           <div className="navbar-nav mr-auto"></div>
 
           {currentUser ? (
-            <div className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <div className="box-avatar">
-                  <img
-                    src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                    alt="profile-img"
-                    className="avatar"
-                  />
-                </div>
-              </li>
-            </div>
+            <Link to={"/user/profile"} onClick={this.resetModuleSelected}>
+              <div
+                className="navbar-nav ml-auto cursor-pointer"
+                onClick={() => {
+                  console.log(this.state);
+                }}
+              >
+                <li className="nav-item">
+                  <div className="box-avatar">
+                    <img
+                      src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                      alt="profile-img"
+                      className="avatar"
+                    />
+                  </div>
+                </li>
+              </div>
+            </Link>
           ) : (
             <div className="navbar-nav ml-auto flex items-center">
               <li className="nav-item">
@@ -280,6 +299,7 @@ class App extends Component {
                 <Route path="/list_user_admin" component={ListUserAdmin} />
                 <Route path="/user_admin_details/:id" component={Detail} />
                 <Route path="/edit_user_admin/:id" component={EditUser} />
+                <Route path="/user/profile/:id" component={ProfileDetail} />
 
                 <Route
                   path="/list_blog_management"
@@ -297,6 +317,21 @@ class App extends Component {
                   path="/blog_management_details/:id"
                   component={DetailManageBlog}
                 />
+
+                <Route
+                  path="/list_subject_management"
+                  component={ListSubjectManagement}
+                />
+                <Route
+                  path="/subject_management_details/:id"
+                  component={DetailManageSubject}
+                />
+                <Route
+                  path="/detail_subject/:id"
+                  component={DetailUserSubject}
+                />
+                <Route path="/add_subject" component={AddSubjectManagement} />
+                <Route path="/edit_subject/:id" component={EditSubject} />
 
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />

@@ -92,7 +92,7 @@ class EditUserAdmin extends Component {
       active: dataDetail?.active,
     };
 
-    // console.log(initialValues)
+
     return (
       <div className="container">
         <div className="title">
@@ -105,7 +105,6 @@ class EditUserAdmin extends Component {
           layout="horizontal"
           onFinish={this.onFinish}
           initialValues={initialValues}
-          // onValuesChange={onFormLayoutChange}
         >
           <Form.Item label="Active" name="active" className="flex items-center">
             <Radio.Group>

@@ -43,6 +43,8 @@ class AuthService {
   getRole() {
     return JSON.parse(localStorage.getItem("role"));
   }
+
+
 }
 
 export default new AuthService();

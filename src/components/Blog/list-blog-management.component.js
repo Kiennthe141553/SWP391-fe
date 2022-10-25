@@ -5,7 +5,7 @@ import BlogService from "../../services/blog.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
-// import { getDateTime } from "../../helper/datetime";
+import { getDateTime } from "../../helper/datetime";
 import ".././style.css";
 import "../../styles/tailwind.css";
 import { Input } from "antd";
@@ -95,17 +95,19 @@ export default class ListBlogManagement extends Component {
         title: "Create By",
         dataIndex: "createdBy",
         key: "createdBy",
+        render: (text) => <p>{text}</p>,
       },
       {
         title: "Update By",
         dataIndex: "updatedBy",
         key: "updatedBy",
+        render: (text) => <p>{text}</p>,
       },
       {
         title: "Create Date",
         dataIndex: "createdDate",
         key: "createdDate",
-        render: (text) => <p>{text}</p>,
+        render: (text) => <p>{getDateTime(text)}</p>,
       },
       {
         title: "Action",
