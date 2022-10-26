@@ -71,15 +71,10 @@ class HomeUser extends Component {
           </a>
         </div>
 
-        {/* recent */}
-        {/* <SubjectList props={this.props} /> */}
         <div className="">
           {data?.map((item) => (
             <a href={`/detail_subject/${item.id}`}>
-              <div
-                className="bg-gray-200 rounded-lg p-2 m-2 cursor-pointer"
-                // onClick={linkDetailSubject(item.id)}
-              >
+              <div className="bg-gray-200 rounded-lg p-2 m-2 cursor-pointer">
                 <div>
                   <div className="font-bold text-xl text-gray-800">
                     {item.name}
