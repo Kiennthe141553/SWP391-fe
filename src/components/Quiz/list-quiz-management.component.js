@@ -46,6 +46,7 @@ export default class ListQuizManagement extends Component {
   }
 
   render() {
+    
     const removeQuizAdmin = (id) => {
       console.log(id);
       QuizService.deleteQuiz(id)
@@ -98,19 +99,19 @@ export default class ListQuizManagement extends Component {
         render: (text) => <p>{text}</p>,
       },
       {
-        title: "Create By",
-        dataIndex: "createdBy",
-        key: "createdBy",
+        title: "Rating",
+        dataIndex: "rating",
+        key: "rating",
       },
       {
-        title: "Update By",
-        dataIndex: "updatedBy",
-        key: "updatedBy",
+        title: "Subject",
+        dataIndex: "subjectId",
+        key: "subjectId",
       },
       {
-        title: "Create Date",
-        dataIndex: "createdDate",
-        key: "createdDate",
+        title: "Total Question",
+        dataIndex: "totalQuestions",
+        key: "totalQuestions",
         render: (text) => <p>{getDateTime(text)}</p>,
       },
       {
@@ -167,11 +168,10 @@ export default class ListQuizManagement extends Component {
             Add Quiz
           </Button>
         </div>
-        {this.state.userReady ? (
-          <div className="list-user overflow-scroll ">
-            <Table columns={columns} dataSource={this.state.dataSource} />
-          </div>
-        ) : null}
+
+        <div className="list-user overflow-scroll ">
+          <Table columns={columns} dataSource={this.state.dataSource} />
+        </div>
       </div>
     );
   }

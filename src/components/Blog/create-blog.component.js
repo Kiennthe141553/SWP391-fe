@@ -5,6 +5,7 @@ import EventBus from "../../common/EventBus";
 
 import { Form, Input, Button } from "antd";
 import "./../style.css";
+import "./blog.css";
 
 export default class AddBlog extends Component {
   constructor(props) {

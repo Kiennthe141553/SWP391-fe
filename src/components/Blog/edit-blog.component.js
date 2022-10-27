@@ -9,6 +9,7 @@ import "../../styles/tailwind.css";
 
 import { Form, Input, Button, InputNumber, DatePicker } from "antd";
 import ".././style.css";
+import "./blog.css";
 
 class EditBlogManager extends Component {
   static propTypes = {
@@ -86,21 +87,13 @@ class EditBlogManager extends Component {
       },
     };
 
-    const initialValues = {
-      address: dataDetail?.address,
-      birthDate: dataDetail?.birthDate,
-      email: dataDetail?.email,
-      firstName: dataDetail?.firstName,
-      gender: dataDetail?.gender,
-      lastName: dataDetail?.lastName,
-      active: dataDetail?.active,
-    };
-
     const { TextArea } = Input;
 
     const styles = {
       input_container: "flex items-center",
     };
+
+    console.log(dataDetail);
 
     return (
       <div className="container">
@@ -113,7 +106,6 @@ class EditBlogManager extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
-          initialValues={initialValues}
         >
           <Form.Item
             label="Title"
@@ -127,7 +119,7 @@ class EditBlogManager extends Component {
             name="contentText"
             className={styles.input_container}
           >
-            <TextArea rows={4} />
+            <TextArea placeholder={dataDetail?.contentText} rows={4} />
           </Form.Item>
           <Form.Item
             label="Create By"

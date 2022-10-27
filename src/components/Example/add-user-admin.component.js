@@ -59,7 +59,7 @@ export default class AddUserAdmin extends Component {
           layout="horizontal"
           onFinish={this.onFinish}
         >
-          <Form.Item label="Category" name="categoryId">
+          <Form.Item label="Subject" name="subject">
             <Select>
               {listCate.map((item, index) => (
                 <Select.Option key={index} value={item.category_id}>

@@ -57,19 +57,15 @@ class DetailQuiz extends Component {
               <strong>Description:</strong> {data?.description}
             </p>
             <p>
-              <strong>Create By:</strong> {data?.createdBy}
+              <strong>Subject:</strong> {data?.subjectId}
             </p>
+
             <p>
-              <strong>Create Date:</strong> {getDateTime(data?.createdDate)}
+              <strong>Rating:</strong> {data?.rating}
             </p>
+
             <p>
-              <strong>Update By:</strong> {data?.updatedBy}
-            </p>
-            <p>
-              <strong>Update Date:</strong> {getDateTime(data?.updatedDate)}
-            </p>
-            <p>
-              <strong>Version:</strong> {data?.version}
+              <strong>Total Question:</strong> {data?.totalQuestion}
             </p>
           </div>
         ) : null}

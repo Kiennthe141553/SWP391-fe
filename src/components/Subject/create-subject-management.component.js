@@ -5,6 +5,7 @@ import EventBus from "../../common/EventBus";
 
 import { Form, Input, Button, DatePicker } from "antd";
 import "./../style.css";
+import "./subject.css";
 
 export default class AddSubjectManagement extends Component {
   constructor(props) {

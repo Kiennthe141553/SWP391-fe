@@ -9,6 +9,7 @@ import "../../styles/tailwind.css";
 
 import { Form, Input, Button, InputNumber, DatePicker } from "antd";
 import ".././style.css";
+import "./quiz.css";
 
 class EditQuizManager extends Component {
   static propTypes = {

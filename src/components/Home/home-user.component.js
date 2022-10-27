@@ -40,7 +40,7 @@ class HomeUser extends Component {
   }
 
   render() {
-    const { data, userReady } = this.state;
+    const { data } = this.state;
     // const linkDetailSubject = (id) => {
     //   this.props.history.push(`/detail_subject/${id}`);
     // };

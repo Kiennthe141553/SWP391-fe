@@ -8,6 +8,7 @@ import "../../styles/tailwind.css";
 
 import { Form, Input, Button, Radio, DatePicker } from "antd";
 import ".././style.css";
+import "./user.css";
 
 class EditUserAdmin extends Component {
   static propTypes = {

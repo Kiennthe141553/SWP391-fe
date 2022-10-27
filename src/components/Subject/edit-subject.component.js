@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import BlogService from "../../services/blog.service";
+import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
@@ -9,6 +9,8 @@ import "../../styles/tailwind.css";
 
 import { Form, Input, Button, InputNumber, DatePicker } from "antd";
 import ".././style.css";
+import { getDateTime } from "../../helper/datetime";
+import "./subject.css";
 
 class EditSubjectManager extends Component {
   static propTypes = {
@@ -35,7 +37,7 @@ class EditSubjectManager extends Component {
     if (!currentUser) this.setState({ redirect: "/" });
     const { id } = this.props.match.params;
 
-    BlogService.getDetailBlog(id)
+    SubjectService.getDetailSubject(id)
       .then((response) => {
         this.setState({ dataDetail: response.data, userReady: true });
       })
@@ -67,7 +69,7 @@ class EditSubjectManager extends Component {
       version: values.version || this.state.dataDetail?.version,
     };
 
-    BlogService.editBlog(id, param)
+    SubjectService.EditSubject(id, param)
       .then(() => {
         this.props.history.push(`/list_blog_management`);
       })
@@ -106,7 +108,7 @@ class EditSubjectManager extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>Edit User</h2>
+          <h2>Edit Subject</h2>
         </div>
         <Form
           ref={this.formRef}
@@ -117,11 +119,11 @@ class EditSubjectManager extends Component {
           initialValues={initialValues}
         >
           <Form.Item label="Code" name="code" className="flex items-center">
-            <Input defaultValue={dataDetail?.code} />
+            <Input placeholder={dataDetail?.code} />
           </Form.Item>
 
           <Form.Item label="Name" name="name" className="flex items-center">
-            <Input defaultValue={dataDetail?.name} />
+            <Input placeholder={dataDetail?.name} />
           </Form.Item>
 
           <Form.Item
@@ -129,7 +131,7 @@ class EditSubjectManager extends Component {
             name="description"
             className="flex items-center"
           >
-            <TextArea rows={4} defaultValue={dataDetail?.description} />
+            <TextArea rows={4} placeholder={dataDetail?.description} />
           </Form.Item>
 
           <Form.Item
@@ -137,14 +139,14 @@ class EditSubjectManager extends Component {
             name="createdBy"
             className={styles.input_container}
           >
-            <Input defaultValue={dataDetail?.createdBy} />
+            <Input placeholder={dataDetail?.createdBy} />
           </Form.Item>
           <Form.Item
             label="Create Date"
             name="createdDate"
             className={styles.input_container}
           >
-            <DatePicker defaultValue={dataDetail?.createdDate} picker="week" />
+            <DatePicker placeholder={dataDetail?.createdDate} picker="week" />
           </Form.Item>
 
           <Form.Item
@@ -152,7 +154,7 @@ class EditSubjectManager extends Component {
             name="updatedBy"
             className={styles.input_container}
           >
-            <Input defaultValue={dataDetail?.updatedBy} />
+            <Input placeholder={dataDetail?.updatedBy} />
           </Form.Item>
 
           <Form.Item
@@ -160,7 +162,7 @@ class EditSubjectManager extends Component {
             name="updatedDate"
             className={styles.input_container}
           >
-            <DatePicker defaultValue={dataDetail?.updatedDate} picker="week" />
+            <DatePicker placeholder={dataDetail?.updatedDate} picker="week" />
           </Form.Item>
 
           <Form.Item
@@ -168,7 +170,7 @@ class EditSubjectManager extends Component {
             name="version"
             className={styles.input_container}
           >
-            <InputNumber defaultValue={dataDetail?.version} />
+            <InputNumber placeholder={dataDetail?.version} />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>
