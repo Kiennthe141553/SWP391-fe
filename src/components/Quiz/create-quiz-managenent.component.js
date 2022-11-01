@@ -83,7 +83,11 @@ export default class AddQuizManagement extends Component {
           layout="horizontal"
           onFinish={this.onFinish}
         >
-          <Form.Item label="Subject" name="subjectId">
+          <Form.Item
+            label="Subject"
+            name="subjectId"
+            className="flex items-center"
+          >
             <Select>
               {listSub.map((item, index) => (
                 <Select.Option key={index} value={item.id}>

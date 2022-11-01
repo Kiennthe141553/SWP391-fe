@@ -38,6 +38,10 @@ import EventBus from "./common/EventBus";
 
 import "./styles/tailwind.css";
 import ProfileDetail from "./components/Profile/profile-user.component";
+import ListQuestionManagement from "./components/Question/list-question-management.component";
+import DetailManageQuestion from "./components/Question/detail-question-management.component";
+import AddQuestionManagement from "./components/Question/create-question-management.component";
+import EditQuestion from "./components/Question/edit-question.component";
 
 class App extends Component {
   constructor(props) {
@@ -128,6 +132,11 @@ class App extends Component {
         link: "/list_quiz_management",
         name: "Manage Quiz",
         isActive: moduleSelected === "Manage Quiz",
+      },
+      {
+        link: "/list_question_management",
+        name: "Manage Question",
+        isActive: moduleSelected === "Manage Question",
       },
     ];
 
@@ -351,6 +360,20 @@ class App extends Component {
                 />
                 <Route path="/add_quiz" component={AddQuizManagement} />
                 <Route path="/edit_quiz/:id" component={EditQuiz} />
+
+                <Route path="/change-password" component={ChangePassword} />
+                <Route path="/chart" component={Chart} />
+
+                <Route
+                  path="/list_question_management"
+                  component={ListQuestionManagement}
+                />
+                <Route
+                  path="/question_management_details/:id"
+                  component={DetailManageQuestion}
+                />
+                <Route path="/add_question" component={AddQuestionManagement} />
+                <Route path="/edit_question/:id" component={EditQuestion} />
 
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />

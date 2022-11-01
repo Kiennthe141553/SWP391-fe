@@ -46,7 +46,6 @@ export default class ListQuizManagement extends Component {
   }
 
   render() {
-    
     const removeQuizAdmin = (id) => {
       console.log(id);
       QuizService.deleteQuiz(id)
