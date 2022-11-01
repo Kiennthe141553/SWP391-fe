@@ -29,7 +29,7 @@ export default class ListQuizManagement extends Component {
     const currentUser = AuthService.getCurrentUser();
 
     if (!currentUser) this.setState({ redirect: "/" });
-    QuizService.getListQuiz()
+    QuizService.getAllQuiz()
       .then((response) => {
         this.setState({
           dataSource: response.data,

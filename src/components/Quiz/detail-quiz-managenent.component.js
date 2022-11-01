@@ -4,7 +4,7 @@ import QuizService from "../../services/quiz.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+
 import "../../styles/tailwind.css";
 class DetailQuiz extends Component {
   static propTypes = {

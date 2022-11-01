@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import BlogService from "../../services/blog.service";
+import QuizService from "../../services/quiz.service";
+import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
@@ -7,7 +8,7 @@ import { withRouter } from "react-router-dom";
 
 import "../../styles/tailwind.css";
 
-import { Form, Input, Button, InputNumber, DatePicker } from "antd";
+import { Form, Input, Button, InputNumber, DatePicker, Select } from "antd";
 import ".././style.css";
 import "./quiz.css";
 
@@ -23,7 +24,7 @@ class EditQuizManager extends Component {
     this.state = {
       dataDetail: null,
       userReady: false,
-      listCategory: [],
+      listSubject: [],
       objCate: null,
     };
   }
@@ -36,7 +37,18 @@ class EditQuizManager extends Component {
     if (!currentUser) this.setState({ redirect: "/" });
     const { id } = this.props.match.params;
 
-    BlogService.getDetailBlog(id)
+    SubjectService.getListSubject()
+      .then((response) => {
+        this.setState({ listSubject: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      });
+
+    QuizService.getDetailQuiz(id)
       .then((response) => {
         this.setState({ dataDetail: response.data, userReady: true });
       })
@@ -56,21 +68,20 @@ class EditQuizManager extends Component {
     const { id } = this.props.match.params;
     const param = {
       code: values.code || this.state.dataDetail?.code,
-      createdBy: values.createdBy || this.state.dataDetail?.createdBy,
-      createdDate: values.createdDate || this.state.dataDetail?.createdDate,
+      subjectId: values.subjectId || this.state.dataDetail?.subjectId,
       description: values.description || this.state.dataDetail?.description,
       name: values.name || this.state.dataDetail?.name,
-      updatedBy: values.updatedBy || this.state.dataDetail?.updatedBy,
-      updatedDate: values.updatedDate || this.state.dataDetail?.updatedDate,
-      isDeleted: this.state.dataDetail?.isDeleted,
+      rating: values.rating || this.state.dataDetail?.rating,
+      deleted: this.state.dataDetail?.deleted,
       id: this.state.dataDetail?.id,
+      totalQuestions:
+        values.totalQuestions || this.state.dataDetail?.totalQuestions,
       userId: this.state.dataDetail?.userId,
-      version: values.version || this.state.dataDetail?.version,
     };
 
-    BlogService.editBlog(id, param)
+    QuizService.editQuiz(id, param)
       .then(() => {
-        this.props.history.push(`/list_blog_management`);
+        this.props.history.push(`/list_quiz_management`);
       })
       .catch((error) => {
         console.log(error);
@@ -79,6 +90,7 @@ class EditQuizManager extends Component {
 
   render() {
     const { dataDetail } = this.state;
+    const listSub = this.state.listSubject;
 
     const buttonItemLayout = {
       wrapperCol: {
@@ -117,6 +129,16 @@ class EditQuizManager extends Component {
           onFinish={this.onFinish}
           initialValues={initialValues}
         >
+          <Form.Item label="Subject" name="subjectId">
+            <Select>
+              {listSub.map((item, index) => (
+                <Select.Option key={index} value={item.id}>
+                  {item.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
           <Form.Item label="Code" name="code" className="flex items-center">
             <Input defaultValue={dataDetail?.code} />
           </Form.Item>
@@ -134,42 +156,11 @@ class EditQuizManager extends Component {
           </Form.Item>
 
           <Form.Item
-            label="Create By"
-            name="createdBy"
+            label="Rating"
+            name="rating"
             className={styles.input_container}
           >
-            <Input defaultValue={dataDetail?.createdBy} />
-          </Form.Item>
-          <Form.Item
-            label="Create Date"
-            name="createdDate"
-            className={styles.input_container}
-          >
-            <DatePicker defaultValue={dataDetail?.createdDate} picker="week" />
-          </Form.Item>
-
-          <Form.Item
-            label="Update By"
-            name="updatedBy"
-            className={styles.input_container}
-          >
-            <Input defaultValue={dataDetail?.updatedBy} />
-          </Form.Item>
-
-          <Form.Item
-            label="Update Date"
-            name="updatedDate"
-            className={styles.input_container}
-          >
-            <DatePicker defaultValue={dataDetail?.updatedDate} picker="week" />
-          </Form.Item>
-
-          <Form.Item
-            label="Version"
-            name="version"
-            className={styles.input_container}
-          >
-            <InputNumber defaultValue={dataDetail?.version} />
+            <InputNumber defaultValue={dataDetail?.rating} />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>

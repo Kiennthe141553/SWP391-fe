@@ -4,7 +4,7 @@ import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 
-import { Form, Input, Button, Select } from "antd";
+import { Form, Input, Button, Select, InputNumber } from "antd";
 import "./../style.css";
 import "./quiz.css";
 
@@ -24,7 +24,7 @@ export default class AddQuizManagement extends Component {
 
     if (!currentUser) this.setState({ redirect: "/" });
 
-    QuizService.getListQuiz()
+    SubjectService.getListSubject()
       .then((response) => {
         this.setState({ list: response.data });
       })
@@ -44,8 +44,9 @@ export default class AddQuizManagement extends Component {
     console.log(values);
     const payload = {
       id: "",
-      isDeleted: 0,
+      deleted: 0,
       userId: "",
+      totalQuestions: 0,
       ...values,
     };
     QuizService.createQuiz(payload)
@@ -110,7 +111,7 @@ export default class AddQuizManagement extends Component {
           </Form.Item>
 
           <Form.Item label="Rating" name="rating" className="flex items-center">
-            <Input />
+            <InputNumber />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>

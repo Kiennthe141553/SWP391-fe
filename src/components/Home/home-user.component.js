@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+// import { Pagination } from "antd";
 import "../../styles/tailwind.css";
 import { Carousel } from "antd";
 import SubjectService from "../../services/subject.service";
@@ -15,12 +15,37 @@ const contentStyle = {
 class HomeUser extends Component {
   constructor(props) {
     super(props);
-
+    // this.onShowSizeChange = this.onShowSizeChange.bind(this);
+    // this.onShowChange = this.onShowChange.bind(this);
     this.state = {
-      data: null,
+      data: [],
       userReady: false,
     };
   }
+
+  // onShowSizeChange(current, pageSize) {
+  //   console.log(current, pageSize);
+  // }
+
+  // onShowChange(current) {
+  //   const { id } = this.props.match.params;
+  //   const param = {
+  //     index: current,
+  //     pageSize: 10,
+  //     subid: id,
+  //   };
+
+  //   SubjectService.getListSubject(param)
+  //     .then((response) => {
+  //       this.setState({ data: response.data, userReady: true });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       if (error.response && error.response.status === 401) {
+  //         EventBus.dispatch("logout");
+  //       }
+  //     });
+  // }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
@@ -41,9 +66,9 @@ class HomeUser extends Component {
 
   render() {
     const { data } = this.state;
-    // const linkDetailSubject = (id) => {
-    //   this.props.history.push(`/detail_subject/${id}`);
-    // };
+
+    // const total = data.length / 10 + 1;
+
     return (
       <div className="w-7/12 mt-2">
         <Carousel autoplay>
@@ -90,6 +115,14 @@ class HomeUser extends Component {
             </a>
           ))}
         </div>
+
+        {/* <Pagination
+          showSizeChanger
+          onShowSizeChange={this.onShowSizeChange}
+          defaultCurrent={1}
+          total={total}
+          onChange={this.onShowChange}
+        /> */}
       </div>
     );
   }
