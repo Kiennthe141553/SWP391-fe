@@ -86,14 +86,7 @@ class HomeUser extends Component {
           </div>
         </Carousel>
         <div className="flex justify-between mt-4">
-          <p className="font-bold text-xl">Recent</p>
-          <a
-            href="/"
-            className="underline
-        text-blue-600"
-          >
-            show more
-          </a>
+          <p className="font-bold text-xl">Subject List</p>
         </div>
 
         <div className="">

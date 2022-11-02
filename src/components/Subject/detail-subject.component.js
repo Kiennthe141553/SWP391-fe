@@ -100,21 +100,6 @@ class DetailSubjectUser extends Component {
             <p>
               <strong>Description:</strong> {data?.description}
             </p>
-            <p>
-              <strong>Create By:</strong> {data?.createdBy}
-            </p>
-            <p>
-              <strong>Create Date:</strong> {getDateTime(data?.createdDate)}
-            </p>
-            <p>
-              <strong>Update By:</strong> {data?.updatedBy}
-            </p>
-            <p>
-              <strong>Update Date:</strong> {getDateTime(data?.updatedDate)}
-            </p>
-            <p>
-              <strong>Version:</strong> {data?.version}
-            </p>
           </div>
         ) : null}
 
