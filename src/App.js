@@ -25,6 +25,12 @@ import AddSubjectManagement from "./components/Subject/create-subject-management
 import EditSubject from "./components/Subject/edit-subject.component";
 import DetailUserSubject from "./components/Subject/detail-subject.component";
 
+import ListQuizManagement from "./components/Quiz/list-quiz-management.component";
+import DetailManageQuiz from "./components/Quiz/detail-quiz-managenent.component";
+import AddQuizManagement from "./components/Quiz/create-quiz-managenent.component";
+import EditQuiz from "./components/Quiz/edit-quiz.component";
+
+
 import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
 import Detail from "./components/ManageUser/detail-user-admin.component";
 import EditUser from "./components/ManageUser/edit-user-admin.component";
@@ -33,6 +39,10 @@ import EventBus from "./common/EventBus";
 
 import "./styles/tailwind.css";
 import ProfileDetail from "./components/Profile/profile-user.component";
+import ListQuestionManagement from "./components/Question/list-question-management.component";
+import DetailManageQuestion from "./components/Question/detail-question-management.component";
+import AddQuestionManagement from "./components/Question/create-question-management.component";
+import EditQuestion from "./components/Question/edit-question.component";
 
 class App extends Component {
   constructor(props) {
@@ -118,6 +128,16 @@ class App extends Component {
         link: "/list_subject_management",
         name: "Manage Subject",
         isActive: moduleSelected === "Manage Subject",
+      },
+      {
+        link: "/list_quiz_management",
+        name: "Manage Quiz",
+        isActive: moduleSelected === "Manage Quiz",
+      },
+      {
+        link: "/list_question_management",
+        name: "Manage Question",
+        isActive: moduleSelected === "Manage Question",
       },
     ];
 
@@ -330,6 +350,35 @@ class App extends Component {
                 />
                 <Route path="/add_subject" component={AddSubjectManagement} />
                 <Route path="/edit_subject/:id" component={EditSubject} />
+
+                <Route
+                  path="/list_quiz_management"
+                  component={ListQuizManagement}
+                />
+                <Route
+                  path="/quiz_management_details/:id"
+                  component={DetailManageQuiz}
+                />
+                <Route
+                  path="/list_quiz_subject/:id"
+                  component={DetailUserSubject}
+                />
+                <Route path="/add_quiz" component={AddQuizManagement} />
+                <Route path="/edit_quiz/:id" component={EditQuiz} />
+
+                <Route path="/change-password" component={ChangePassword} />
+                <Route path="/chart" component={Chart} />
+
+                <Route
+                  path="/list_question_management"
+                  component={ListQuestionManagement}
+                />
+                <Route
+                  path="/question_management_details/:id"
+                  component={DetailManageQuestion}
+                />
+                <Route path="/add_question" component={AddQuestionManagement} />
+                <Route path="/edit_question/:id" component={EditQuestion} />
 
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />

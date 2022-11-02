@@ -1,4 +1,3 @@
-import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import userService from "../../services/user.service";
 import "../../styles/tailwind.css";

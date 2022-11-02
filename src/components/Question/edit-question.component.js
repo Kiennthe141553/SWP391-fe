@@ -9,9 +9,8 @@ import "../../styles/tailwind.css";
 
 import { Form, Input, Button, InputNumber, DatePicker } from "antd";
 import ".././style.css";
-import "./blog.css";
 
-class EditBlogManager extends Component {
+class EditQuestionManager extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -55,16 +54,16 @@ class EditBlogManager extends Component {
   onFinish = (values) => {
     const { id } = this.props.match.params;
     const param = {
-      authorID: this.state.dataDetail?.authorID,
-      contentText: values.contentText || this.state.dataDetail?.contentText,
+      code: values.code || this.state.dataDetail?.code,
       createdBy: values.createdBy || this.state.dataDetail?.createdBy,
       createdDate: values.createdDate || this.state.dataDetail?.createdDate,
-      imageID: values.imageID || this.state.dataDetail?.imageID,
-      title: values.title || this.state.dataDetail?.title,
+      description: values.description || this.state.dataDetail?.description,
+      name: values.name || this.state.dataDetail?.name,
       updatedBy: values.updatedBy || this.state.dataDetail?.updatedBy,
       updatedDate: values.updatedDate || this.state.dataDetail?.updatedDate,
-      isDeleted: 0,
-      id: id,
+      isDeleted: this.state.dataDetail?.isDeleted,
+      id: this.state.dataDetail?.id,
+      userId: this.state.dataDetail?.userId,
       version: values.version || this.state.dataDetail?.version,
     };
 
@@ -87,13 +86,22 @@ class EditBlogManager extends Component {
       },
     };
 
+    const initialValues = {
+      code: dataDetail?.code,
+      name: dataDetail?.name,
+      description: dataDetail?.description,
+      createdBy: dataDetail?.createdBy,
+      createdDate: dataDetail?.createdDate,
+      updatedBy: dataDetail?.updatedBy,
+      updatedDate: dataDetail?.updatedDate,
+      version: dataDetail?.version,
+    };
+
     const { TextArea } = Input;
 
     const styles = {
       input_container: "flex items-center",
     };
-
-    console.log(dataDetail);
 
     return (
       <div className="container">
@@ -106,62 +114,61 @@ class EditBlogManager extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
+          initialValues={initialValues}
         >
-          <Form.Item
-            label="Title"
-            name="title"
-            className={styles.input_container}
-          >
-            <Input placeholder={dataDetail?.title} clasName="rounded-xl" />
+          <Form.Item label="Code" name="code" className="flex items-center">
+            <Input defaultValue={dataDetail?.code} />
           </Form.Item>
-          <Form.Item
-            label="Content"
-            name="contentText"
-            className={styles.input_container}
-          >
-            <TextArea placeholder={dataDetail?.contentText} rows={4} />
+
+          <Form.Item label="Name" name="name" className="flex items-center">
+            <Input defaultValue={dataDetail?.name} />
           </Form.Item>
+
+          <Form.Item
+            label="Description"
+            name="description"
+            className="flex items-center"
+          >
+            <TextArea rows={4} defaultValue={dataDetail?.description} />
+          </Form.Item>
+
           <Form.Item
             label="Create By"
             name="createdBy"
             className={styles.input_container}
           >
-            <Input placeholder={dataDetail?.createdBy} />
+            <Input defaultValue={dataDetail?.createdBy} />
           </Form.Item>
           <Form.Item
             label="Create Date"
             name="createdDate"
             className={styles.input_container}
           >
-            <DatePicker placeholder={dataDetail?.createdDate} picker="week" />
+            <DatePicker defaultValue={dataDetail?.createdDate} picker="week" />
           </Form.Item>
+
           <Form.Item
             label="Update By"
             name="updatedBy"
             className={styles.input_container}
           >
-            <Input placeholder={dataDetail?.updatedBy} />
+            <Input defaultValue={dataDetail?.updatedBy} />
           </Form.Item>
+
           <Form.Item
             label="Update Date"
             name="updatedDate"
             className={styles.input_container}
           >
-            <DatePicker placeholder={dataDetail?.updatedDate} picker="week" />
+            <DatePicker defaultValue={dataDetail?.updatedDate} picker="week" />
           </Form.Item>
-          <Form.Item
-            label="Image Link"
-            name="imageID"
-            className={styles.input_container}
-          >
-            <Input placeholder={dataDetail?.imageID} />
-          </Form.Item>
+
           <Form.Item
             label="Version"
             name="version"
             className={styles.input_container}
           >
-            <InputNumber placeholder={dataDetail?.version} />
+            <InputNumber defaultValue={dataDetail?.version} />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>
@@ -178,6 +185,6 @@ class EditBlogManager extends Component {
   }
 }
 
-const EditBlog = withRouter(EditBlogManager);
+const EditQuestion = withRouter(EditQuestionManager);
 
-export default EditBlog;
+export default EditQuestion;

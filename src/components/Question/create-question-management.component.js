@@ -1,18 +1,18 @@
 import React, { Component } from "react";
-import BlogService from "../../services/blog.service";
+import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
-
-import { Form, Input, Button } from "antd";
+import "../Quiz/quiz.css";
+import { Form, Input, Button, Select } from "antd";
 import "./../style.css";
-import "./blog.css";
+import questionService from "../../services/question.service";
 
-export default class AddBlog extends Component {
+export default class AddQuestionManagement extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      listCategory: [],
+      list: [],
     };
   }
 
@@ -22,6 +22,18 @@ export default class AddBlog extends Component {
     const currentUser = AuthService.getCurrentUser();
 
     if (!currentUser) this.setState({ redirect: "/" });
+
+    questionService
+      .getListQuestion()
+      .then((response) => {
+        this.setState({ list: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      });
   }
 
   onReset = () => {
@@ -30,9 +42,16 @@ export default class AddBlog extends Component {
 
   onFinish = (values) => {
     console.log(values);
-    BlogService.createBlog(values)
+    const payload = {
+      id: "",
+      isDeleted: 0,
+      userId: "",
+      ...values,
+    };
+    questionService
+      .create(payload)
       .then(() => {
-        this.props.history.push(`/list_blog_management`);
+        this.props.history.push(`/list_question_management`);
       })
       .catch((error) => {
         console.log(error);
@@ -43,6 +62,7 @@ export default class AddBlog extends Component {
   };
 
   render() {
+    const quizSub = this.state.list;
     const buttonItemLayout = {
       wrapperCol: {
         span: 14,
@@ -55,7 +75,7 @@ export default class AddBlog extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>Add Blog</h2>
+          <h2>Add Question</h2>
         </div>
         <Form
           ref={this.formRef}
@@ -65,23 +85,32 @@ export default class AddBlog extends Component {
           onFinish={this.onFinish}
         >
           <Form.Item
-            label="Content"
-            name="contentText"
+            label="Quiz Id"
+            name="quizId"
             className="flex items-center"
           >
-            <TextArea rows={4} />
+            <Select>
+              {quizSub.map((item, index) => (
+                <Select.Option key={index} value={item.id}>
+                  {item.name}
+                </Select.Option>
+              ))}
+            </Select>
           </Form.Item>
-          <Form.Item label="ID" name="id" className="flex items-center">
-            <Input />
-          </Form.Item>
+
           <Form.Item
-            label="Image"
-            name="imageBase64"
+            label="Question Text"
+            name="questionText"
             className="flex items-center"
           >
             <Input />
           </Form.Item>
-          <Form.Item label="Title" name="title" className="flex items-center">
+
+          <Form.Item
+            label="Total Answer"
+            name="TotalAnswer"
+            className="flex items-center"
+          >
             <Input />
           </Form.Item>
 

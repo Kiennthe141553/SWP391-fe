@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import QuizService from "../../services/quiz.service";
 import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
@@ -7,12 +8,11 @@ import { withRouter } from "react-router-dom";
 
 import "../../styles/tailwind.css";
 
-import { Form, Input, Button, InputNumber, DatePicker } from "antd";
+import { Form, Input, Button, InputNumber, DatePicker, Select } from "antd";
 import ".././style.css";
+import "./quiz.css";
 
-import "./subject.css";
-
-class EditSubjectManager extends Component {
+class EditQuizManager extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
@@ -24,7 +24,7 @@ class EditSubjectManager extends Component {
     this.state = {
       dataDetail: null,
       userReady: false,
-      listCategory: [],
+      listSubject: [],
       objCate: null,
     };
   }
@@ -37,7 +37,18 @@ class EditSubjectManager extends Component {
     if (!currentUser) this.setState({ redirect: "/" });
     const { id } = this.props.match.params;
 
-    SubjectService.getDetailSubject(id)
+    SubjectService.getListSubject()
+      .then((response) => {
+        this.setState({ listSubject: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response && error.response.status === 401) {
+          EventBus.dispatch("logout");
+        }
+      });
+
+    QuizService.getDetailQuiz(id)
       .then((response) => {
         this.setState({ dataDetail: response.data, userReady: true });
       })
@@ -57,21 +68,20 @@ class EditSubjectManager extends Component {
     const { id } = this.props.match.params;
     const param = {
       code: values.code || this.state.dataDetail?.code,
-      createdBy: values.createdBy || this.state.dataDetail?.createdBy,
-      createdDate: values.createdDate || this.state.dataDetail?.createdDate,
+      subjectId: values.subjectId || this.state.dataDetail?.subjectId,
       description: values.description || this.state.dataDetail?.description,
       name: values.name || this.state.dataDetail?.name,
-      updatedBy: values.updatedBy || this.state.dataDetail?.updatedBy,
-      updatedDate: values.updatedDate || this.state.dataDetail?.updatedDate,
-      isDeleted: this.state.dataDetail?.isDeleted,
+      rating: values.rating || this.state.dataDetail?.rating,
+      deleted: this.state.dataDetail?.deleted,
       id: this.state.dataDetail?.id,
+      totalQuestions:
+        values.totalQuestions || this.state.dataDetail?.totalQuestions,
       userId: this.state.dataDetail?.userId,
-      version: values.version || this.state.dataDetail?.version,
     };
 
-    SubjectService.EditSubject(id, param)
+    QuizService.editQuiz(id, param)
       .then(() => {
-        this.props.history.push(`/list_blog_management`);
+        this.props.history.push(`/list_quiz_management`);
       })
       .catch((error) => {
         console.log(error);
@@ -80,6 +90,7 @@ class EditSubjectManager extends Component {
 
   render() {
     const { dataDetail } = this.state;
+    const listSub = this.state.listSubject;
 
     const buttonItemLayout = {
       wrapperCol: {
@@ -108,7 +119,7 @@ class EditSubjectManager extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>Edit Subject</h2>
+          <h2>Edit User</h2>
         </div>
         <Form
           ref={this.formRef}
@@ -118,12 +129,22 @@ class EditSubjectManager extends Component {
           onFinish={this.onFinish}
           initialValues={initialValues}
         >
+          <Form.Item label="Subject" name="subjectId">
+            <Select>
+              {listSub.map((item, index) => (
+                <Select.Option key={index} value={item.id}>
+                  {item.name}
+                </Select.Option>
+              ))}
+            </Select>
+          </Form.Item>
+
           <Form.Item label="Code" name="code" className="flex items-center">
-            <Input placeholder={dataDetail?.code} />
+            <Input defaultValue={dataDetail?.code} />
           </Form.Item>
 
           <Form.Item label="Name" name="name" className="flex items-center">
-            <Input placeholder={dataDetail?.name} />
+            <Input defaultValue={dataDetail?.name} />
           </Form.Item>
 
           <Form.Item
@@ -131,46 +152,15 @@ class EditSubjectManager extends Component {
             name="description"
             className="flex items-center"
           >
-            <TextArea rows={4} placeholder={dataDetail?.description} />
+            <TextArea rows={4} defaultValue={dataDetail?.description} />
           </Form.Item>
 
           <Form.Item
-            label="Create By"
-            name="createdBy"
+            label="Rating"
+            name="rating"
             className={styles.input_container}
           >
-            <Input placeholder={dataDetail?.createdBy} />
-          </Form.Item>
-          <Form.Item
-            label="Create Date"
-            name="createdDate"
-            className={styles.input_container}
-          >
-            <DatePicker placeholder={dataDetail?.createdDate} picker="week" />
-          </Form.Item>
-
-          <Form.Item
-            label="Update By"
-            name="updatedBy"
-            className={styles.input_container}
-          >
-            <Input placeholder={dataDetail?.updatedBy} />
-          </Form.Item>
-
-          <Form.Item
-            label="Update Date"
-            name="updatedDate"
-            className={styles.input_container}
-          >
-            <DatePicker placeholder={dataDetail?.updatedDate} picker="week" />
-          </Form.Item>
-
-          <Form.Item
-            label="Version"
-            name="version"
-            className={styles.input_container}
-          >
-            <InputNumber placeholder={dataDetail?.version} />
+            <InputNumber defaultValue={dataDetail?.rating} />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>
@@ -187,6 +177,6 @@ class EditSubjectManager extends Component {
   }
 }
 
-const EditSubject = withRouter(EditSubjectManager);
+const EditQuiz = withRouter(EditQuizManager);
 
-export default EditSubject;
+export default EditQuiz;
