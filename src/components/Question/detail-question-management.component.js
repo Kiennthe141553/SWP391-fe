@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
 import "../../styles/tailwind.css";
 import questionService from "../../services/question.service";
 class DetailQuestion extends Component {

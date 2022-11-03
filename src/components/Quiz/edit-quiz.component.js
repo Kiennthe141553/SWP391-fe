@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 
 import "../../styles/tailwind.css";
 
-import { Form, Input, Button, InputNumber, DatePicker, Select } from "antd";
+import { Form, Input, Button, InputNumber, Select } from "antd";
 import ".././style.css";
 import "./quiz.css";
 

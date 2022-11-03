@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SubjectService from "../../services/subject.service";
+
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import "../Quiz/quiz.css";
@@ -69,8 +69,6 @@ export default class AddQuestionManagement extends Component {
         offset: 4,
       },
     };
-
-    const { TextArea } = Input;
 
     return (
       <div className="container">

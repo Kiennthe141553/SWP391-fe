@@ -264,11 +264,11 @@ const ProfileDetail = () => {
         />
       </div>
 
-      {/* gender  0 is male, 1 is female*/}
       <div className="flex items-center">
         <img
           className="mr-4 object-contain "
           src="https://img.icons8.com/plumpy/24/000000/gender.png"
+          alt=""
         />
         <div class="flex items-center mr-4">
           <input

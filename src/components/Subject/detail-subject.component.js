@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { Pagination } from "antd";
 import QuizService from "../../services/quiz.service";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+
 import "../../styles/tailwind.css";
 class DetailSubjectUser extends Component {
   static propTypes = {
