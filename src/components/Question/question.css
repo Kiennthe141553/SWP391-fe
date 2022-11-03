@@ -1,0 +1,13 @@
+textarea::placeholder,
+input::placeholder,
+.ant-select-selection-placeholder {
+    color: black !important;
+}
+
+.ant-picker {
+    width: 100%;
+}
+
+.ant-input-number-in-form-item {
+    width: 100%;
+}

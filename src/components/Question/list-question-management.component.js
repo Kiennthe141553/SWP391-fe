@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+
 import ".././style.css";
 import "../../styles/tailwind.css";
 import { Input } from "antd";
@@ -156,7 +156,7 @@ export default class ListQuestionManagement extends Component {
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
         const filteredData = this.state.dataSource.filter((entry) => {
-          return String(entry.code).toLowerCase().includes(valueToLowCase);
+          return String(entry.id).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });
       }

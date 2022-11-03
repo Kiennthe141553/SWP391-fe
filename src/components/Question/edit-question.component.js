@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SubjectService from "../../services/subject.service";
+
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 import "../../styles/tailwind.css";
 
-import { Form, Input, Button, InputNumber, DatePicker, Select } from "antd";
+import { Form, Input, Button, Select } from "antd";
 import ".././style.css";
 import "../Quiz/quiz.css";
 import questionService from "../../services/question.service";
@@ -27,6 +27,7 @@ class EditQuestionManager extends Component {
       userReady: false,
       listSubject: [],
       objCate: null,
+      listSelectRightAnswer: [],
     };
   }
 
@@ -41,7 +42,9 @@ class EditQuestionManager extends Component {
     quizService
       .getAllQuiz()
       .then((response) => {
-        this.setState({ listSubject: response.data });
+        this.setState({
+          listSubject: response.data,
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -53,7 +56,15 @@ class EditQuestionManager extends Component {
     questionService
       .getDetailQuestion(id)
       .then((response) => {
-        this.setState({ dataDetail: response.data, userReady: true });
+        this.setState({
+          dataDetail: response.data,
+          userReady: true,
+          listSelectRightAnswer: [
+            response.data.answer1,
+            response.data.answer2,
+            response.data.answer3,
+          ],
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -67,23 +78,32 @@ class EditQuestionManager extends Component {
     this.formRef.current.resetFields();
   };
 
+  onChange = () => {
+    const arr = [
+      this.formRef.current.getFieldValue("answer1"),
+      this.formRef.current.getFieldValue("answer2"),
+      this.formRef.current.getFieldValue("answer3"),
+    ];
+    this.setState({ listSelectRightAnswer: arr });
+  };
+
   onFinish = (values) => {
-    const { id } = this.props.match.params;
     const param = {
-      code: values.code || this.state.dataDetail?.code,
-      subjectId: values.subjectId || this.state.dataDetail?.subjectId,
-      description: values.description || this.state.dataDetail?.description,
-      name: values.name || this.state.dataDetail?.name,
-      rating: values.rating || this.state.dataDetail?.rating,
+      quiztId: values.quiztId || this.state.dataDetail?.quiztId,
+      questionText: values.questionText || this.state.dataDetail?.questionText,
+      answer1: values.answer1 || this.state.dataDetail?.answer1,
+      answer2: values.answer2 || this.state.dataDetail?.answer2,
+      answer3: values.answer3 || this.state.dataDetail?.answer3,
+      name: values.rightAnswer || this.state.dataDetail?.rightAnswer,
       deleted: this.state.dataDetail?.deleted,
       id: this.state.dataDetail?.id,
-      totalQuestions:
-        values.totalQuestions || this.state.dataDetail?.totalQuestions,
+      totalAnswer: this.state.dataDetail?.totalAnswer,
+      quiztsubjectId: this.state.dataDetail?.quiztsubjectId,
       userId: this.state.dataDetail?.userId,
     };
 
     questionService
-      .editQuestion(id, param)
+      .editQuestion(param)
       .then(() => {
         this.props.history.push(`/list_question_management`);
       })
@@ -93,7 +113,13 @@ class EditQuestionManager extends Component {
   };
 
   render() {
-    const { dataDetail } = this.state;
+    const { dataDetail, listSubject } = this.state;
+    console.log(this.state.listSelectRightAnswer);
+    const listAnswer = this.state.listSelectRightAnswer;
+    const currentQuiz = listSubject.filter((item) => {
+      return item.id === dataDetail?.quiztId;
+    });
+
     const listSub = this.state.listSubject;
 
     const buttonItemLayout = {
@@ -101,23 +127,6 @@ class EditQuestionManager extends Component {
         span: 14,
         offset: 4,
       },
-    };
-
-    const initialValues = {
-      code: dataDetail?.code,
-      name: dataDetail?.name,
-      description: dataDetail?.description,
-      createdBy: dataDetail?.createdBy,
-      createdDate: dataDetail?.createdDate,
-      updatedBy: dataDetail?.updatedBy,
-      updatedDate: dataDetail?.updatedDate,
-      version: dataDetail?.version,
-    };
-
-    const { TextArea } = Input;
-
-    const styles = {
-      input_container: "flex items-center",
     };
 
     return (
@@ -131,14 +140,13 @@ class EditQuestionManager extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
-          initialValues={initialValues}
         >
           <Form.Item
             label="Quiz Id"
             name="quiztId"
             className="flex items-center"
           >
-            <Select>
+            <Select placeholder={currentQuiz[0]?.name}>
               {listSub.map((item, index) => (
                 <Select.Option key={index} value={item.id}>
                   {item.name}
@@ -152,7 +160,7 @@ class EditQuestionManager extends Component {
             name="questionText"
             className="flex items-center"
           >
-            <Input />
+            <Input placeholder={dataDetail?.questionText} />
           </Form.Item>
 
           <Form.Item
@@ -160,7 +168,7 @@ class EditQuestionManager extends Component {
             name="answer1"
             className="flex items-center"
           >
-            <Input />
+            <Input placeholder={dataDetail?.answer1} onChange={this.onChange} />
           </Form.Item>
 
           <Form.Item
@@ -168,7 +176,7 @@ class EditQuestionManager extends Component {
             name="answer2"
             className="flex items-center"
           >
-            <Input />
+            <Input placeholder={dataDetail?.answer2} onChange={this.onChange} />
           </Form.Item>
 
           <Form.Item
@@ -176,18 +184,19 @@ class EditQuestionManager extends Component {
             name="answer3"
             className="flex items-center"
           >
-            <Input />
+            <Input placeholder={dataDetail?.answer3} onChange={this.onChange} />
           </Form.Item>
           <Form.Item
             label="Right Answer"
             name="rightAnswer"
             className="flex items-center"
           >
-            <Select>
-              <Select.Option value={1}>1</Select.Option>
-              <Select.Option value={2}>2</Select.Option>
-              <Select.Option value={3}>3</Select.Option>
-              ))
+            <Select placeholder={dataDetail?.rightAnswer}>
+              {listAnswer.map((item, index) => (
+                <Select.Option key={index} value={item}>
+                  {item}
+                </Select.Option>
+              ))}
             </Select>
           </Form.Item>
 

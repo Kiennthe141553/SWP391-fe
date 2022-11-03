@@ -90,24 +90,17 @@ class EditQuizManager extends Component {
 
   render() {
     const { dataDetail } = this.state;
+
     const listSub = this.state.listSubject;
+    const currentSub = listSub.filter((item) => {
+      return item.id === dataDetail?.subjectId;
+    });
 
     const buttonItemLayout = {
       wrapperCol: {
         span: 14,
         offset: 4,
       },
-    };
-
-    const initialValues = {
-      code: dataDetail?.code,
-      name: dataDetail?.name,
-      description: dataDetail?.description,
-      createdBy: dataDetail?.createdBy,
-      createdDate: dataDetail?.createdDate,
-      updatedBy: dataDetail?.updatedBy,
-      updatedDate: dataDetail?.updatedDate,
-      version: dataDetail?.version,
     };
 
     const { TextArea } = Input;
@@ -127,10 +120,9 @@ class EditQuizManager extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
-          initialValues={initialValues}
         >
           <Form.Item label="Subject" name="subjectId">
-            <Select>
+            <Select placeholder={currentSub[0]?.name}>
               {listSub.map((item, index) => (
                 <Select.Option key={index} value={item.id}>
                   {item.name}
@@ -140,11 +132,11 @@ class EditQuizManager extends Component {
           </Form.Item>
 
           <Form.Item label="Code" name="code" className="flex items-center">
-            <Input defaultValue={dataDetail?.code} />
+            <Input placeholder={dataDetail?.code} />
           </Form.Item>
 
           <Form.Item label="Name" name="name" className="flex items-center">
-            <Input defaultValue={dataDetail?.name} />
+            <Input placeholder={dataDetail?.name} />
           </Form.Item>
 
           <Form.Item
@@ -152,7 +144,7 @@ class EditQuizManager extends Component {
             name="description"
             className="flex items-center"
           >
-            <TextArea rows={4} defaultValue={dataDetail?.description} />
+            <TextArea rows={4} placeholder={dataDetail?.description} />
           </Form.Item>
 
           <Form.Item
@@ -160,7 +152,7 @@ class EditQuizManager extends Component {
             name="rating"
             className={styles.input_container}
           >
-            <InputNumber defaultValue={dataDetail?.rating} />
+            <InputNumber placeholder={dataDetail?.rating} />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>

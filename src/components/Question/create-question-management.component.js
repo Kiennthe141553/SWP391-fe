@@ -14,6 +14,7 @@ export default class AddQuestionManagement extends Component {
 
     this.state = {
       list: [],
+      listSelectRightAnswer:[]
     };
   }
 
@@ -41,25 +42,28 @@ export default class AddQuestionManagement extends Component {
     this.formRef.current.resetFields();
   };
 
+  onChange = () => {
+    const arr = [
+      this.formRef.current.getFieldValue('answer1') ,
+      this.formRef.current.getFieldValue('answer2') ,
+      this.formRef.current.getFieldValue('answer3')
+    ]
+    this.setState(
+      {listSelectRightAnswer: arr}
+    )
+  };
+
   onFinish = (values) => {
     const payload = {
       id: "",
       totalAnswer: "3",
       deleted: false,
-      quiztsubjectId: 0,
+      quiztsubjectId: "",
       ...values,
     };
 
-    const demodata = {
-      id: "",
-      quiztsubjectId: 54,
-      totalAnswer: "44",
-      deleted: false,
-      ...values,
-    };
-    console.log(values);
     questionService
-      .createQuestion(demodata)
+      .createQuestion(payload)
       .then(() => {
         this.props.history.push(`/list_question_management`);
       })
@@ -73,6 +77,7 @@ export default class AddQuestionManagement extends Component {
 
   render() {
     const quizSub = this.state.list;
+    const listAnswer = this.state.listSelectRightAnswer;
     const buttonItemLayout = {
       wrapperCol: {
         span: 14,
@@ -91,6 +96,7 @@ export default class AddQuestionManagement extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
+          // onChange={this.onChange}
         >
           <Form.Item
             label="Quiz Id"
@@ -119,7 +125,7 @@ export default class AddQuestionManagement extends Component {
             name="answer1"
             className="flex items-center"
           >
-            <Input />
+            <Input onChange={this.onChange} required />
           </Form.Item>
 
           <Form.Item
@@ -127,7 +133,7 @@ export default class AddQuestionManagement extends Component {
             name="answer2"
             className="flex items-center"
           >
-            <Input />
+            <Input onChange={this.onChange} required />
           </Form.Item>
 
           <Form.Item
@@ -135,7 +141,7 @@ export default class AddQuestionManagement extends Component {
             name="answer3"
             className="flex items-center"
           >
-            <Input />
+            <Input onChange={this.onChange} required />
           </Form.Item>
           <Form.Item
             label="Right Answer"
@@ -143,10 +149,11 @@ export default class AddQuestionManagement extends Component {
             className="flex items-center"
           >
             <Select>
-              <Select.Option value={1}>1</Select.Option>
-              <Select.Option value={2}>2</Select.Option>
-              <Select.Option value={3}>3</Select.Option>
-              ))
+              {listAnswer.map((item, index) => (
+                <Select.Option key={index} value={item}>
+                  {item}
+                </Select.Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item {...buttonItemLayout}>

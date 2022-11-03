@@ -4,7 +4,7 @@ import SubjectService from "../../services/subject.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+
 import "../../styles/tailwind.css";
 class DetailSubject extends Component {
   static propTypes = {

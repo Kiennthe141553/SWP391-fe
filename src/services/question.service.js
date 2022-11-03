@@ -28,9 +28,9 @@ class QuestionService {
     });
   }
 
-  editQuestion(id, payload) {
+  editQuestion(payload) {
     return (
-      axios.post(API_URL + `api/editquestion/${id}`, payload),
+      axios.post(API_URL + `api/editquestion`, payload),
       {
         headers: authHeader(),
       }

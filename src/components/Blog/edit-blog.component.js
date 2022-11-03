@@ -41,7 +41,6 @@ class EditBlogManager extends Component {
         this.setState({ dataDetail: response.data, userReady: true });
       })
       .catch((error) => {
-        console.log(error);
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }

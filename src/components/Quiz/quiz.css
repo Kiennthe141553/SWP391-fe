@@ -1,5 +1,6 @@
 textarea::placeholder,
-input::placeholder {
+input::placeholder,
+.ant-select-selection-placeholder {
     color: black !important;
 }
 
