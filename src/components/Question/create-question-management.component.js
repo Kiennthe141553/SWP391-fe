@@ -6,6 +6,7 @@ import "../Quiz/quiz.css";
 import { Form, Input, Button, Select } from "antd";
 import "./../style.css";
 import questionService from "../../services/question.service";
+import quizService from "../../services/quiz.service";
 
 export default class AddQuestionManagement extends Component {
   constructor(props) {
@@ -23,8 +24,8 @@ export default class AddQuestionManagement extends Component {
 
     if (!currentUser) this.setState({ redirect: "/" });
 
-    questionService
-      .getListQuestion()
+    quizService
+      .getAllQuiz()
       .then((response) => {
         this.setState({ list: response.data });
       })
@@ -41,15 +42,24 @@ export default class AddQuestionManagement extends Component {
   };
 
   onFinish = (values) => {
-    console.log(values);
     const payload = {
       id: "",
-      isDeleted: 0,
-      userId: "",
+      totalAnswer: "3",
+      deleted: false,
+      quiztsubjectId: 0,
       ...values,
     };
+
+    const demodata = {
+      id: "",
+      quiztsubjectId: 54,
+      totalAnswer: "44",
+      deleted: false,
+      ...values,
+    };
+    console.log(values);
     questionService
-      .create(payload)
+      .createQuestion(demodata)
       .then(() => {
         this.props.history.push(`/list_question_management`);
       })
@@ -84,7 +94,7 @@ export default class AddQuestionManagement extends Component {
         >
           <Form.Item
             label="Quiz Id"
-            name="quizId"
+            name="quiztId"
             className="flex items-center"
           >
             <Select>
@@ -105,13 +115,40 @@ export default class AddQuestionManagement extends Component {
           </Form.Item>
 
           <Form.Item
-            label="Total Answer"
-            name="TotalAnswer"
+            label="Answer 1"
+            name="answer1"
             className="flex items-center"
           >
             <Input />
           </Form.Item>
 
+          <Form.Item
+            label="Answer 2"
+            name="answer2"
+            className="flex items-center"
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Answer 3"
+            name="answer3"
+            className="flex items-center"
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Right Answer"
+            name="rightAnswer"
+            className="flex items-center"
+          >
+            <Select>
+              <Select.Option value={1}>1</Select.Option>
+              <Select.Option value={2}>2</Select.Option>
+              <Select.Option value={3}>3</Select.Option>
+              ))
+            </Select>
+          </Form.Item>
           <Form.Item {...buttonItemLayout}>
             <Button type="primary" htmlType="submit">
               Submit

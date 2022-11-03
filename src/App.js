@@ -30,7 +30,6 @@ import DetailManageQuiz from "./components/Quiz/detail-quiz-managenent.component
 import AddQuizManagement from "./components/Quiz/create-quiz-managenent.component";
 import EditQuiz from "./components/Quiz/edit-quiz.component";
 
-
 import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
 import Detail from "./components/ManageUser/detail-user-admin.component";
 import EditUser from "./components/ManageUser/edit-user-admin.component";
@@ -156,13 +155,13 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-black header shadow-sm">
+        <nav className="navbar navbar-expand navbar-dark bg-gray-100 header shadow-md text-black">
           <Link
             to={"/"}
             className="navbar-brand"
             onClick={this.resetModuleSelected}
           >
-            English Practice Quizzz
+            <img src="/quizicon.png" alt="logo" className="w-8" />
           </Link>
           <div className="navbar-nav mr-auto"></div>
 

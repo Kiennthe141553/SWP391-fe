@@ -70,52 +70,51 @@ class HomeUser extends Component {
     // const total = data.length / 10 + 1;
 
     return (
-      <div className="w-7/12 mt-2">
-        <Carousel autoplay>
-          <div>
-            <h3 style={contentStyle}>1</h3>
+      <div className=" flex justify-center mt-2">
+        <div className="w-10/12">
+          <Carousel autoplay className="12/12">
+            <div>
+              <h3 style={contentStyle}>1</h3>
+            </div>
+            <div>
+              <h3 style={contentStyle}>2</h3>
+            </div>
+            <div>
+              <h3 style={contentStyle}>3</h3>
+            </div>
+          </Carousel>
+          <div className="flex justify-between mt-4">
+            <p className="font-bold text-xl">Subject List</p>
           </div>
-          <div>
-            <h3 style={contentStyle}>2</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>3</h3>
-          </div>
-          <div>
-            <h3 style={contentStyle}>4</h3>
-          </div>
-        </Carousel>
-        <div className="flex justify-between mt-4">
-          <p className="font-bold text-xl">Subject List</p>
-        </div>
 
-        <div className="">
-          {data?.map((item) => (
-            <a href={`/detail_subject/${item.id}`}>
-              <div className="bg-gray-200 rounded-lg p-2 m-2 cursor-pointer">
-                <div>
-                  <div className="font-bold text-xl text-gray-800">
-                    {item.name}
+          <div className="w-7/12">
+            {data?.map((item) => (
+              <a href={`/detail_subject/${item.id}`}>
+                <div className="bg-gray-200 rounded-lg p-2 m-2 cursor-pointer">
+                  <div>
+                    <div className="font-bold text-xl text-gray-800">
+                      {item.name}
+                    </div>
+                    <div className="text-gray-400">{item.code}</div>
                   </div>
-                  <div className="text-gray-400">{item.code}</div>
-                </div>
-                <div>
-                  <div className="flex mt-4 items-center">
-                    <div className="font-semibold">{item.description}</div>
+                  <div>
+                    <div className="flex mt-4 items-center">
+                      <div className="font-semibold">{item.description}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          ))}
-        </div>
+              </a>
+            ))}
+          </div>
 
-        {/* <Pagination
+          {/* <Pagination
           showSizeChanger
           onShowSizeChange={this.onShowSizeChange}
           defaultCurrent={1}
           total={total}
           onChange={this.onShowChange}
         /> */}
+        </div>
       </div>
     );
   }

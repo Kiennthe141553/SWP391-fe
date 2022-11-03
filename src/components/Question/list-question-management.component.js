@@ -67,9 +67,9 @@ export default class ListQuestionManagement extends Component {
     const data = this.state.list;
     const columns = [
       {
-        title: "Code",
-        dataIndex: "code",
-        key: "code",
+        title: "Id",
+        dataIndex: "id",
+        key: "id",
         render: (text, record) => {
           return (
             <Link
@@ -82,33 +82,44 @@ export default class ListQuestionManagement extends Component {
         },
       },
       {
-        title: "Id",
-        dataIndex: "Id",
-        key: "Id",
-        render: (text) => <p>{text}</p>,
-      },
-      {
         title: "Question Text",
-        dataIndex: "question_text",
-        key: "question_text",
-        render: (text) => <p>{text}</p>,
-      },
-      {
-        title: "Description",
-        dataIndex: "description",
-        key: "description",
+        dataIndex: "questionText",
+        key: "questionText",
         render: (text) => <p>{text}</p>,
       },
       {
         title: "Quiz Id",
-        dataIndex: "quizId",
-        key: "quizId",
+        dataIndex: "quiztId",
+        key: "quiztId",
+        render: (text) => <p>{text}</p>,
       },
+
       {
-        title: "Total Answer",
-        dataIndex: "totalAnswer",
-        key: "totalAnswer",
-        render: (text) => <p>{getDateTime(text)}</p>,
+        title: "Answer 1",
+        dataIndex: "answer1",
+        key: "answer1",
+        render: (text) => <p>{text}</p>,
+      },
+
+      {
+        title: "Answer 2",
+        dataIndex: "answer2",
+        key: "answer2",
+        render: (text) => <p>{text}</p>,
+      },
+
+      {
+        title: "Answer 3",
+        dataIndex: "answer3",
+        key: "answer3",
+        render: (text) => <p>{text}</p>,
+      },
+
+      {
+        title: "Right answer",
+        dataIndex: "rightAnswer",
+        key: "rightAnswer",
+        render: (text) => <p>{text}</p>,
       },
 
       {

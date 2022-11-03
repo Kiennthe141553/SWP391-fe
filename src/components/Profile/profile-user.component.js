@@ -21,12 +21,25 @@ const ProfileDetail = () => {
       setNewUser({
         id: res.data.id,
         username: res.data.username,
+        password: "",
         email: res.data.email,
         firstName: res.data.firstName,
         lastName: res.data.lastName,
-        address: res.data.address,
         datebirth: res.data.datebirth,
         gender: res.data.gender,
+        address: res.data.address,
+        active: res.data.active,
+
+        //   id: "41f21b37-ed03-496b-8580-691ae97b6e4d",
+        //   username: "update 123",
+        //   password: "",
+        //   email: "update123asd@gmail",
+        //   firstName: "update 123",
+        //   lastName: "update 123",
+        //   birthDate: "2000-05-04",
+        //   gender: 1,
+        //   address: "update 123",
+        //   active: 1,
       });
     };
     fetchCurrentUser();
@@ -48,15 +61,23 @@ const ProfileDetail = () => {
   const handleChange = (e) => {
     const value = e.target.value;
     setNewUser({ ...newUser, [e.target.name]: value });
+    console.log(newUser);
   };
 
   const handleSubmit = async () => {
     try {
-      console.log(newUser);
-      const res = await userService.editUser(
-        "3464d541-0db9-4df0-ab13-42700250533c",
-        { address: "trang" }
-      );
+      const res = await userService.editProfile({
+        active: 1,
+        address: "somewhere",
+        datebirth: undefined,
+        email: "user@gmail.com",
+        firstName: "fdsafs",
+        gender: 0,
+        id: "aaae5739-251c-469b-aeee-4246611feb3e",
+        lastName: "fsafdsa",
+        password: "",
+        username: "user5",
+      });
       console.log(res);
     } catch (e) {
       console.log(e);
