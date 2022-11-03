@@ -5,7 +5,7 @@ const API_URL = "http://localhost:10004/quizPractice/";
 
 class QuestionService {
   getListQuestion() {
-    return axios.get(API_URL + "api/getlistquestion", {
+    return axios.get(API_URL + "api/getallquestion", {
       headers: authHeader(),
     });
   }

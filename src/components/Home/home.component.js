@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const styles = {
-    btn: "bg-green-500 text-white shadow-lg rounded-md p-2 shadow-indigo-500/40 btn",
+    btn: "bg-green-400 text-white shadow-md rounded-md p-2 shadow-indigo-500/40 btn",
   };
   return (
     <div className="home-container flex items-center flex-col">

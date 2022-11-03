@@ -119,7 +119,7 @@ class EditQuizManager extends Component {
     return (
       <div className="container">
         <div className="title">
-          <h2>Edit User</h2>
+          <h2>Edit Quiz</h2>
         </div>
         <Form
           ref={this.formRef}

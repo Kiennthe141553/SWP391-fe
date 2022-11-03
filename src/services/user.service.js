@@ -15,7 +15,7 @@ class UserService {
 
   editProfile(payload) {
     console.log(authHeader());
-    return axios.put(API_URL + `api/myProfile`, payload, {
+    return axios.post(API_URL + `api/editProfile`, payload, {
       headers: authHeader(),
     });
   }
