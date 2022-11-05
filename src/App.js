@@ -184,28 +184,28 @@ class App extends Component {
             </Link>
           ) : (
             <div className="navbar-nav ml-auto flex items-center">
-              <li className="nav-item">
+              <li className="nav-item transition ease-in-out scale-button">
                 <Link
                   to={"/blog"}
-                  className="p-2 text-gray-200 rounded-lg bg-blue-600 hover:text-gray-200 hover:bg-blue-800 "
+                  className="p-2 text-white rounded-lg bg-blue-500 hover:bg-blue-600 "
                 >
                   Blog
                 </Link>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item transition ease-in-out scale-button">
                 <Link
                   to={"/login"}
-                  className="p-2 text-gray-200 rounded-lg bg-blue-600 hover:text-gray-200 hover:bg-blue-800 "
+                  className="p-2 text-white rounded-lg bg-blue-500 hover:bg-blue-600"
                 >
                   Login
                 </Link>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item  transition ease-in-out scale-button">
                 <Link
                   to={"/register"}
-                  className="p-2 text-gray-200 border border-gray-800 rounded-lg hover:text-gray-400 "
+                  className="p-2 text-white border bg-green-500 rounded-lg hover:bg-green-600"
                 >
                   Register
                 </Link>
