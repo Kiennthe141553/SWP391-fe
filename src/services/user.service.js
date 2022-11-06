@@ -14,7 +14,6 @@ class UserService {
   }
 
   editProfile(payload) {
-    console.log(authHeader());
     return axios.post(API_URL + `api/editProfile`, payload, {
       headers: authHeader(),
     });
@@ -45,12 +44,9 @@ class UserService {
   }
 
   editUser(id, payload) {
-    return (
-      axios.put(API_URL + `api/user/${id}`, payload),
-      {
-        headers: authHeader(),
-      }
-    );
+    return axios.put(API_URL + `api/user/${id}`, payload, {
+      headers: authHeader(),
+    });
   }
 }
 

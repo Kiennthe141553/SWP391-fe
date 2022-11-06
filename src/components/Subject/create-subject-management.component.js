@@ -10,7 +10,6 @@ import "./subject.css";
 export default class AddSubjectManagement extends Component {
   constructor(props) {
     super(props);
-
     this.state = {};
   }
 

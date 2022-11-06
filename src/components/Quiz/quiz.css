@@ -11,3 +11,47 @@ input::placeholder,
 .ant-input-number-in-form-item {
     width: 100%;
 }
+.ant-radio-group.ant-radio-group-outline {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.overflow-y-scroll {
+    height: fit-content !important;
+}
+
+.head-list-answer {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ant-form-item-control-input {
+    margin-left: 20px;
+}
+
+.ant-form-item-label {
+    font-size: 16px;
+    font-weight: bold;
+    width: fit-content;
+    margin-left: 10px;
+}
+
+.head-ques {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.body-ques {
+    font-size: 16px;
+
+}
+
+.ant-radio-wrapper-in-form-item {
+    margin-bottom: 10px;
+}
+
+.button-submit-answer .ant-form-item-control {
+    margin-left: 10px;
+}

@@ -5,7 +5,7 @@ import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import "../../styles/tailwind.css";
-
+import moment from "moment";
 import { Form, Input, Button, Radio, DatePicker } from "antd";
 import ".././style.css";
 import "./user.css";
@@ -66,6 +66,7 @@ class EditUserAdmin extends Component {
 
     UserService.editUser(id, param)
       .then(() => {
+        console.log("run");
         this.props.history.push(`/list_user_admin`);
       })
       .catch((error) => {
@@ -92,7 +93,6 @@ class EditUserAdmin extends Component {
       lastName: dataDetail?.lastName,
       active: dataDetail?.active,
     };
-
 
     return (
       <div className="container">
@@ -128,7 +128,10 @@ class EditUserAdmin extends Component {
             name="birthDate"
             className="flex items-center"
           >
-            <DatePicker placeholder={dataDetail?.birthDate} picker="week" />
+            <DatePicker
+              placeholder={moment(dataDetail?.birthDate).format("MM/DD/YYYY")}
+              picker="week"
+            />
           </Form.Item>
           <Form.Item
             label="First Name"

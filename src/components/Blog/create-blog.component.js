@@ -84,6 +84,14 @@ export default class AddBlog extends Component {
             <Input />
           </Form.Item>
 
+          <Form.Item
+            label="Create By"
+            name="createdBy"
+            className="flex items-center"
+          >
+            <Input />
+          </Form.Item>
+
           <Form.Item {...buttonItemLayout}>
             <Button type="primary" htmlType="submit">
               Submit

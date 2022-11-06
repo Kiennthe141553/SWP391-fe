@@ -65,23 +65,23 @@ class EditQuizManager extends Component {
   };
 
   onFinish = (values) => {
-    const { id } = this.props.match.params;
+
     const param = {
       code: values.code || this.state.dataDetail?.code,
       subjectId: values.subjectId || this.state.dataDetail?.subjectId,
       description: values.description || this.state.dataDetail?.description,
       name: values.name || this.state.dataDetail?.name,
       rating: values.rating || this.state.dataDetail?.rating,
-      deleted: this.state.dataDetail?.deleted,
+      deleted: this.state.dataDetail?.deleted || 0,
       id: this.state.dataDetail?.id,
-      totalQuestions:
-        values.totalQuestions || this.state.dataDetail?.totalQuestions,
+      totalQuestions: this.state.dataDetail?.totalQuestions,
       userId: this.state.dataDetail?.userId,
     };
 
-    QuizService.editQuiz(id, param)
+    QuizService.editQuiz(param)
       .then(() => {
         this.props.history.push(`/list_quiz_management`);
+        console.log("run");
       })
       .catch((error) => {
         console.log(error);

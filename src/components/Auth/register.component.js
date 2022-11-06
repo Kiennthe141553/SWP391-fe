@@ -102,6 +102,7 @@ export default class Register extends Component {
         this.state.lastname
       ).then(
         (response) => {
+          this.props.history.push("/login");
           this.setState({
             message: response.data.message,
             successful: true,

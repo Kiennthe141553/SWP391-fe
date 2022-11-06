@@ -10,6 +10,16 @@ class QuestionService {
     });
   }
 
+  getListAnswerQues(params) {
+    return axios.get(
+      API_URL + "api/getlistquestion",
+      { params },
+      {
+        headers: authHeader(),
+      }
+    );
+  }
+
   getDetailQuestion(id) {
     return axios.get(API_URL + `api/getquestion/${id}`, {
       headers: authHeader(),
@@ -29,12 +39,9 @@ class QuestionService {
   }
 
   editQuestion(payload) {
-    return (
-      axios.post(API_URL + `api/editquestion`, payload),
-      {
-        headers: authHeader(),
-      }
-    );
+    return axios.post(API_URL + `api/editquestion`, payload, {
+      headers: authHeader(),
+    });
   }
 }
 

@@ -4,7 +4,7 @@ import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-
+import moment from "moment";
 import "../../styles/tailwind.css";
 
 import { Form, Input, Button, InputNumber, DatePicker } from "antd";
@@ -54,17 +54,11 @@ class EditBlogManager extends Component {
   onFinish = (values) => {
     const { id } = this.props.match.params;
     const param = {
-      authorID: this.state.dataDetail?.authorID,
       contentText: values.contentText || this.state.dataDetail?.contentText,
-      createdBy: values.createdBy || this.state.dataDetail?.createdBy,
-      createdDate: values.createdDate || this.state.dataDetail?.createdDate,
+
       imageID: values.imageID || this.state.dataDetail?.imageID,
+
       title: values.title || this.state.dataDetail?.title,
-      updatedBy: values.updatedBy || this.state.dataDetail?.updatedBy,
-      updatedDate: values.updatedDate || this.state.dataDetail?.updatedDate,
-      isDeleted: 0,
-      id: id,
-      version: values.version || this.state.dataDetail?.version,
     };
 
     BlogService.editBlog(id, param)
@@ -120,47 +114,13 @@ class EditBlogManager extends Component {
           >
             <TextArea placeholder={dataDetail?.contentText} rows={4} />
           </Form.Item>
-          <Form.Item
-            label="Create By"
-            name="createdBy"
-            className={styles.input_container}
-          >
-            <Input placeholder={dataDetail?.createdBy} />
-          </Form.Item>
-          <Form.Item
-            label="Create Date"
-            name="createdDate"
-            className={styles.input_container}
-          >
-            <DatePicker placeholder={dataDetail?.createdDate} picker="week" />
-          </Form.Item>
-          <Form.Item
-            label="Update By"
-            name="updatedBy"
-            className={styles.input_container}
-          >
-            <Input placeholder={dataDetail?.updatedBy} />
-          </Form.Item>
-          <Form.Item
-            label="Update Date"
-            name="updatedDate"
-            className={styles.input_container}
-          >
-            <DatePicker placeholder={dataDetail?.updatedDate} picker="week" />
-          </Form.Item>
+
           <Form.Item
             label="Image Link"
             name="imageID"
             className={styles.input_container}
           >
             <Input placeholder={dataDetail?.imageID} />
-          </Form.Item>
-          <Form.Item
-            label="Version"
-            name="version"
-            className={styles.input_container}
-          >
-            <InputNumber placeholder={dataDetail?.version} />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>

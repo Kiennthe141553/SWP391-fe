@@ -17,7 +17,7 @@ class DetailSubjectUser extends Component {
 
   constructor(props) {
     super(props);
-    this.onShowSizeChange = this.onShowSizeChange.bind(this);
+
     this.onShowChange = this.onShowChange.bind(this);
     this.state = {
       data: [],
@@ -26,9 +26,7 @@ class DetailSubjectUser extends Component {
     };
   }
 
-  onShowSizeChange(current, pageSize) {
-    console.log(current, pageSize);
-  }
+
 
   onShowChange(current) {
     const { id } = this.props.match.params;
@@ -126,8 +124,6 @@ class DetailSubjectUser extends Component {
           <div className="flex justify-center">
             <Pagination
               className=""
-              showSizeChanger
-              onShowSizeChange={this.onShowSizeChange}
               defaultCurrent={1}
               total={total}
               onChange={this.onShowChange}

@@ -30,6 +30,8 @@ import DetailManageQuiz from "./components/Quiz/detail-quiz-managenent.component
 import AddQuizManagement from "./components/Quiz/create-quiz-managenent.component";
 import EditQuiz from "./components/Quiz/edit-quiz.component";
 
+import TakeSelectedQuiz from "./components/Quiz/take-quiz.component";
+
 import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
 import Detail from "./components/ManageUser/detail-user-admin.component";
 import EditUser from "./components/ManageUser/edit-user-admin.component";
@@ -378,6 +380,8 @@ class App extends Component {
                 />
                 <Route path="/add_question" component={AddQuestionManagement} />
                 <Route path="/edit_question/:id" component={EditQuestion} />
+
+                <Route path="/detail_quiz/:id" component={TakeSelectedQuiz} />
 
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />
