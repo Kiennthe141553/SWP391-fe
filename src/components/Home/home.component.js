@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   const styles = {
-    btn: "bg-green-400 text-white shadow-md rounded-md p-2 shadow-indigo-500/40 btn",
+    btn: "bg-green-400 text-white rounded-md p-2 home-btn",
   };
   return (
     <div className="home-container flex items-center flex-col">
@@ -30,7 +30,7 @@ export default function Home() {
               <button className={styles.btn}>Get started</button>
             </Link>
             <Link to={"/login"} className="nav-link">
-              <button className=" text-gray-800 border-2 border-black p-2 mt-4 shadow-sm rounded-xl btn">
+              <button className="bg-blue-400 text-white p-2 mt-4 rounded-md home-btn">
                 I already have an account
               </button>
             </Link>

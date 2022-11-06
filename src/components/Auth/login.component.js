@@ -114,7 +114,7 @@ export default class Login extends Component {
               <Input
                 type="text"
                 placeholder="Username"
-                className="form-control"
+                className="form-control inp"
                 name="username"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
@@ -127,7 +127,7 @@ export default class Login extends Component {
               <Input
                 placeholder="Password"
                 type="password"
-                className="form-control"
+                className="form-control inp"
                 name="password"
                 value={this.state.password}
                 onChange={this.onChangePassword}
