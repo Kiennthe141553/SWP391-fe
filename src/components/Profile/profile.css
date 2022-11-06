@@ -1,6 +1,5 @@
 textarea::placeholder,
-input::placeholder,
-.ant-select-selection-placeholder {
+input::placeholder {
     color: black !important;
 }
 
@@ -10,4 +9,8 @@ input::placeholder,
 
 .ant-input-number-in-form-item {
     width: 100%;
+}
+
+.button-edit {
+    margin-left: 40px;
 }

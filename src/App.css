@@ -5,6 +5,7 @@ label {
 
 .header {
   height: 7vh;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .main-page {
@@ -18,7 +19,7 @@ label {
 
 .col-menu {
   /* background-color: rgb(222, 236, 254); */
-  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .col-menu .menu .contain-menu .nav-item {
@@ -109,4 +110,19 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+}
+
+.translate-card:hover {
+  transform: translateY(-5px);
+}
+
+.scale-button:hover {
+  transform: scale(1.1);
+}
+
+.slider {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 160px;
 }

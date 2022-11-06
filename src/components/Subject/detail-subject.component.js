@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { Pagination } from "antd";
 import QuizService from "../../services/quiz.service";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+
 import "../../styles/tailwind.css";
 class DetailSubjectUser extends Component {
   static propTypes = {
@@ -17,7 +17,7 @@ class DetailSubjectUser extends Component {
 
   constructor(props) {
     super(props);
-    this.onShowSizeChange = this.onShowSizeChange.bind(this);
+
     this.onShowChange = this.onShowChange.bind(this);
     this.state = {
       data: [],
@@ -26,9 +26,7 @@ class DetailSubjectUser extends Component {
     };
   }
 
-  onShowSizeChange(current, pageSize) {
-    console.log(current, pageSize);
-  }
+
 
   onShowChange(current) {
     const { id } = this.props.match.params;
@@ -86,21 +84,17 @@ class DetailSubjectUser extends Component {
     const total = listQuiz.length + 1;
     return (
       <div className="container">
-        <div className="title">
-          <h2 className="text-2xl">Detail Subject: {data?.code}</h2>
+        <div className="mt-2">
+          <h2 className="mb-1 text-2xl font-bold">
+            Detail Subject: {data?.name} - {data?.code}
+          </h2>
         </div>
         {userReady ? (
-          <div>
-            <p>
-              <strong>Code:</strong> {data?.code}
-            </p>
-            <p>
-              <strong>Name:</strong> {data?.name}
-            </p>
-            <p>
+          <ul className="w-10/12 mt-6 mx-auto p-2 rounded-sm text-gray-600  bg-gray-100">
+            <li>
               <strong>Description:</strong> {data?.description}
-            </p>
-          </div>
+            </li>
+          </ul>
         ) : null}
 
         <div className=" mt-2">
@@ -108,10 +102,10 @@ class DetailSubjectUser extends Component {
             <p className="font-bold text-xl">List Quiz</p>
           </div>
 
-          <div className="">
+          <div className="overflow-y-scroll" style={{ height: "650px" }}>
             {listQuiz?.map((item) => (
               <a href={`/detail_quiz/${item.id}`}>
-                <div className="bg-gray-200 rounded-lg p-2 m-2 cursor-pointer">
+                <div className="bg-gray-200 rounded-lg p-2 m-4 cursor-pointer transition ease-in duration-100 hover:shadow-md translate-card">
                   <div>
                     <div className="font-bold text-xl text-gray-800">
                       {item.name}
@@ -127,14 +121,14 @@ class DetailSubjectUser extends Component {
               </a>
             ))}
           </div>
-
-          <Pagination
-            showSizeChanger
-            onShowSizeChange={this.onShowSizeChange}
-            defaultCurrent={1}
-            total={total}
-            onChange={this.onShowChange}
-          />
+          <div className="flex justify-center">
+            <Pagination
+              className=""
+              defaultCurrent={1}
+              total={total}
+              onChange={this.onShowChange}
+            />
+          </div>
         </div>
       </div>
     );

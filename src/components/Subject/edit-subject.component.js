@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 import "../../styles/tailwind.css";
 
-import { Form, Input, Button, InputNumber, DatePicker } from "antd";
+import { Form, Input, Button } from "antd";
 import ".././style.css";
 
 import "./subject.css";
@@ -54,24 +54,17 @@ class EditSubjectManager extends Component {
   };
 
   onFinish = (values) => {
+    console.log("object");
     const { id } = this.props.match.params;
     const param = {
       code: values.code || this.state.dataDetail?.code,
-      createdBy: values.createdBy || this.state.dataDetail?.createdBy,
-      createdDate: values.createdDate || this.state.dataDetail?.createdDate,
       description: values.description || this.state.dataDetail?.description,
       name: values.name || this.state.dataDetail?.name,
-      updatedBy: values.updatedBy || this.state.dataDetail?.updatedBy,
-      updatedDate: values.updatedDate || this.state.dataDetail?.updatedDate,
-      isDeleted: this.state.dataDetail?.isDeleted,
-      id: this.state.dataDetail?.id,
-      userId: this.state.dataDetail?.userId,
-      version: values.version || this.state.dataDetail?.version,
     };
 
-    SubjectService.EditSubject(id, param)
+    SubjectService.editSubject(id, param)
       .then(() => {
-        this.props.history.push(`/list_blog_management`);
+        this.props.history.push(`/list_subject_management`);
       })
       .catch((error) => {
         console.log(error);
@@ -88,22 +81,7 @@ class EditSubjectManager extends Component {
       },
     };
 
-    const initialValues = {
-      code: dataDetail?.code,
-      name: dataDetail?.name,
-      description: dataDetail?.description,
-      createdBy: dataDetail?.createdBy,
-      createdDate: dataDetail?.createdDate,
-      updatedBy: dataDetail?.updatedBy,
-      updatedDate: dataDetail?.updatedDate,
-      version: dataDetail?.version,
-    };
-
     const { TextArea } = Input;
-
-    const styles = {
-      input_container: "flex items-center",
-    };
 
     return (
       <div className="container">
@@ -116,7 +94,6 @@ class EditSubjectManager extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
-          initialValues={initialValues}
         >
           <Form.Item label="Code" name="code" className="flex items-center">
             <Input placeholder={dataDetail?.code} />
@@ -132,45 +109,6 @@ class EditSubjectManager extends Component {
             className="flex items-center"
           >
             <TextArea rows={4} placeholder={dataDetail?.description} />
-          </Form.Item>
-
-          <Form.Item
-            label="Create By"
-            name="createdBy"
-            className={styles.input_container}
-          >
-            <Input placeholder={dataDetail?.createdBy} />
-          </Form.Item>
-          <Form.Item
-            label="Create Date"
-            name="createdDate"
-            className={styles.input_container}
-          >
-            <DatePicker placeholder={dataDetail?.createdDate} picker="week" />
-          </Form.Item>
-
-          <Form.Item
-            label="Update By"
-            name="updatedBy"
-            className={styles.input_container}
-          >
-            <Input placeholder={dataDetail?.updatedBy} />
-          </Form.Item>
-
-          <Form.Item
-            label="Update Date"
-            name="updatedDate"
-            className={styles.input_container}
-          >
-            <DatePicker placeholder={dataDetail?.updatedDate} picker="week" />
-          </Form.Item>
-
-          <Form.Item
-            label="Version"
-            name="version"
-            className={styles.input_container}
-          >
-            <InputNumber placeholder={dataDetail?.version} />
           </Form.Item>
 
           <Form.Item {...buttonItemLayout}>

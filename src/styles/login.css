@@ -20,7 +20,7 @@
 
 .login_img {
   width: 50%;
-  height: 90%;
+  height: 80%;
   border-radius: 10px;
   object-fit: cover;
   z-index: 1;
@@ -88,4 +88,8 @@
 
 .btn {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.inp::placeholder {
+  color: rgba(0, 0, 0, 0.4) !important;
 }

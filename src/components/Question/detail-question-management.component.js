@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
 import "../../styles/tailwind.css";
 import questionService from "../../services/question.service";
 class DetailQuestion extends Component {
@@ -26,9 +25,7 @@ class DetailQuestion extends Component {
     questionService
       .getDetailQuestion(id)
       .then((response) => {
-        console.log(response);
         this.setState({ data: response.data, userReady: true });
-        console.log(this.state.data);
       })
       .catch((error) => {
         console.log(error);
@@ -49,24 +46,31 @@ class DetailQuestion extends Component {
         {userReady ? (
           <div>
             <p>
-              <strong>Code:</strong> {data?.code}
+              <strong>Id:</strong> {data?.id}
             </p>
             <p>
-              <strong>Name:</strong> {data?.name}
+              <strong>Quiz Id:</strong> {data?.quiztId}
             </p>
             <p>
-              <strong>Description:</strong> {data?.description}
+              <strong>questionText:</strong> {data?.questionText}
             </p>
             <p>
-              <strong>Subject:</strong> {data?.subjectId}
+              <strong>Answer 1:</strong> {data?.answer1}
+            </p>
+            <p>
+              <strong>Answer 2:</strong> {data?.answer2}
             </p>
 
             <p>
-              <strong>Rating:</strong> {data?.rating}
+              <strong>Answer 3:</strong> {data?.answer3}
             </p>
 
             <p>
-              <strong>Total Question:</strong> {data?.totalQuestion}
+              <strong>Correct Answer</strong> {data?.rightAnswer}
+            </p>
+
+            <p>
+              <strong>Total Answer:</strong> {data?.totalAnswer}
             </p>
           </div>
         ) : null}

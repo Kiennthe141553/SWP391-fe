@@ -29,12 +29,9 @@ class SubjectService {
   }
 
   editSubject(id, payload) {
-    return (
-      axios.put(API_URL + `api/subjects/${id}`, payload),
-      {
-        headers: authHeader(),
-      }
-    );
+    return axios.put(API_URL + `api/subjects/${id}`, payload, {
+      headers: authHeader(),
+    });
   }
 }
 

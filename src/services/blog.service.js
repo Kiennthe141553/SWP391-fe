@@ -29,12 +29,9 @@ class BlogService {
   }
 
   editBlog(id, payload) {
-    return (
-      axios.put(API_URL + `api/blogs/${id}`, payload),
-      {
-        headers: authHeader(),
-      }
-    );
+    return axios.put(API_URL + `api/blogs/${id}`, payload, {
+      headers: authHeader(),
+    });
   }
 }
 

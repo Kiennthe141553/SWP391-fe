@@ -38,13 +38,10 @@ class QuizService {
     });
   }
 
-  editQuiz(id, payload) {
-    return (
-      axios.put(API_URL + `api/editquizt/${id}`, payload),
-      {
-        headers: authHeader(),
-      }
-    );
+  editQuiz(payload) {
+    return axios.post(API_URL + `api/editquizt`, payload, {
+      headers: authHeader(),
+    });
   }
 }
 

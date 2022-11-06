@@ -29,13 +29,12 @@ export default class AddBlog extends Component {
   };
 
   onFinish = (values) => {
-    console.log(values);
+
     BlogService.createBlog(values)
       .then(() => {
         this.props.history.push(`/list_blog_management`);
       })
       .catch((error) => {
-        console.log(error);
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
@@ -82,6 +81,14 @@ export default class AddBlog extends Component {
             <Input />
           </Form.Item>
           <Form.Item label="Title" name="title" className="flex items-center">
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            label="Create By"
+            name="createdBy"
+            className="flex items-center"
+          >
             <Input />
           </Form.Item>
 

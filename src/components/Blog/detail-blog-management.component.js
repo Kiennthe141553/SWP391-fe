@@ -25,12 +25,12 @@ class DetailBlog extends Component {
     const { id } = this.props.match.params;
     BlogService.getDetailBlog(id)
       .then((response) => {
-        console.log(response);
+   
         this.setState({ data: response.data, userReady: true });
-        console.log(this.state.data);
+  
       })
       .catch((error) => {
-        console.log(error);
+
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
@@ -39,7 +39,7 @@ class DetailBlog extends Component {
 
   render() {
     const { data, userReady } = this.state;
-    console.log(data);
+
     return (
       <div className="container">
         <div className="title">

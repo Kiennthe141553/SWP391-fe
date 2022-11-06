@@ -30,6 +30,7 @@ import DetailManageQuiz from "./components/Quiz/detail-quiz-managenent.component
 import AddQuizManagement from "./components/Quiz/create-quiz-managenent.component";
 import EditQuiz from "./components/Quiz/edit-quiz.component";
 
+import TakeSelectedQuiz from "./components/Quiz/take-quiz.component";
 
 import ListUserAdmin from "./components/ManageUser/list-user-admin.component";
 import Detail from "./components/ManageUser/detail-user-admin.component";
@@ -156,13 +157,13 @@ class App extends Component {
 
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-black header shadow-sm">
+        <nav className="navbar navbar-expand navbar-dark bg-gray-100 header shadow-md text-black">
           <Link
             to={"/"}
             className="navbar-brand"
             onClick={this.resetModuleSelected}
           >
-            English Practice Quizzz
+            <img src="/quizicon.png" alt="logo" className="w-8" />
           </Link>
           <div className="navbar-nav mr-auto"></div>
 
@@ -185,28 +186,28 @@ class App extends Component {
             </Link>
           ) : (
             <div className="navbar-nav ml-auto flex items-center">
-              <li className="nav-item">
+              <li className="nav-item transition ease-in-out scale-button">
                 <Link
                   to={"/blog"}
-                  className="p-2 text-gray-200 rounded-lg bg-blue-600 hover:text-gray-200 hover:bg-blue-800 "
+                  className="p-2 text-white rounded-lg bg-blue-500 hover:bg-blue-600 "
                 >
                   Blog
                 </Link>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item transition ease-in-out scale-button">
                 <Link
                   to={"/login"}
-                  className="p-2 text-gray-200 rounded-lg bg-blue-600 hover:text-gray-200 hover:bg-blue-800 "
+                  className="p-2 text-white rounded-lg bg-blue-500 hover:bg-blue-600"
                 >
                   Login
                 </Link>
               </li>
 
-              <li className="nav-item">
+              <li className="nav-item  transition ease-in-out scale-button">
                 <Link
                   to={"/register"}
-                  className="p-2 text-gray-200 border border-gray-800 rounded-lg hover:text-gray-400 "
+                  className="p-2 text-white border bg-green-500 rounded-lg hover:bg-green-600"
                 >
                   Register
                 </Link>
@@ -379,6 +380,8 @@ class App extends Component {
                 />
                 <Route path="/add_question" component={AddQuestionManagement} />
                 <Route path="/edit_question/:id" component={EditQuestion} />
+
+                <Route path="/detail_quiz/:id" component={TakeSelectedQuiz} />
 
                 <Route path="/change-password" component={ChangePassword} />
                 <Route path="/chart" component={Chart} />

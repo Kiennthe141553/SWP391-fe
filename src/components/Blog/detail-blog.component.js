@@ -5,7 +5,6 @@ import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 
-
 class DetailBlogUser extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -25,12 +24,9 @@ class DetailBlogUser extends Component {
     const { id } = this.props.match.params;
     BlogService.getDetailBlog(id)
       .then((response) => {
-        console.log(response);
         this.setState({ data: response.data, userReady: true });
-        console.log(this.state.data);
       })
       .catch((error) => {
-        console.log(error);
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
@@ -39,14 +35,14 @@ class DetailBlogUser extends Component {
 
   render() {
     const { data, userReady } = this.state;
-    console.log(data);
+
     return (
-      <div className="container">
+      <div className="">
         <div className="title"></div>
         {userReady ? (
-          <div className="">
+          <div className="overflow-scroll p-4" style={{ height: "93vh" }}>
             {/* title */}
-            <div className="text-center text-3xl font-semibold mb-10">
+            <div className="text-center text-3xl font-semibold mb-10 mt-4">
               {data?.title}
             </div>
             {/* author */}

@@ -4,7 +4,7 @@ import SubjectService from "../../services/subject.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+
 import "../../styles/tailwind.css";
 class DetailSubject extends Component {
   static propTypes = {
@@ -39,11 +39,10 @@ class DetailSubject extends Component {
 
   render() {
     const { data, userReady } = this.state;
-    console.log(data);
     return (
       <div className="container">
-        <div className="title">
-          <h2 className="text-2xl">Detail Subject: {data?.code}</h2>
+        <div className="text-gray-700">
+          <h2 className="text-2xl">Detail Subject: {data?.name}</h2>
         </div>
         {userReady ? (
           <div>
@@ -58,18 +57,6 @@ class DetailSubject extends Component {
             </p>
             <p>
               <strong>Create By:</strong> {data?.createdBy}
-            </p>
-            <p>
-              <strong>Create Date:</strong> {getDateTime(data?.createdDate)}
-            </p>
-            <p>
-              <strong>Update By:</strong> {data?.updatedBy}
-            </p>
-            <p>
-              <strong>Update Date:</strong> {getDateTime(data?.updatedDate)}
-            </p>
-            <p>
-              <strong>Version:</strong> {data?.version}
             </p>
           </div>
         ) : null}

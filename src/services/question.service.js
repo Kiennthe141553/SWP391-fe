@@ -5,9 +5,19 @@ const API_URL = "http://localhost:10004/quizPractice/";
 
 class QuestionService {
   getListQuestion() {
-    return axios.get(API_URL + "api/getlistquestion", {
+    return axios.get(API_URL + "api/getallquestion", {
       headers: authHeader(),
     });
+  }
+
+  getListAnswerQues(params) {
+    return axios.get(
+      API_URL + "api/getlistquestion",
+      { params },
+      {
+        headers: authHeader(),
+      }
+    );
   }
 
   getDetailQuestion(id) {
@@ -28,13 +38,10 @@ class QuestionService {
     });
   }
 
-  editQuestion(id, payload) {
-    return (
-      axios.post(API_URL + `api/editquestion/${id}`, payload),
-      {
-        headers: authHeader(),
-      }
-    );
+  editQuestion(payload) {
+    return axios.post(API_URL + `api/editquestion`, payload, {
+      headers: authHeader(),
+    });
   }
 }
 

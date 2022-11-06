@@ -102,6 +102,7 @@ export default class Register extends Component {
         this.state.lastname
       ).then(
         (response) => {
+          this.props.history.push("/login");
           this.setState({
             message: response.data.message,
             successful: true,
@@ -144,7 +145,7 @@ export default class Register extends Component {
                   <Input
                     placeholder="First Name"
                     type="text"
-                    className="form-control"
+                    className="form-control inp"
                     name="firstname"
                     value={this.state.firstname}
                     onChange={this.onChangeFirstName}
@@ -155,7 +156,7 @@ export default class Register extends Component {
                   <Input
                     placeholder="Last Name"
                     type="text"
-                    className="form-control"
+                    className="form-control inp"
                     name="lastname"
                     value={this.state.lastname}
                     onChange={this.onChangeLastName}
@@ -166,7 +167,7 @@ export default class Register extends Component {
                   <Input
                     placeholder="Username"
                     type="text"
-                    className="form-control"
+                    className="form-control inp"
                     name="username"
                     value={this.state.username}
                     onChange={this.onChangeUsername}
@@ -177,7 +178,7 @@ export default class Register extends Component {
                   <Input
                     placeholder="Email"
                     type="text"
-                    className="form-control"
+                    className="form-control inp"
                     name="email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
@@ -188,7 +189,7 @@ export default class Register extends Component {
                   <Input
                     placeholder="Password"
                     type="password"
-                    className="form-control"
+                    className="form-control inp"
                     name="password"
                     value={this.state.password}
                     onChange={this.onChangePassword}
