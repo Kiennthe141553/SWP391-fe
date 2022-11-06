@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Form, Radio, Button, DatePicker } from "antd";
+import { Form, Radio, Button } from "antd";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
-import { Pagination } from "antd";
+
 import QuizService from "../../services/quiz.service";
 import QuestionService from "../../services/question.service";
 import { withRouter } from "react-router-dom";
@@ -71,8 +71,7 @@ class TakeQuiz extends Component {
         offset: 4,
       },
     };
-    const { data, quesNum, listQues } = this.state;
-    const total = listQues.length;
+    const { data, listQues } = this.state;
 
     return (
       <div className="container">

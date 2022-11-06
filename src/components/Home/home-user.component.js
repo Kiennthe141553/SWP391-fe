@@ -5,7 +5,7 @@ import { Carousel } from "antd";
 import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
-import Moment from "react-moment";
+
 const contentStyle = {
   color: "#fff",
   lineHeight: "160px",

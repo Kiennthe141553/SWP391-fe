@@ -4,10 +4,10 @@ import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
-import moment from "moment";
+
 import "../../styles/tailwind.css";
 
-import { Form, Input, Button, InputNumber, DatePicker } from "antd";
+import { Form, Input, Button } from "antd";
 import ".././style.css";
 
 import "./subject.css";
@@ -82,10 +82,6 @@ class EditSubjectManager extends Component {
     };
 
     const { TextArea } = Input;
-
-    const styles = {
-      input_container: "flex items-center",
-    };
 
     return (
       <div className="container">
