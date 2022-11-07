@@ -43,6 +43,12 @@ class QuizService {
       headers: authHeader(),
     });
   }
+
+  submitResult(id, payload) {
+    return axios.post(API_URL + `api/returnanswer/${id}`, payload, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new QuizService();

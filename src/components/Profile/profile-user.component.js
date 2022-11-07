@@ -56,10 +56,10 @@ class ProfileDetail extends Component {
       id: this.state.infoUser?.id,
       isDeleted: this.state.infoUser?.isDeleted,
       lastName: values.lastName | this.state.infoUser?.lastName,
-      password: this.state.infoUser?.password,
+      password: '',
       updatedBy: this.state.infoUser?.updatedBy,
       updatedDate: this.state.infoUser?.updatedDate,
-      username: values.username | this.state.infoUser?.username,
+      username: '',
       version: this.state.infoUser?.version,
     };
     userService
@@ -115,13 +115,6 @@ class ProfileDetail extends Component {
           onFinish={this.onFinish}
           disabled={!isEdit}
         >
-          <Form.Item
-            label="User Name"
-            name="username"
-            className="flex items-center"
-          >
-            <Input placeholder={infoUser?.username} />
-          </Form.Item>
           <Form.Item
             label="First Name"
             name="firstName"
