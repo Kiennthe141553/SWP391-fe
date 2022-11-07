@@ -55,3 +55,10 @@ input::placeholder,
 .button-submit-answer .ant-form-item-control {
     margin-left: 10px;
 }
+.detail-result .background-green {
+    background-color: #a4cf97b8;
+}
+
+.detail-result .background-red {
+    background-color: #cd616bb8;
+}
