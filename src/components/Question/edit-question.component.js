@@ -100,6 +100,7 @@ class EditQuestionManager extends Component {
       totalAnswer: this.state.dataDetail?.totalAnswer,
       quiztsubjectId: this.state.dataDetail?.quiztsubjectId,
       userId: this.state.dataDetail?.userId,
+      rightAnswer: values.rightAnswer || this.state.dataDetail?.rightAnswer,
     };
 
     questionService
