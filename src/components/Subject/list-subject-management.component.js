@@ -5,7 +5,7 @@ import SubjectService from "../../services/subject.service";
 import AuthService from "../../services/auth.service";
 import EventBus from "../../common/EventBus";
 import { Redirect } from "react-router-dom";
-import { getDateTime } from "../../helper/datetime";
+import moment from "moment";
 import ".././style.css";
 import "../../styles/tailwind.css";
 import { Input } from "antd";
@@ -111,7 +111,9 @@ export default class ListSubjectManagement extends Component {
         title: "Create Date",
         dataIndex: "createdDate",
         key: "createdDate",
-        render: (text) => <p>{getDateTime(text)}</p>,
+        render: (text) => (
+          <p>{text ? moment(text).format("MM/DD/YYYY") : ""}</p>
+        ),
       },
       {
         title: "Action",
@@ -146,7 +148,7 @@ export default class ListSubjectManagement extends Component {
         const currValue = val;
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
-        const filteredData = this.state.dataSource.filter((entry) => {
+        const filteredData = data.filter((entry) => {
           return String(entry.name).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });

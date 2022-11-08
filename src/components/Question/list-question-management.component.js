@@ -155,7 +155,7 @@ export default class ListQuestionManagement extends Component {
         const currValue = val;
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
-        const filteredData = this.state.dataSource.filter((entry) => {
+        const filteredData = data.filter((entry) => {
           return String(entry.id).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });

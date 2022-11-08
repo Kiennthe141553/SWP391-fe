@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { getDateTime } from "../../helper/datetime";
 import "../../styles/tailwind.css";
+import moment from "moment";
 class DetailBlog extends Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
@@ -25,12 +26,9 @@ class DetailBlog extends Component {
     const { id } = this.props.match.params;
     BlogService.getDetailBlog(id)
       .then((response) => {
-   
         this.setState({ data: response.data, userReady: true });
-  
       })
       .catch((error) => {
-
         if (error.response && error.response.status === 401) {
           EventBus.dispatch("logout");
         }
@@ -64,13 +62,19 @@ class DetailBlog extends Component {
               <strong>Create By:</strong> {data?.createdBy}
             </p>
             <p>
-              <strong>Create Date:</strong> {getDateTime(data?.createdDate)}
+              <strong>Create Date:</strong>{" "}
+              {data.createdDate
+                ? moment(data?.createdDate).format("MM/DD/YYYY")
+                : ""}
             </p>
             <p>
               <strong>Update By:</strong> {data?.updatedBy}
             </p>
             <p>
-              <strong>Update Date:</strong> {getDateTime(data?.updatedDate)}
+              <strong>Update Date:</strong>
+              {data.updatedDate
+                ? moment(data?.updatedDate).format("MM/DD/YYYY")
+                : ""}
             </p>
             <p>
               <strong>Version:</strong> {data?.version}

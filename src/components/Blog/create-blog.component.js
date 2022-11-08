@@ -70,9 +70,7 @@ export default class AddBlog extends Component {
           >
             <TextArea rows={4} />
           </Form.Item>
-          <Form.Item label="ID" name="id" className="flex items-center">
-            <Input />
-          </Form.Item>
+
           <Form.Item
             label="Image"
             name="imageBase64"
