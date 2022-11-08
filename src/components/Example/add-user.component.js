@@ -38,7 +38,7 @@ export default class AddUser extends Component {
   }
 
   onReset = () => {
-    this.formRef.current.resetFields();
+    window.history.go(-1);
   };
 
   onFinish = (values) => {
@@ -104,7 +104,7 @@ export default class AddUser extends Component {
         <Form.Item {...buttonItemLayout}>
           <Button type="primary" htmlType="submit">Submit</Button>
           <Button htmlType="button" onClick={this.onReset}>
-            Reset
+            Back
           </Button>
         </Form.Item>
       </Form>
