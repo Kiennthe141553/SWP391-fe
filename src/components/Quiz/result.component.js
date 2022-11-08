@@ -54,12 +54,16 @@ export default class ResultQuiz extends Component {
           <div className="detail-result">
             {listMapResult.map((item, index) => (
               <div
-                className={item.correct ? "background-green" : "background-red"}
+                className={
+                  item.correct
+                    ? "bg-green-400 rounded-md"
+                    : "bg-red-400 rounded-md"
+                }
               >
-                <div className="rounded-lg p-2 m-4 cursor-pointer transition ease-in duration-100 hover:shadow-md translate-card">
+                <div className="p-2 m-4 cursor-pointer">
                   <div>
                     <div className="font-bold text-xl ">
-                      Ques {index + 1}: {item.questionText}
+                      Question {index + 1}: <p>{item.questionText}</p>
                     </div>
                     <div className="font-bold ">
                       Your answer: {item.yourAnswer}
@@ -75,12 +79,20 @@ export default class ResultQuiz extends Component {
             ))}
           </div>
           <div className="group-result-button">
-            <Button htmlType="button" onClick={this.onBack}>
+            <button
+              htmlType="button"
+              onClick={this.onBack}
+              className="ease-in-out transition p-2 translate-card rounded bg-blue-400 text-white mr-4 hover:shadow-md"
+            >
               Return Home
-            </Button>
-            <Button htmlType="button" onClick={this.onRetake}>
+            </button>
+            <button
+              htmlType="button"
+              onClick={this.onRetake}
+              className="transition ease-in-out p-2 translate-card rounded bg-green-400 text-white hover:shadow-md"
+            >
               Retake Quiz
-            </Button>
+            </button>
           </div>
         </div>
       </div>
