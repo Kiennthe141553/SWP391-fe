@@ -84,6 +84,7 @@ class TakeQuiz extends Component {
       },
     };
     const { data, listQues, showResult, dataResult } = this.state;
+    const { id } = this.props.match.params;
 
     return (
       <div className="container">
@@ -162,6 +163,7 @@ class TakeQuiz extends Component {
                 listResult={dataResult}
                 listAllQues={listQues}
                 history={this.props.history}
+                idQuiz={id}
               />
             </div>
           </div>

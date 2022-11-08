@@ -22,6 +22,11 @@ export default class ResultQuiz extends Component {
     this.props.history.push(`/`);
   };
 
+  onRetake = () => {
+    this.props.history.push(`/detail_quiz/${this.props.idQuiz}`);
+    window.location.reload();
+  };
+
   render() {
     const { listResult, listAllQues } = this.props;
 
@@ -69,10 +74,14 @@ export default class ResultQuiz extends Component {
               </div>
             ))}
           </div>
-
-          <Button htmlType="button" onClick={this.onBack}>
-            Return Home
-          </Button>
+          <div className="group-result-button">
+            <Button htmlType="button" onClick={this.onBack}>
+              Return Home
+            </Button>
+            <Button htmlType="button" onClick={this.onRetake}>
+              Retake Quiz
+            </Button>
+          </div>
         </div>
       </div>
     );
