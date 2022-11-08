@@ -55,7 +55,10 @@ class EditUserAdmin extends Component {
     const { id } = this.props.match.params;
 
     const isActive = values.active !== null ? values.active : this.state.dataDetail?.active
-
+    const isGender =
+      values.gender !== null
+        ? values.gender
+        : this.state.dataDetail?.gender || 1;
 
     const param = {
       active: isActive,
@@ -63,7 +66,7 @@ class EditUserAdmin extends Component {
       birthDate: values.birthDate || this.state.dataDetail?.birthDate,
       email: values.email || this.state.dataDetail?.email,
       firstName: values.firstName || this.state.dataDetail?.firstName,
-      gender: values.gender || this.state.dataDetail?.gender || 1,
+      gender: isGender,
       id: id,
       lastName: values.lastName || this.state.dataDetail?.lastName,
     };

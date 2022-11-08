@@ -56,7 +56,8 @@ class ProfileDetail extends Component {
       createdDate: this.state.infoUser?.createdDate,
       email: values.email | this.state.infoUser?.email,
       firstName: values.firstName | this.state.infoUser?.firstName,
-      gender: values.gender | this.state.infoUser?.gender,
+      gender:
+        values.gender !== null ? values.gender : this.state.infoUser?.gender,
       id: this.state.infoUser?.id,
       isDeleted: this.state.infoUser?.isDeleted,
       lastName: values.lastName | this.state.infoUser?.lastName,
