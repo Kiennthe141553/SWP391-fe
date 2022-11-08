@@ -17,8 +17,12 @@ class ProfileDetail extends Component {
   }
 
   componentDidMount() {
+    const usernameJson = JSON.parse(localStorage.getItem("username"));
+    const body = {
+      username: usernameJson,
+    };
     userService
-      .getProfile()
+      .getProfile(body)
       .then((response) => {
         console.log(response.data);
         this.setState({ infoUser: response.data, userReady: true });
@@ -62,11 +66,16 @@ class ProfileDetail extends Component {
       username: "",
       version: this.state.infoUser?.version,
     };
+
+    const usernameJson = JSON.parse(localStorage.getItem("username"));
+    const body = {
+      username: usernameJson,
+    };
     userService
       .editProfile(payload)
       .then(() => {
         userService
-          .getProfile()
+          .getProfile(body)
           .then((response) => {
             console.log(response.data);
             this.setState({ infoUser: response.data, userReady: true });

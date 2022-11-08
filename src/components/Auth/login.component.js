@@ -75,12 +75,12 @@ export default class Login extends Component {
           window.location.reload();
         },
         (error) => {
+          console.log(error.response.data.httpStatus);
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+            error.response.data.httpStatus === 400
+              ? "Your account was banned"
+              : error.response.data.message || error.response.data.httpStatus;
+           
 
           this.setState({
             loading: false,

@@ -81,6 +81,13 @@ export default class ListUserAdmin extends Component {
           );
         },
       },
+
+      {
+        title: "User Name",
+        dataIndex: "username",
+        key: "username",
+        render: (text) => <p>{text}</p>,
+      },
       {
         title: "Role",
         dataIndex: "roles",

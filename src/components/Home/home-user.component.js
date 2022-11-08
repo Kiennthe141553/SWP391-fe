@@ -16,37 +16,14 @@ const contentStyle = {
 class HomeUser extends Component {
   constructor(props) {
     super(props);
-    // this.onShowSizeChange = this.onShowSizeChange.bind(this);
-    // this.onShowChange = this.onShowChange.bind(this);
+
     this.state = {
       data: [],
       userReady: false,
     };
   }
 
-  // onShowSizeChange(current, pageSize) {
-  //   console.log(current, pageSize);
-  // }
 
-  // onShowChange(current) {
-  //   const { id } = this.props.match.params;
-  //   const param = {
-  //     index: current,
-  //     pageSize: 10,
-  //     subid: id,
-  //   };
-
-  //   SubjectService.getListSubject(param)
-  //     .then((response) => {
-  //       this.setState({ data: response.data, userReady: true });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       if (error.response && error.response.status === 401) {
-  //         EventBus.dispatch("logout");
-  //       }
-  //     });
-  // }
 
   componentDidMount() {
     const currentUser = AuthService.getCurrentUser();
