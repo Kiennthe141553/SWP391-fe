@@ -53,8 +53,12 @@ class EditUserAdmin extends Component {
 
   onFinish = (values) => {
     const { id } = this.props.match.params;
+
+    const isActive = values.active !== null ? values.active : this.state.dataDetail?.active
+
+
     const param = {
-      active: values.active || this.state.dataDetail?.active,
+      active: isActive,
       address: values.address || this.state.dataDetail?.address,
       birthDate: values.birthDate || this.state.dataDetail?.birthDate,
       email: values.email || this.state.dataDetail?.email,
@@ -84,24 +88,13 @@ class EditUserAdmin extends Component {
       },
     };
 
-    const initialValues = {
-      address: dataDetail?.address,
-      birthDate: dataDetail?.birthDate,
-      email: dataDetail?.email,
-      firstName: dataDetail?.firstName,
-      gender: dataDetail?.gender,
-      lastName: dataDetail?.lastName,
-      active: dataDetail?.active,
-      isDeleted: 0,
-    };
+  
 
     const genderDefault = dataDetail?.gender
       ? dataDetail.gender === 0
         ? "Male"
         : "Female"
       : "";
-
-    console.log(dataDetail?.active);
 
     const activeDefault = dataDetail?.active === 0 ? "Deactive" : "Active";
     return (
@@ -115,7 +108,6 @@ class EditUserAdmin extends Component {
           wrapperCol={{ span: 14 }}
           layout="horizontal"
           onFinish={this.onFinish}
-          initialValues={initialValues}
         >
           <Form.Item label="Active" name="active" className="flex items-center">
             <Select placeholder={activeDefault}>
