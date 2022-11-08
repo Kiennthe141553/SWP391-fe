@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import "../../styles/tailwind.css";
 import moment from "moment";
-import { Form, Input, Button, Radio, DatePicker } from "antd";
+import { Form, Input, Button, Select, DatePicker } from "antd";
 import ".././style.css";
 import "./user.css";
 
@@ -48,7 +48,7 @@ class EditUserAdmin extends Component {
   }
 
   onReset = () => {
-    this.formRef.current.resetFields();
+    window.history.go(-1);
   };
 
   onFinish = (values) => {
@@ -92,8 +92,18 @@ class EditUserAdmin extends Component {
       gender: dataDetail?.gender,
       lastName: dataDetail?.lastName,
       active: dataDetail?.active,
+      isDeleted: 0,
     };
 
+    const genderDefault = dataDetail?.gender
+      ? dataDetail.gender === 0
+        ? "Male"
+        : "Female"
+      : "";
+
+    console.log(dataDetail?.active);
+
+    const activeDefault = dataDetail?.active === 0 ? "Deactive" : "Active";
     return (
       <div className="container">
         <div className="title">
@@ -108,10 +118,10 @@ class EditUserAdmin extends Component {
           initialValues={initialValues}
         >
           <Form.Item label="Active" name="active" className="flex items-center">
-            <Radio.Group>
-              <Radio value={0}>Deactive</Radio>
-              <Radio value={1}>Active</Radio>
-            </Radio.Group>
+            <Select placeholder={activeDefault}>
+              <Select.Option value={0}>Deactive</Select.Option>
+              <Select.Option value={1}>Active</Select.Option>
+            </Select>
           </Form.Item>
           <Form.Item label="Email" name="email" className="flex items-center">
             <Input placeholder={dataDetail?.email} />
@@ -148,17 +158,17 @@ class EditUserAdmin extends Component {
             <Input placeholder={dataDetail?.lastName} />
           </Form.Item>
           <Form.Item label="Gender" name="gender" className="flex items-center">
-            <Radio.Group>
-              <Radio value={0}>Male</Radio>
-              <Radio value={1}>Female</Radio>
-            </Radio.Group>
+            <Select placeholder={genderDefault}>
+              <Select.Option value={0}>Male</Select.Option>
+              <Select.Option value={1}>Female</Select.Option>
+            </Select>
           </Form.Item>
           <Form.Item {...buttonItemLayout}>
             <Button type="primary" htmlType="submit">
               Submit
             </Button>
             <Button htmlType="button" onClick={this.onReset}>
-              Reset
+              Back
             </Button>
           </Form.Item>
         </Form>
