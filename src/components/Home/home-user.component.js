@@ -98,7 +98,7 @@ class HomeUser extends Component {
             </div>
           </Carousel>
           <div className="flex justify-around bg-gray-100 rounded-md mt-6 p-2">
-            <div className="w-6/12 " style={{ height: "600px" }}>
+            <div className="w-8/12 " style={{ height: "600px" }}>
               <p className="font-bold text-xl">Subject List</p>
               <div className="overflow-y-scroll">
                 {data?.map((item) => (
@@ -108,9 +108,9 @@ class HomeUser extends Component {
                         <div className="font-bold text-xl text-gray-800">
                           {item.name}
                         </div>
-                        <div className="text-gray-400 mt-1 ml-1">
+                        <div className="text-gray-600 mt-1 ml-1">
                           {" "}
-                          - ({item.code})
+                          - {item.code}
                         </div>
                       </div>
                       <div>
@@ -124,31 +124,6 @@ class HomeUser extends Component {
                   </a>
                 ))}
               </div>
-            </div>
-            <div className="w-4/12">
-              <p className="font-bold text-xl">Quiz List</p>
-              {data?.map((item) => (
-                <a href={`/detail_subject/${item.id}`}>
-                  <div className="bg-gray-200 rounded-lg p-2 m-2 cursor-pointer shadow-md translate-card transition ease-in-out">
-                    <div className="flex ">
-                      <div className="font-bold text-xl text-gray-800">
-                        {item.name}
-                      </div>
-                      <div className="text-gray-400 mt-1 ml-1">
-                        {" "}
-                        - ({item.code})
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex mt-4 items-center text-gray-600">
-                        <div className="font-semibold">
-                          <div>{item.createdBy}</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              ))}
             </div>
           </div>
 

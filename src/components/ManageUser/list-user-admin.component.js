@@ -21,6 +21,7 @@ export default class ListUserAdmin extends Component {
       dataSource: [],
       value: "",
       list: [],
+      dataSearch: []
     };
   }
 
@@ -127,6 +128,7 @@ export default class ListUserAdmin extends Component {
     ];
 
     const onSearch = (val) => {
+      this.setState({ dataSource: data });
       console.log(val);
       if (val === "") {
         this.setState({ dataSource: data });
@@ -134,8 +136,8 @@ export default class ListUserAdmin extends Component {
         const currValue = val;
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
-        const filteredData = this.state.dataSource.filter((entry) => {
-          return String(entry.username).toLowerCase().includes(valueToLowCase);
+        const filteredData = data.filter((entry) => {
+          return String(entry.email).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });
       }

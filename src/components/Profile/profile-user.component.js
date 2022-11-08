@@ -56,10 +56,10 @@ class ProfileDetail extends Component {
       id: this.state.infoUser?.id,
       isDeleted: this.state.infoUser?.isDeleted,
       lastName: values.lastName | this.state.infoUser?.lastName,
-      password: '',
+      password: "",
       updatedBy: this.state.infoUser?.updatedBy,
       updatedDate: this.state.infoUser?.updatedDate,
-      username: '',
+      username: "",
       version: this.state.infoUser?.version,
     };
     userService
@@ -160,18 +160,33 @@ class ProfileDetail extends Component {
           </Form.Item>
           {isEdit && (
             <Form.Item {...buttonItemLayout}>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-              <Button htmlType="button" onClick={this.onBack}>
-                Back
-              </Button>
+              <div className="w-full flex justify-center ">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="mr-2 transition ease-in-out translate-card shadow-md"
+                >
+                  Submit
+                </Button>
+                <Button
+                  htmlType="button"
+                  onClick={this.onBack}
+                  className="transition ease-in-out translate-card shadow-md"
+                >
+                  Back
+                </Button>
+              </div>
             </Form.Item>
           )}
         </Form>
         {!isEdit && (
-          <div className="button-edit">
-            <Button type="primary" htmlType="button" onClick={this.onEdit}>
+          <div className="w-full flex justify-center translate-card transition ease-in-out">
+            <Button
+              type="primary"
+              htmlType="button"
+              onClick={this.onEdit}
+              className="shadow-md"
+            >
               Edit
             </Button>
           </div>

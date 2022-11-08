@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 import { getDateTime } from "../../helper/datetime";
 import ".././style.css";
 import "../../styles/tailwind.css";
+import moment from "moment";
 import { Input } from "antd";
 const { Search } = Input;
 
@@ -107,7 +108,9 @@ export default class ListBlogManagement extends Component {
         title: "Create Date",
         dataIndex: "createdDate",
         key: "createdDate",
-        render: (text) => <p>{getDateTime(text)}</p>,
+        render: (text) => (
+          <p>{text ? moment(text).format("MM/DD/YYYY") : ""}</p>
+        ),
       },
       {
         title: "Action",
@@ -143,7 +146,7 @@ export default class ListBlogManagement extends Component {
         const currValue = val;
         this.setState({ value: currValue });
         const valueToLowCase = String(currValue).toLowerCase();
-        const filteredData = this.state.dataSource.filter((entry) => {
+        const filteredData = data.filter((entry) => {
           return String(entry.title).toLowerCase().includes(valueToLowCase);
         });
         this.setState({ dataSource: filteredData });
