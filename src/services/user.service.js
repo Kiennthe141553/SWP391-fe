@@ -7,8 +7,8 @@ class UserService {
   // getListUser() {
   //   return axios.get(API_URL + "api/user", { headers: authHeader() });
   // }
-  getProfile() {
-    return axios.get(API_URL + `api/myProfile`, {
+  getProfile(payload) {
+    return axios.post(API_URL + `api/myProfile`, payload, {
       headers: authHeader(),
     });
   }

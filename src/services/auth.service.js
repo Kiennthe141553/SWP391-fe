@@ -16,6 +16,7 @@ class AuthService {
             JSON.stringify(response.data.accessToken)
           );
           localStorage.setItem("role", JSON.stringify(response.data.role));
+          localStorage.setItem("username", JSON.stringify(username));
         }
 
         return response.data;
